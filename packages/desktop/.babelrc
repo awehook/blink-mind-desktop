@@ -1,0 +1,20 @@
+{
+  "env": {
+    "main": {
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": { "node": "12" }
+          }
+        ]
+      ]
+    },
+    "development": {
+      "presets": ["@babel/preset-env", "react-app"]
+    },
+    "production": {
+      "presets": ["@babel/preset-env", "react-app"]
+    }
+  }
+}
