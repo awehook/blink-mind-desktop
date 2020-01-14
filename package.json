@@ -1,0 +1,16 @@
+{
+  "name": "blink-mind-desktop",
+  "version": "1.0.0",
+  "author": "awehook <awehook@163.com>",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+
+  "scripts": {
+    "dev": "yarn workspace desktop dev",
+    "dist": "yarn workspace desktop dist",
+    "distme": "yarn workspace desktop distme",
+    "package": "yarn workspace desktop package"
+  }
+}
