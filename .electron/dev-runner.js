@@ -1,3 +1,4 @@
+const program = require('commander');
 const chalk = require('chalk');
 const electron = require('electron');
 const path = require('path');
@@ -8,6 +9,9 @@ const { startRenderer } = require('./start-renderer');
 let electronProcess = null;
 let manualRestart = false;
 let hotMiddleware;
+
+program.option('-d, --dbg', 'debug main process');
+program.parse(process.argv);
 
 function logStats(proc, data) {
   let log = '';
@@ -71,7 +75,7 @@ function startMain() {
 
 function startElectron() {
   let args = [
-    '--inspect=5858',
+    program.dbg ? '--inspect-brk' : '--inspect=5858',
     path.join(__dirname, '../dist/electron/main.js')
   ];
   // detect yarn or npm and process commandline args accordingly
@@ -112,9 +116,15 @@ function electronLog(data, color) {
 }
 
 function init() {
-  Promise.all([startRenderer(), startMain()])
+  Promise.all([
+    // startRenderer(),
+    startMain()
+  ])
     .then(() => {
       startElectron();
+    })
+    .then(() => {
+      startRenderer();
     })
     .catch(err => {
       console.error(err);

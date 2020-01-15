@@ -6,10 +6,13 @@ const webpack = require('webpack');
 
 const TerserPlugin = require('terser-webpack-plugin');
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 let mainConfig = {
   entry: {
     main: path.join(__dirname, '../src/main/index.js')
   },
+  devtool: isProduction ? 'none' : 'source-map',
   externals: [...Object.keys(dependencies || {})],
   module: {
     rules: [
@@ -31,7 +34,7 @@ let mainConfig = {
   output: {
     filename: '[name].js',
     libraryTarget: 'commonjs2',
-    path: path.join(__dirname, '../dist/electron')
+    path: path.join(__dirname, '../build/electron')
   },
   plugins: [new webpack.NoEmitOnErrorsPlugin()],
   optimization: {
@@ -46,7 +49,7 @@ let mainConfig = {
 /**
  * Adjust mainConfig for development settings
  */
-if (process.env.NODE_ENV !== 'production') {
+if (!isProduction) {
   mainConfig.plugins.push(
     new webpack.DefinePlugin({
       __static: `"${path.join(__dirname, '../static').replace(/\\/g, '\\\\')}"`
@@ -57,14 +60,14 @@ if (process.env.NODE_ENV !== 'production') {
 /**
  * Adjust mainConfig for production settings
  */
-if (process.env.NODE_ENV === 'production') {
-  mainConfig.plugins.push(
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"production"'
-    })
-  );
-  const terserOptions = require('./terserOptions');
-  mainConfig.optimization.minimizer.push(new TerserPlugin(terserOptions()));
-}
+if (isProduction) {
+                    mainConfig.plugins.push(
+                      new webpack.DefinePlugin({
+                        'process.env.NODE_ENV': '"production"'
+                      })
+                    );
+                    // const terserOptions = require('./terserOptions');
+                    // mainConfig.optimization.minimizer.push(new TerserPlugin(terserOptions()));
+                  }
 
 module.exports = mainConfig;

@@ -1,11 +1,11 @@
 import { app } from 'electron';
-import { initUserDefault } from './store-util';
-import { initWindowManager } from './window-manager';
+import { initStore } from './store';
+import { initWindowManager } from './window/window-manager';
 import { ProductName } from '../common';
-
-initUserDefault();
+import './ipc';
 
 const appReadyCallback = () => {
+  initStore();
   initWindowManager();
 };
 app.name = ProductName;

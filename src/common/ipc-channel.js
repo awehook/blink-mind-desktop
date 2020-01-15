@@ -5,3 +5,10 @@ export const IpcChannelMain = {
 export const IpcChannelRenderer = {
   OPEN_FILE: "OPEN_FILE"
 };
+
+export const IpcChannelName = {
+  GET_I18N: 'GET_I18N',
+  GET_INITIAL_TRANSLATIONS : 'GET_INITIAL_TRANSLATIONS',
+  I18N_LANG_CHANGED: 'I18N_LANG_CHANGED',
+  I18N_CHANGE_LANG: 'I18N_CHANGE_LANG'
+};

@@ -1,6 +1,5 @@
 import { app, BrowserWindow, systemPreferences } from 'electron';
-import { setUserDefault } from './store-util';
-import { isMacOS } from './utils';
+import { isMacOS } from '../utils';
 const isDev = require('electron-is-dev');
 const windowStateKeeper = require('electron-window-state');
 
@@ -15,8 +14,8 @@ export function createMainWindow() {
     x: mainWindowState.x,
     y: mainWindowState.y,
     webPreferences: {
-      scrollBounce: true,
-      preload: __dirname + '/preload.js'
+      nodeIntegration: true,
+      scrollBounce: true
     },
     title: 'BlinkMind'
   });
@@ -29,18 +28,12 @@ export function createMainWindow() {
     mainWindow.show();
     mainWindow.focus();
   });
-  let resizeTimeout;
   mainWindow.on('resize', () => {
-    clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(() => {
-      let size = mainWindow.getSize();
-      setUserDefault('mainWindowWidth', size[0]);
-      setUserDefault('mainWindowHeight', size[1]);
-    }, 600);
+
+
   });
 
   mainWindow.on('closed', () => {
-    //mainWindow = null;
     app.quit();
   });
 
