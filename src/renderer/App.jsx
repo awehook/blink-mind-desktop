@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { WelcomePage } from './pages/welcome';
 import { I18nContext, i18n } from './context';
 import { ipcRenderer } from 'electron';
 import './App.css';
 import { IpcChannelName } from '../common';
+import { PageRouter } from './route/page-router';
 
 function App() {
   const [i18nValue, setI18nValue] = useState(i18n);
@@ -18,7 +18,7 @@ function App() {
   });
   return (
     <I18nContext.Provider value={i18nValue}>
-      <WelcomePage />
+      <PageRouter />
     </I18nContext.Provider>
   );
 }

@@ -76,7 +76,7 @@ function startMain() {
 function startElectron() {
   let args = [
     program.dbg ? '--inspect-brk' : '--inspect=5858',
-    path.join(__dirname, '../dist/electron/main.js')
+    path.join(__dirname, '../build/electron/main.js')
   ];
   // detect yarn or npm and process commandline args accordingly
   if (process.env.npm_execpath.endsWith('yarn.js')) {
