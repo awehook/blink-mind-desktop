@@ -14,6 +14,15 @@ const store = new ElectronStore({
           }
         }
       }
+    },
+    recent: {
+      type: 'object',
+      properties: {
+        openedDir: {
+          type: 'string',
+          default: null
+        }
+      }
     }
   }
 });
@@ -23,6 +32,9 @@ export const StoreItemKey = {
     normal: {
       language: 'preferences.normal.language'
     }
+  },
+  recent: {
+    openedDir: 'recent.openedDir'
   }
 };
 

@@ -266,7 +266,8 @@ module.exports = function(webpackEnv) {
         'react-native': 'react-native-web',
         // 为了解决yarn link lerna 的monorepo 导致webpack 打包进去多个react-dom的问题
         react: path.resolve('node_modules/react'),
-        'react-dom': path.resolve('node_modules/react-dom')
+        'react-dom': path.resolve('node_modules/react-dom'),
+        'styled-components': path.resolve('node_modules/styled-components'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

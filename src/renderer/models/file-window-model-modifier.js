@@ -1,7 +1,17 @@
-export function setFileModel(fileWindowModel, { id, model }) {
-  const index = fileWindowModel.files.findIndex(v => v.id === id);
-  fileWindowModel = fileWindowModel.updateIn(['files', index], fileModel =>
-    fileModel.set('model', model)
+export function setFileModel(filesWindowModel, { id, model, isSave = false }) {
+  const index = filesWindowModel.files.findIndex(v => v.id === id);
+  filesWindowModel = filesWindowModel.updateIn(['files', index], fileModel => {
+    fileModel = fileModel.set('model', model);
+    if (isSave) fileModel = fileModel.set('savedModel', model);
+    return fileModel;
+  });
+  return filesWindowModel;
+}
+
+export function setFilePath(filesWindowModel, { id, path }) {
+  const index = filesWindowModel.files.findIndex(v => v.id === id);
+  filesWindowModel = filesWindowModel.updateIn(['files', index], fileModel =>
+    fileModel.set('path', path)
   );
-  return fileWindowModel;
+  return filesWindowModel;
 }

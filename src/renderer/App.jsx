@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { I18nContext, i18n } from './context';
 import { ipcRenderer } from 'electron';
-import './App.css';
 import { IpcChannelName } from '../common';
 import { PageRouter } from './route/page-router';
+import './App.css';
 
 function App() {
   const [i18nValue, setI18nValue] = useState(i18n);

@@ -20,7 +20,7 @@ export function initI18n(callback) {
       wait: false
     },
 
-    debug: true,
+    debug: process.env.I18N_DEBUG==='true',
     initImmediate: true
   };
 

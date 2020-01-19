@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { remote } from 'electron';
-import { FileWindowModel, FileModel, setFileModel } from '../models';
-import { List } from 'immutable';
+import { ipcRenderer, remote } from 'electron';
+import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { MindMap } from '../components';
 
 import { Controller } from '@blink-mind/core';
@@ -11,15 +10,24 @@ import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 import { ThemeSelectorPlugin } from '@blink-mind/plugin-theme-selector';
 import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import {
-  TopicReferencePlugin,
   SearchPlugin,
-  UndoRedoPlugin,
-  TagsPlugin
+  TagsPlugin,
+  TopicReferencePlugin,
+  UndoRedoPlugin
 } from '@blink-mind/plugins';
+import { ToolbarPlugin } from '../plugins';
 import '@blink-mind/renderer-react/lib/main.css';
 import '@blink-mind/plugins/lib/main.css';
+import { IpcChannelName } from '../../common';
+import { List } from 'immutable';
+import debug from 'debug';
+import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
+import { useTranslation } from '../hooks';
+
+const log = debug('bmd:files-page');
 
 const plugins = [
+  ToolbarPlugin(),
   RichTextEditorPlugin(),
   ThemeSelectorPlugin(),
   TopicReferencePlugin(),
@@ -36,46 +44,140 @@ function createBlinkMindController(onChange) {
 }
 
 export function FilesPage(props) {
-  const windowData = remote.getCurrentWindow().windowData;
+  const t = useTranslation();
+  const initWindowData = remote.getCurrentWindow().windowData;
 
-  const files = windowData.files.map(file => {
-    return new FileModel({
-      path: file
+  const [windowData] = useState(initWindowData);
+
+  const nProps = {
+    windowData,
+    t
+  };
+  return <FilesPageInternal {...nProps} />;
+}
+
+export class FilesPageInternal extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { windowData } = this.props;
+    const fileModels = windowData.files.map(file => {
+      const controller = createBlinkMindController(this.onChange(file.id));
+      let model = null;
+      if (file.path == null) {
+        model = controller.run('createNewModel');
+      } else {
+        const content = getFileContent({ path: file.path });
+        const obj = JSON.parse(content);
+        model = controller.run('deserializeModel', { obj, controller });
+      }
+      return new FileModel({
+        id: file.id,
+        path: file.path,
+        savedModel: file.path ? model : null,
+        model,
+        controller
+      });
     });
-  });
 
-  const initFileWindowModel = new FileWindowModel({
-    files: List(files)
-  });
+    const filesWindowModel = new FilesWindowModel({
+      files: List(fileModels)
+    });
 
-  const [fileWindowModel, setFileWindowModel] = useState(initFileWindowModel);
+    this.state = {
+      filesWindowModel
+    };
 
-  console.log(fileWindowModel);
+    log('this.state', this.state);
+  }
 
-  const fileModel = fileWindowModel.files.get(0);
+  onBeforeCloseWindow = e => {
+    const unsavedFiles = this.state.filesWindowModel
+      .getUnsavedFiles()
+      .toArray();
+    if (unsavedFiles.length > 0) {
+      const canceled = unsavedFiles.some(f => {
+        const r = saveFileWithFileModel(f, this.props.t);
+        return r === 'cancel';
+      });
+      if (!canceled) {
+        remote.getCurrentWindow().destroy();
+      }
+    } else {
+      remote.getCurrentWindow().destroy();
+    }
+  };
 
-  console.log(fileModel);
+  // 菜单的save => MR_SAVE => onSave => RM_SAVE
+  // 菜单save: 判断path 是否为null, 是：saveAs 不是：save
 
-  const onChange = fileModel => (model, callback) => {
-    const newFileWindowModel = setFileModel(fileWindowModel, {
-      id: fileModel.id,
+  onSave = (e, { path, id }) => {
+    log('onSave', path);
+    const fileModel = this.state.filesWindowModel.getFile(id);
+    const content = fileModel.getContent();
+    log('content', content);
+    saveFile({ path, id, content });
+    const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
+      id: id,
+      path,
+      isSave: true
+    });
+    this.setState(newFileWindowModel);
+  };
+
+  componentDidMount() {
+    ipcRenderer.on(IpcChannelName.MR_SAVE, this.onSave);
+    ipcRenderer.on(
+      IpcChannelName.MR_BEFORE_CLOSE_WINDOW,
+      this.onBeforeCloseWindow
+    );
+  }
+
+  componentWillUnmount() {
+    ipcRenderer.off(IpcChannelName.MR_SAVE, this.onSave);
+    ipcRenderer.off(
+      IpcChannelName.MR_BEFORE_CLOSE_WINDOW,
+      this.onBeforeCloseWindow
+    );
+  }
+
+  onChange = fileModelId => (model, callback) => {
+    console.log('onchange', fileModelId);
+    const fileModel = this.state.filesWindowModel.getFile(fileModelId);
+    const edited = fileModel.model !== model;
+    log('edited', edited);
+    log(remote.getCurrentWindow());
+    remote.getCurrentWindow().setTitleFlag({ edited });
+    if (!edited) return;
+    const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
+      id: fileModelId,
       model
     });
-    setFileWindowModel(newFileWindowModel);
+
+    this.setState(
+      {
+        filesWindowModel: newFileWindowModel
+      },
+      callback
+    );
   };
 
-  const controller = createBlinkMindController(onChange(fileModel));
+  render() {
+    const { filesWindowModel } = this.state;
+    const files = filesWindowModel.files;
+    if (files.size === 1) {
+      const fileModel = files.get(0);
+      const mindMapProps = {
+        fileModel
+      };
 
-  const mindMapProps = {
-    fileModel,
-    controller
-  };
+      log('renderFilePage', mindMapProps);
 
-  console.log('renderFilePage');
-
-  return (
-    <>
-      <MindMap {...mindMapProps} />
-    </>
-  );
+      return (
+        <>
+          <MindMap {...mindMapProps} />
+        </>
+      );
+    }
+  }
 }

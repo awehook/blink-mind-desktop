@@ -1,9 +1,16 @@
 {
+  "cancel": "Cancel",
   "welcomePageTitle": "Welcome to BlinkMind",
   "file": "File",
   "openFile": "Open File",
   "save": "Save",
+  "edited": "Edited",
+  "dontSave": "Don't Save",
+  "saveAs": "Save As",
   "newFile": "New",
   "newTab": "New Tab",
-  "preferences": "Preferences"
+  "preferences": "Preferences",
+  "untitled": "untitled",
+  "saveTipTitle": "Do you want to save the changes?",
+  "saveTipContent": "Your changes will be lost if you don't save them."
 }

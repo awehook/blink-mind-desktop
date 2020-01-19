@@ -74,6 +74,8 @@ function startMain() {
 }
 
 function startElectron() {
+  const env = require('dotenv').config({ path: path.join(__dirname, '.env') })
+    .parsed;
   let args = [
     program.dbg ? '--inspect-brk' : '--inspect=5858',
     path.join(__dirname, '../build/electron/main.js')
@@ -85,7 +87,7 @@ function startElectron() {
     args = args.concat(process.argv.slice(2));
   }
 
-  electronProcess = spawn(electron, args);
+  electronProcess = spawn(electron, args, { env });
   electronProcess.stdout.on('data', data => {
     electronLog(data, 'blue');
   });

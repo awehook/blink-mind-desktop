@@ -1,8 +1,11 @@
 import { isMacOS } from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
+import {saveAs, save, openFile} from './menu-event-handler';
 
-function getMenu(i18n) {
+
+
+function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
   const productName = {
     label: ProductName,
@@ -22,12 +25,32 @@ function getMenu(i18n) {
     label: t(I18nTextKey.file),
     submenu: [
       {
-        label: t(I18nTextKey.newFile)
+        label: t(I18nTextKey.newFile),
+        click() {
+          windowMgr.newFile();
+        }
       },
       {
+        label: t(I18nTextKey.openFile),
+        click() {
+          openFile(windowMgr)
+        }
+      },
+      {
+        id: I18nTextKey.save,
         label: t(I18nTextKey.save),
         accelerator: 'CommandOrControl+S',
-        click() {}
+        click() {
+          save(windowMgr);
+        }
+      },
+      {
+        id: I18nTextKey.saveAs,
+        label: t(I18nTextKey.saveAs),
+        accelerator: 'Shift+CommandOrControl+S',
+        click() {
+          saveAs(windowMgr);
+        }
       }
     ]
   };
@@ -77,6 +100,6 @@ function getMenu(i18n) {
   return menu;
 }
 
-export function buildMenu(i18n) {
-  Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu(i18n)));
+export function buildMenu(i18n, windowMgr) {
+  Menu.setApplicationMenu(Menu.buildFromTemplate(getMenu(i18n, windowMgr)));
 }

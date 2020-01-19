@@ -1,19 +1,22 @@
 import React from 'react';
-import { ipcRenderer } from 'electron';
 import { Icon } from '../components';
 import { IconName } from '@blink-mind/renderer-react';
-import { I18nTextKey, IpcChannelName } from '../../common';
+import { I18nTextKey } from '../../common';
 import './welcome.scss';
 import { useTranslation } from '../hooks';
+import { newFile, openFile } from '../utils';
 
 export function WelcomePage(props) {
+  let onClickNewFile;
   const t = useTranslation();
 
-  const onClickNewFile = () => {
-    ipcRenderer.send(IpcChannelName.NEW_FILE, { closeWelcome: true });
+  onClickNewFile = () => {
+    newFile();
   };
 
-  const onClickOpenFile = () => {};
+  const onClickOpenFile = () => {
+    openFile();
+  };
 
   return (
     <div className="welcome">

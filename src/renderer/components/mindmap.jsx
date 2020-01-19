@@ -1,18 +1,14 @@
 import React from 'react';
 import { Diagram } from '@blink-mind/renderer-react';
+import debug from 'debug';
 
+const log = debug('bmd:mindmap');
 
 export class MindMap extends React.Component {
-  controller;
-  constructor(props) {
-    super(props);
-    const { controller } = props;
-    this.controller = controller;
-  }
 
   createModel(fileModel) {
     if (fileModel.path == null) {
-      return this.controller.run('createNewModel');
+      return fileModel.controller.run('createNewModel');
     }
     return null;
   }
@@ -21,9 +17,9 @@ export class MindMap extends React.Component {
     const { fileModel } = this.props;
 
     const model = fileModel.model || this.createModel(fileModel);
-
+    log('renderDiagram',model);
     const diagramProps = {
-      controller: this.controller,
+      controller: fileModel.controller,
       model
     };
     return <Diagram {...diagramProps} />;
