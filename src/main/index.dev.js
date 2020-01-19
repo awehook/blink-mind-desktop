@@ -1,4 +1,4 @@
-require('electron-debug')({ showDevTools: true });
+require('electron-debug')({ showDevTools: false });
 
 // Install `react-devtools`
 require('electron').app.on('ready', () => {
