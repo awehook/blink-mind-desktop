@@ -8,6 +8,15 @@ export const I18nTextKey = {
   dontSave: 'dontSave',
   saveAs: 'saveAs',
   newFile: 'newFile',
+  /*==============================================*/
+  edit: 'edit',
+  undo: 'undo',
+  redo: 'redo',
+  cut: 'cut',
+  copy: 'copy',
+  paste: 'paste',
+
+  /*==============================================*/
   newTab: 'newTab',
   preferences: 'preferences',
   untitled: 'untitled',

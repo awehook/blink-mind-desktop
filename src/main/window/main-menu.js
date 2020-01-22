@@ -1,9 +1,7 @@
 import { isMacOS } from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
-import {saveAs, save, openFile} from './menu-event-handler';
-
-
+import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -33,7 +31,7 @@ function getMenu(i18n, windowMgr) {
       {
         label: t(I18nTextKey.openFile),
         click() {
-          openFile(windowMgr)
+          openFile(windowMgr);
         }
       },
       {
@@ -56,15 +54,23 @@ function getMenu(i18n, windowMgr) {
   };
 
   const edit = {
-    label: 'Edit',
+    label: t(I18nTextKey.edit),
     submenu: [
-      { role: 'undo' },
-      { role: 'redo' },
+      {
+        label: t(I18nTextKey.undo),
+        accelerator: 'CommandOrControl+Z',
+        click() {
+          undo();
+        }
+      },
+      {
+        label: t(I18nTextKey.redo),
+        accelerator: 'Shift+CommandOrControl+Z',
+        click() {
+          redo();
+        }
+      },
       { type: 'separator' },
-      { role: 'cut' },
-      { role: 'copy' },
-      { role: 'paste' },
-      { role: 'pasteandmatchstyle' }
     ]
   };
 

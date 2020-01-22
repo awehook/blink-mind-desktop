@@ -1,7 +1,7 @@
 import { initI18n, i18n } from '../i18n';
 import { FileData, WindowData } from './window-data';
 import { buildMenu } from './main-menu';
-import { I18nTextKey, IpcChannelName } from '../../common';
+import { I18nTextKey, IpcChannelName, IpcType } from '../../common';
 import {
   app,
   BrowserWindow,
@@ -174,7 +174,9 @@ export class WindowMgr {
 
     window.on('close', e => {
       e.preventDefault();
-      window.webContents.send(IpcChannelName.MR_BEFORE_CLOSE_WINDOW);
+      window.webContents.send(IpcChannelName.MR, {
+        type: IpcType.MR_BEFORE_CLOSE_WINDOW
+      });
     });
 
     window.on('closed', () => {
@@ -225,7 +227,8 @@ export class WindowMgr {
             windowData.saveAs(path);
 
             focusWindow.setTitleFlag({ edited: false });
-            focusWindow.webContents.send(IpcChannelName.MR_SAVE, {
+            focusWindow.webContents.send(IpcChannelName.MR, {
+              type: IpcType.MR_SAVE,
               id: focusFile.id,
               path
             });

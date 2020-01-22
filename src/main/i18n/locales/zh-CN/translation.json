@@ -8,6 +8,16 @@
   "dontSave": "不保存",
   "saveAs": "另存为",
   "newFile": "新建文件",
+
+  "edit": "编辑",
+  "undo": "撤销",
+  "redo": "重做",
+  "cut": "剪切",
+  "copy": "拷贝",
+  "paste": "粘贴",
+  "duplicate": "复制",
+
+
   "newTab": "新建标签页",
   "preferences": "首选项",
   "untitled": "未命名",

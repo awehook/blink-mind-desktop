@@ -10,6 +10,12 @@ export const IpcChannelName = {
   RM_OPEN_FILE: 'RM_OPEN_FILE',
   // RM_SAVE_ALL_FILES_OF_WINDOW: "RM_SAVE_ALL_FILES_OF_WINDOW",
 
+  MR: 'MR',
+};
+
+export const IpcType = {
   MR_SAVE: 'MR_SAVE',
+  MR_UNDO: 'MR_UNDO',
+  MR_REDO: 'MR_REDO',
   MR_BEFORE_CLOSE_WINDOW: 'MR_BEFORE_CLOSE_WINDOW',
 };

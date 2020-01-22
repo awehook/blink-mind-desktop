@@ -18,7 +18,7 @@ import {
 import { ToolbarPlugin } from '../plugins';
 import '@blink-mind/renderer-react/lib/main.css';
 import '@blink-mind/plugins/lib/main.css';
-import { IpcChannelName } from '../../common';
+import { IpcChannelName, IpcType } from '../../common';
 import { List } from 'immutable';
 import debug from 'debug';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
@@ -81,7 +81,8 @@ export class FilesPageInternal extends React.Component {
     });
 
     const filesWindowModel = new FilesWindowModel({
-      files: List(fileModels)
+      files: List(fileModels),
+      activeFileId: fileModels[0].id
     });
 
     this.state = {
@@ -91,7 +92,63 @@ export class FilesPageInternal extends React.Component {
     log('this.state', this.state);
   }
 
-  onBeforeCloseWindow = e => {
+  getActiveFileModel() {
+    return this.state.filesWindowModel.getActiveFile();
+  }
+
+  // 菜单的save => MR_SAVE => onSave => RM_SAVE
+  // 菜单save: 判断path 是否为null, 是：saveAs 不是：save
+
+  onIpcMR = (e, arg) => {
+    const { type } = arg;
+    log('onIpcMR', type);
+    switch (type) {
+      case IpcType.MR_SAVE:
+        this.onSave(e, arg);
+        break;
+      case IpcType.MR_UNDO:
+        this.onUndo();
+        break;
+      case IpcType.MR_REDO:
+        this.onRedo();
+        break;
+      case IpcType.MR_BEFORE_CLOSE_WINDOW:
+        this.onBeforeCloseWindow();
+        break;
+      default:
+        break;
+    }
+  };
+
+  onSave = (e, { path, id }) => {
+    log('onSave', path);
+    const fileModel = this.state.filesWindowModel.getFile(id);
+    const content = fileModel.getContent();
+    log('content', content);
+    saveFile({ path, id, content });
+    const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
+      id: id,
+      path,
+      isSave: true
+    });
+    this.setState(newFileWindowModel);
+  };
+
+  onUndo = () => {
+    const fileModel = this.getActiveFileModel();
+    const controller = fileModel.controller;
+    const model = fileModel.model;
+    controller.run('undo', { controller, model });
+  };
+
+  onRedo = () => {
+    const fileModel = this.getActiveFileModel();
+    const controller = fileModel.controller;
+    const model = fileModel.model;
+    controller.run('redo', { controller, model });
+  };
+
+  onBeforeCloseWindow = () => {
     const unsavedFiles = this.state.filesWindowModel
       .getUnsavedFiles()
       .toArray();
@@ -108,37 +165,12 @@ export class FilesPageInternal extends React.Component {
     }
   };
 
-  // 菜单的save => MR_SAVE => onSave => RM_SAVE
-  // 菜单save: 判断path 是否为null, 是：saveAs 不是：save
-
-  onSave = (e, { path, id }) => {
-    log('onSave', path);
-    const fileModel = this.state.filesWindowModel.getFile(id);
-    const content = fileModel.getContent();
-    log('content', content);
-    saveFile({ path, id, content });
-    const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
-      id: id,
-      path,
-      isSave: true
-    });
-    this.setState(newFileWindowModel);
-  };
-
   componentDidMount() {
-    ipcRenderer.on(IpcChannelName.MR_SAVE, this.onSave);
-    ipcRenderer.on(
-      IpcChannelName.MR_BEFORE_CLOSE_WINDOW,
-      this.onBeforeCloseWindow
-    );
+    ipcRenderer.on(IpcChannelName.MR, this.onIpcMR);
   }
 
   componentWillUnmount() {
-    ipcRenderer.off(IpcChannelName.MR_SAVE, this.onSave);
-    ipcRenderer.off(
-      IpcChannelName.MR_BEFORE_CLOSE_WINDOW,
-      this.onBeforeCloseWindow
-    );
+    ipcRenderer.off(IpcChannelName.MR, this.onIpcMR);
   }
 
   onChange = fileModelId => (model, callback) => {

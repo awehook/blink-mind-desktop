@@ -1,5 +1,6 @@
+import { BrowserWindow } from 'electron';
 import { extname } from 'path';
-import { ExtName, ExtNames, I18nTextKey } from '../../common';
+import { ExtName, ExtNames, I18nTextKey, IpcChannelName } from '../../common';
 import { i18n } from '../i18n';
 
 export function regularBlinkPath(path) {
@@ -16,4 +17,9 @@ export function getUntitledTile() {
 export function getFileTitle(path, edited) {
   path = path || getUntitledTile();
   return `${path}${edited ? ' -' + i18n.t(I18nTextKey.edited) : ''}`;
+}
+
+export function ipcMR(arg) {
+  const focusWindow = BrowserWindow.getFocusedWindow();
+  focusWindow.webContents.send(IpcChannelName.MR, arg);
 }

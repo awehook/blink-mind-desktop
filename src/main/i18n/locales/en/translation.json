@@ -8,6 +8,15 @@
   "dontSave": "Don't Save",
   "saveAs": "Save As",
   "newFile": "New",
+
+  "edit": "Edit",
+  "undo": "Undo",
+  "redo": "Redo",
+  "cut": "Cut",
+  "copy": "Copy",
+  "paste": "Paste",
+  "duplicate": "Duplicate",
+
   "newTab": "New Tab",
   "preferences": "Preferences",
   "untitled": "untitled",
