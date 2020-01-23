@@ -73,6 +73,7 @@
     "jest-resolve": "23.6.0",
     "jest-watch-typeahead": "^0.2.1",
     "mini-css-extract-plugin": "0.5.0",
+    "ncp": "^2.0.0",
     "node-sass": "^4.13.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
@@ -112,9 +113,12 @@
     "link-blink": "node scripts/blink.js --link",
     "unlink-blink": "node scripts/blink.js --unlink",
     "package": "electron-builder build --publish never",
-    "pack:r": "cross-env GENERATE_SOURCEMAP=false yarn build",
+    "pack:r": "yarn build && ncp index.html build/renderer/index.html",
+    "pack:rr": "cross-env GENERATE_SOURCEMAP=false yarn pack:r",
+    "pack:rs": "yarn pack:r",
     "pack:m": "node ./.electron/build.js",
-    "dist": "yarn pack:r && yarn pack:m && yarn package",
+    "dist": "yarn pack:rr && yarn pack:m && yarn package",
+    "distme": "yarn pack:rs && yarn pack:m && yarn package",
     "run:mac": "./dist/mac/BlinkMind.app/Contents/MacOS/BlinkMind"
   },
   "eslintConfig": {
@@ -206,8 +210,9 @@
       ]
     },
     "mac": {
+      "icon": "icons/icon.png",
       "target": [
-        "zip"
+        "dmg"
       ]
     },
     "win": {

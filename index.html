@@ -6,7 +6,7 @@
       (function() {
         const link = document.createElement('link');
         link.rel = 'stylesheet';
-        link.href = './build/renderer/style.css';
+        link.href = '../style.css';
         // HACK: Writing the script path should be done with webpack
         document.getElementsByTagName('head')[0].appendChild(link);
       })();
@@ -16,7 +16,7 @@
     <div id="root"></div>
     <script>
       {
-        const scripts = ['./build/renderer/bundle.js'];
+        const scripts = ['../bundle.js'];
         document.write(
           scripts
             .map(script => `<script defer src="${script}"><\/script>`)

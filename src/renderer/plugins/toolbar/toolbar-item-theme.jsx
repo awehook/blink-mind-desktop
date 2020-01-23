@@ -31,7 +31,7 @@ export function ToolbarItemTheme(props) {
         <ToolbarItemPopoverTarget />
         <div className="bm-popover-theme">
           {themes.map(theme => (
-            <div className="bm-theme-item" onClick={onClickSetTheme(theme[0])}>
+            <div key={theme[0]} className="bm-theme-item" onClick={onClickSetTheme(theme[0])}>
               <img className="bm-theme-img" src={theme[1]} alt={theme[0]} />
             </div>
           ))}

@@ -44,7 +44,7 @@ export class WindowMgr {
     this.openedFileWindows = new Set();
     this.url = isDev
       ? 'http://localhost:3008'
-      : `file://${app.getAppPath()}/index.html`;
+      : `file://${app.getAppPath()}/build/renderer/index.html`;
 
     const i18n = initI18n((err, t) => {
       console.error('initCallback', err, t);
@@ -52,10 +52,12 @@ export class WindowMgr {
       buildMenu(i18n, this);
       i18n.on('languageChanged', lng => {
         buildMenu(i18n);
-        welcomeWindow.webContents.send(
-          IpcChannelName.I18N_LANG_CHANGED,
-          i18n.getDataByLanguage(lng).translation
-        );
+        BrowserWindow.getAllWindows().forEach(w => {
+          w.webContents.send(
+            IpcChannelName.MR_LANG_CHANGED,
+            i18n.getDataByLanguage(lng).translation
+          );
+        });
       });
       this.currentWindow = welcomeWindow;
     });
@@ -119,7 +121,7 @@ export class WindowMgr {
         nodeIntegration: true,
         scrollBounce: true
       },
-      title: i18n.t(I18nTextKey.welcomePageTitle)
+      title: i18n.t(I18nTextKey.WELCOME_PAGE_TITLE)
     });
     window.loadURL(`${this.url}/#/welcome`);
 

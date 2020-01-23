@@ -15,7 +15,7 @@ import {
   TopicReferencePlugin,
   UndoRedoPlugin
 } from '@blink-mind/plugins';
-import { ToolbarPlugin } from '../plugins';
+import { ToolbarPlugin,I18nPlugin } from '../plugins';
 import '@blink-mind/renderer-react/lib/main.css';
 import '@blink-mind/plugins/lib/main.css';
 import { IpcChannelName, IpcType } from '../../common';
@@ -28,6 +28,7 @@ const log = debug('bmd:files-page');
 
 const plugins = [
   ToolbarPlugin(),
+  I18nPlugin(),
   RichTextEditorPlugin(),
   ThemeSelectorPlugin(),
   TopicReferencePlugin(),

@@ -20,18 +20,18 @@ export function WelcomePage(props) {
 
   return (
     <div className="welcome">
-      <div className="title">{t(I18nTextKey.welcomePageTitle)}</div>
+      <div className="title">{t(I18nTextKey.WELCOME_PAGE_TITLE)}</div>
       <div className="container">
         <div className="group">
           <div className="item" onClick={onClickNewFile}>
             <Icon iconName={IconName.NEW_FILE} />
-            <div>{t(I18nTextKey.newFile)}</div>
+            <div>{t(I18nTextKey.NEW_FILE)}</div>
           </div>
         </div>
         <div className="group">
           <div className="item" onClick={onClickOpenFile}>
             <Icon iconName={IconName.OPEN_FILE} />
-            <div>{t(I18nTextKey.openFile)}</div>
+            <div>{t(I18nTextKey.OPEN_FILE)}</div>
           </div>
         </div>
       </div>

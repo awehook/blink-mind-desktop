@@ -1,25 +1,33 @@
 export const I18nTextKey = {
-  cancel: 'cancel',
-  welcomePageTitle: 'welcomePageTitle',
-  file: 'file',
-  openFile: 'openFile',
-  save: 'save',
-  edited: 'edited',
-  dontSave: 'dontSave',
-  saveAs: 'saveAs',
-  newFile: 'newFile',
+
+  LANGUAGE: 'LANGUAGE',
+  CHINESE_SIMPLIFIED: 'CHINESE_SIMPLIFIED',
+  ENGLISH: "ENGLISH",
+
+  CANCEL: 'CANCEL',
+  WELCOME_PAGE_TITLE: 'WELCOME_PAGE_TITLE',
+  FILE: 'FILE',
+  OPEN_FILE: 'OPEN_FILE',
+  SAVE: 'SAVE',
+  EDITED: 'EDITED',
+  DONT_SAVE: 'DONT_SAVE',
+  SAVE_AS: 'SAVE_AS',
+  NEW_FILE: 'NEW_FILE',
   /*==============================================*/
-  edit: 'edit',
-  undo: 'undo',
-  redo: 'redo',
-  cut: 'cut',
-  copy: 'copy',
-  paste: 'paste',
+  EDIT: 'EDIT',
+  UNDO: 'UNDO',
+  REDO: 'REDO',
+  CUT: 'CUT',
+  COPY: 'COPY',
+  PASTE: 'PASTE',
+  DUPLICATE: 'DUPLICATE',
 
   /*==============================================*/
-  newTab: 'newTab',
-  preferences: 'preferences',
-  untitled: 'untitled',
-  saveTipTitle: 'saveTipTitle',
-  saveTipContent: 'saveTipContent'
+  NEW_TAB: 'NEW_TAB',
+  PREFERENCES: 'PREFERENCES',
+  UNTITLED: 'UNTITLED',
+  SAVE_TIP_TITLE: 'SAVE_TIP_TITLE',
+  SAVE_TIP_CONTENT: 'SAVE_TIP_CONTENT',
+
+
 };

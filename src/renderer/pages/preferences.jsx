@@ -8,16 +8,16 @@ export function PreferencesPage(props) {
   const t = useTranslation();
 
   const changeLangEn = () => {
-    ipcRenderer.send(IpcChannelName.I18N_CHANGE_LANG, 'en');
+    ipcRenderer.send(IpcChannelName.RM_CHANGE_LANG, 'en');
   };
 
   const changeLangCn = () => {
-    ipcRenderer.send(IpcChannelName.I18N_CHANGE_LANG, 'zh-CN');
+    ipcRenderer.send(IpcChannelName.RM_CHANGE_LANG, 'zh-CN');
   };
 
   return (
     <div className="welcome">
-      <div className="title">{t(I18nTextKey.welcomePageTitle)}</div>
+      <div className="title">{t(I18nTextKey.WELCOME_PAGE_TITLE)}</div>
       <button onClick={changeLangEn}>en</button>
       <button onClick={changeLangCn}>zh-CN</button>
       <div className="container">

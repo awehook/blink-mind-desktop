@@ -1,4 +1,4 @@
-import { isMacOS } from '../utils';
+import {changeLang, isMacOS} from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
 import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
@@ -9,42 +9,54 @@ function getMenu(i18n, windowMgr) {
     label: ProductName,
     submenu: [
       {
-        label: t(I18nTextKey.preferences),
+        label: t(I18nTextKey.PREFERENCES),
         click() {}
       },
       {
         label: `About ${ProductName}`,
         selector: 'orderFrontStandardAboutPanel:'
+      },
+      {
+        label: t(I18nTextKey.ENGLISH),
+        click() {
+          changeLang('en');
+        }
+      },
+      {
+        label: t(I18nTextKey.CHINESE_SIMPLIFIED),
+        click() {
+          changeLang('zh-CN');
+        }
       }
     ]
   };
 
   const file = {
-    label: t(I18nTextKey.file),
+    label: t(I18nTextKey.FILE),
     submenu: [
       {
-        label: t(I18nTextKey.newFile),
+        label: t(I18nTextKey.NEW_FILE),
         click() {
           windowMgr.newFile();
         }
       },
       {
-        label: t(I18nTextKey.openFile),
+        label: t(I18nTextKey.OPEN_FILE),
         click() {
           openFile(windowMgr);
         }
       },
       {
-        id: I18nTextKey.save,
-        label: t(I18nTextKey.save),
+        id: I18nTextKey.SAVE,
+        label: t(I18nTextKey.SAVE),
         accelerator: 'CommandOrControl+S',
         click() {
           save(windowMgr);
         }
       },
       {
-        id: I18nTextKey.saveAs,
-        label: t(I18nTextKey.saveAs),
+        id: I18nTextKey.SAVE_AS,
+        label: t(I18nTextKey.SAVE_AS),
         accelerator: 'Shift+CommandOrControl+S',
         click() {
           saveAs(windowMgr);
@@ -54,17 +66,17 @@ function getMenu(i18n, windowMgr) {
   };
 
   const edit = {
-    label: t(I18nTextKey.edit),
+    label: t(I18nTextKey.EDIT),
     submenu: [
       {
-        label: t(I18nTextKey.undo),
+        label: t(I18nTextKey.UNDO),
         accelerator: 'CommandOrControl+Z',
         click() {
           undo();
         }
       },
       {
-        label: t(I18nTextKey.redo),
+        label: t(I18nTextKey.REDO),
         accelerator: 'Shift+CommandOrControl+Z',
         click() {
           redo();
@@ -81,10 +93,6 @@ function getMenu(i18n, windowMgr) {
       { role: 'forcereload' },
       { role: 'toggledevtools' }, // !! 这里加入打开调试工具, 如果你不希望打开请去掉这行
       { type: 'separator' },
-      { role: 'resetzoom' },
-      { role: 'zoomin' },
-      { role: 'zoomout' },
-      { type: 'separator' },
       { role: 'togglefullscreen' }
     ]
   };
@@ -100,8 +108,9 @@ function getMenu(i18n, windowMgr) {
     ]
   };
 
+
   const menu = isMacOS
-    ? [productName, file, edit, view, help]
+    ? [productName, file, edit, view,help]
     : [file, edit, view, help];
   return menu;
 }

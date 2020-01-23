@@ -23,12 +23,12 @@ export function saveFileWithFileModel(fileModel, t) {
   const dialog = remote.dialog;
   let res = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
     type: 'question',
-    title: t(I18nTextKey.saveTipTitle),
-    message: t(I18nTextKey.saveTipContent),
+    title: t(I18nTextKey.SAVE_TIP_TITLE),
+    message: t(I18nTextKey.SAVE_TIP_CONTENT),
     buttons: [
-      t(I18nTextKey.save),
-      t(I18nTextKey.cancel),
-      t(I18nTextKey.dontSave)
+      t(I18nTextKey.SAVE),
+      t(I18nTextKey.CANCEL),
+      t(I18nTextKey.DONT_SAVE)
     ]
   });
 

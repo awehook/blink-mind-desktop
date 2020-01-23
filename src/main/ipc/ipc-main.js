@@ -20,7 +20,7 @@ ipcMain.on(IpcChannelName.GET_I18N, (event, arg) => {
   event.returnValue = i18n.getDataByLanguage(i18n.language).translation;
 });
 
-ipcMain.on(IpcChannelName.I18N_CHANGE_LANG, (event, lang) => {
+ipcMain.on(IpcChannelName.RM_CHANGE_LANG, (event, lang) => {
   i18n.changeLanguage(lang);
 });
 
