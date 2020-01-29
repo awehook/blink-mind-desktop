@@ -64,19 +64,19 @@ export class FilesPageInternal extends React.Component {
     const { windowData } = this.props;
     const fileModels = windowData.files.map(file => {
       const controller = createBlinkMindController(this.onChange(file.id));
-      let model = null;
+      let docModel = null;
       if (file.path == null) {
-        model = controller.run('createNewModel');
+        docModel = controller.run('createNewDocModel');
       } else {
         const content = getFileContent({ path: file.path });
         const obj = JSON.parse(content);
-        model = controller.run('deserializeModel', { obj, controller });
+        docModel = controller.run('deserializeDocModel', { obj, controller });
       }
       return new FileModel({
         id: file.id,
         path: file.path,
-        savedModel: file.path ? model : null,
-        model,
+        savedModel: file.path ? docModel : null,
+        docModel,
         controller
       });
     });
@@ -138,15 +138,15 @@ export class FilesPageInternal extends React.Component {
   onUndo = () => {
     const fileModel = this.getActiveFileModel();
     const controller = fileModel.controller;
-    const model = fileModel.model;
-    controller.run('undo', { controller, model });
+    const docModel = fileModel.docModel;
+    controller.run('undo', { controller, docModel });
   };
 
   onRedo = () => {
     const fileModel = this.getActiveFileModel();
     const controller = fileModel.controller;
-    const model = fileModel.model;
-    controller.run('redo', { controller, model });
+    const docModel = fileModel.docModel;
+    controller.run('redo', { controller, docModel });
   };
 
   onBeforeCloseWindow = () => {
@@ -174,17 +174,17 @@ export class FilesPageInternal extends React.Component {
     ipcRenderer.off(IpcChannelName.MR, this.onIpcMR);
   }
 
-  onChange = fileModelId => (model, callback) => {
+  onChange = fileModelId => (docModel, callback) => {
     console.log('onchange', fileModelId);
     const fileModel = this.state.filesWindowModel.getFile(fileModelId);
-    const edited = fileModel.model !== model;
+    const edited = fileModel.docModel !== docModel;
     log('edited', edited);
     log(remote.getCurrentWindow());
     remote.getCurrentWindow().setTitleFlag({ edited });
     if (!edited) return;
     const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
       id: fileModelId,
-      model
+      docModel
     });
 
     this.setState(

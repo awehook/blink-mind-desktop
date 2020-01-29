@@ -25,6 +25,8 @@
   "SAVE_TIP_TITLE": "你需要保存当前的修改吗？",
   "SAVE_TIP_CONTENT": "如果不保存，当前的修改会丢失。",
 
+  "RENAME": "重命名",
+
   "CONFIRM": "确认",
   "CANCEL": "取消",
   "DEFAULT": "默认",
@@ -32,6 +34,9 @@
   "LEFT_AND_RIGHT": "左右布局",
   "ONLY_LEFT": "仅左侧",
   "ONLY_RIGHT": "仅右侧",
+
+  "ADD_CANVAS": "添加画布",
+  "CANVAS": "画布",
 
   "EDIT": "编辑",
   "ADD_SIBLING": "添加兄弟节点",

@@ -1,6 +1,6 @@
 {
   "LANGUAGE": "Language",
-  "CHINESE_SIMPLIFIED":  "Chinese Simplified",
+  "CHINESE_SIMPLIFIED": "Chinese Simplified",
   "ENGLISH": "English",
 
   "WELCOME_PAGE_TITLE": "Welcome to BlinkMind",
@@ -25,6 +25,8 @@
   "SAVE_TIP_TITLE": "Do you want to save the changes?",
   "SAVE_TIP_CONTENT": "Your changes will be lost if you don't save them.",
 
+  "RENAME": "Rename",
+
   "CONFIRM": "Confirm",
   "CANCEL": "Cancel",
   "DEFAULT": "Default",
@@ -32,6 +34,9 @@
   "LEFT_AND_RIGHT": "Left And Right",
   "ONLY_LEFT": "Only Left",
   "ONLY_RIGHT": "Only Right",
+
+  "ADD_CANVAS": "Add Canvas",
+  "CANVAS": "Canvas",
 
   "EDIT": "Edit",
   "ADD_SIBLING": "Add Sibling",

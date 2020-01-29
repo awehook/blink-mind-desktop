@@ -3,7 +3,7 @@ import { Record } from 'immutable';
 const defaultFileModelRecord = {
   id: null,
   path: null,
-  model: null,
+  docModel: null,
   savedModel: null,
   controller: null,
 };
@@ -20,8 +20,8 @@ export class FileModel extends Record(defaultFileModelRecord) {
     return this.get('savedModel');
   }
 
-  get model() {
-    return this.get('model');
+  get docModel() {
+    return this.get('docModel');
   }
 
   get controller() {
@@ -29,14 +29,14 @@ export class FileModel extends Record(defaultFileModelRecord) {
   }
 
   get isUnsaved() {
-    return this.model !== this.savedModel;
+    return this.docModel !== this.savedModel;
   }
 
 
   getContent() {
     const controller = this.controller;
-    const obj = controller.run('serializeModel', {
-      model: this.model,
+    const obj = controller.run('serializeDocModel', {
+      docModel: this.docModel,
       controller
     });
     return  JSON.stringify(obj, null, 2);

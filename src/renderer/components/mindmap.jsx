@@ -6,9 +6,9 @@ const log = debug('bmd:mindmap');
 
 export class MindMap extends React.Component {
 
-  createModel(fileModel) {
+  createDocModel(fileModel) {
     if (fileModel.path == null) {
-      return fileModel.controller.run('createNewModel');
+      return fileModel.controller.run('createNewDocModel');
     }
     return null;
   }
@@ -16,11 +16,11 @@ export class MindMap extends React.Component {
   renderDiagram() {
     const { fileModel } = this.props;
 
-    const model = fileModel.model || this.createModel(fileModel);
-    log('renderDiagram',model);
+    const docModel = fileModel.docModel || this.createDocModel(fileModel);
+    log('renderDiagram',docModel);
     const diagramProps = {
       controller: fileModel.controller,
-      model
+      docModel
     };
     return <Diagram {...diagramProps} />;
   }
