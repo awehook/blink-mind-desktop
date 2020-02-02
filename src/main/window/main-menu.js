@@ -1,4 +1,4 @@
-import {changeLang, isMacOS} from '../utils';
+import { changeLang, isMacOS } from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
 import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
@@ -83,6 +83,14 @@ function getMenu(i18n, windowMgr) {
         }
       },
       { type: 'separator' },
+      {
+        label: t(I18nTextKey.COPY),
+        role: 'copy'
+      },
+      {
+        label: t(I18nTextKey.PASTE),
+        role: 'paste'
+      }
     ]
   };
 
@@ -108,9 +116,8 @@ function getMenu(i18n, windowMgr) {
     ]
   };
 
-
   const menu = isMacOS
-    ? [productName, file, edit, view,help]
+    ? [productName, file, edit, view, help]
     : [file, edit, view, help];
   return menu;
 }

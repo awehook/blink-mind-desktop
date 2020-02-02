@@ -13,7 +13,9 @@ import {
   SearchPlugin,
   TagsPlugin,
   TopicReferencePlugin,
-  UndoRedoPlugin
+  UndoRedoPlugin,
+  InsertImagesPlugin,
+  ExportTopicPlugin,
 } from '@blink-mind/plugins';
 import { ToolbarPlugin,I18nPlugin } from '../plugins';
 import '@blink-mind/renderer-react/lib/main.css';
@@ -35,7 +37,9 @@ const plugins = [
   SearchPlugin(),
   UndoRedoPlugin(),
   TagsPlugin(),
+  InsertImagesPlugin(),
   TopologyDiagramPlugin(),
+  ExportTopicPlugin(),
   JsonSerializerPlugin(),
   DefaultPlugin()
 ];
@@ -90,7 +94,7 @@ export class FilesPageInternal extends React.Component {
       filesWindowModel
     };
 
-    log('this.state', this.state);
+    // log('this.state', this.state);
   }
 
   getActiveFileModel() {
@@ -179,7 +183,6 @@ export class FilesPageInternal extends React.Component {
     const fileModel = this.state.filesWindowModel.getFile(fileModelId);
     const edited = fileModel.docModel !== docModel;
     log('edited', edited);
-    log(remote.getCurrentWindow());
     remote.getCurrentWindow().setTitleFlag({ edited });
     if (!edited) return;
     const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
