@@ -63,7 +63,7 @@ export class WindowMgr {
     });
 
     ipcMain.on(IpcChannelName.RM_NEW_FILE, (event, arg) => {
-      this.newFile();
+      this.newFile(arg);
     });
 
     ipcMain.on(IpcChannelName.RM_OPEN_FILE, () => {
@@ -97,12 +97,12 @@ export class WindowMgr {
     } else if (this.fileToWindowMap.has(path)) {
       this.fileToWindowMap.get(path).focus();
     } else {
-      this.createFileWindow(path);
+      this.createFileWindow({ path });
     }
   }
 
-  newFile() {
-    this.createFileWindow();
+  newFile({ themeKey }) {
+    this.createFileWindow({ themeKey });
   }
 
   createWelcomeWindow() {
@@ -111,7 +111,7 @@ export class WindowMgr {
       return;
     }
     const window = new BrowserWindow({
-      width: 400,
+      width: 750,
       height: 400,
       center: true,
       resizable: false,
@@ -156,7 +156,8 @@ export class WindowMgr {
     }
   }
 
-  createFileWindow(filePath) {
+  createFileWindow(arg) {
+    const { path } = arg;
     this.closeWelcomeWindow();
     const window = new BrowserWindow({
       show: false,
@@ -165,7 +166,7 @@ export class WindowMgr {
         nodeIntegration: true,
         scrollBounce: true
       },
-      title: filePath == null ? getUntitledTile() : filePath
+      title: path == null ? getUntitledTile() : path
     });
     window.loadURL(`${this.url}/#/file`);
 
@@ -188,7 +189,7 @@ export class WindowMgr {
       this.openedFileWindows.delete(window);
     });
 
-    const files = [new FileData(filePath)];
+    const files = [new FileData(arg)];
 
     window.windowData = new WindowData(files, files[0].id);
 
@@ -196,8 +197,8 @@ export class WindowMgr {
       window.setTitle(window.windowData.getFocusFileTitle(edited));
     };
 
-    if (filePath) {
-      this.fileToWindowMap.set(filePath, window);
+    if (path) {
+      this.fileToWindowMap.set(path, window);
     }
 
     this.openedFileWindows.add(window);

@@ -7,8 +7,8 @@ export function getFileContent({ path }) {
   });
 }
 
-export function newFile() {
-  ipcRenderer.send(IpcChannelName.RM_NEW_FILE);
+export function newFile(arg) {
+  ipcRenderer.send(IpcChannelName.RM_NEW_FILE, arg);
 }
 
 export function openFile() {

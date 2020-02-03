@@ -2,22 +2,6 @@ import React, { useState } from 'react';
 import { ipcRenderer, remote } from 'electron';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { MindMap } from '../components';
-
-import { Controller } from '@blink-mind/core';
-import { DefaultPlugin } from '@blink-mind/renderer-react';
-import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
-import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
-import { ThemeSelectorPlugin } from '@blink-mind/plugin-theme-selector';
-import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
-import {
-  SearchPlugin,
-  TagsPlugin,
-  TopicReferencePlugin,
-  UndoRedoPlugin,
-  InsertImagesPlugin,
-  ExportTopicPlugin,
-} from '@blink-mind/plugins';
-import { ToolbarPlugin,I18nPlugin } from '../plugins';
 import '@blink-mind/renderer-react/lib/main.css';
 import '@blink-mind/plugins/lib/main.css';
 import { IpcChannelName, IpcType } from '../../common';
@@ -25,28 +9,9 @@ import { List } from 'immutable';
 import debug from 'debug';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
 import { useTranslation } from '../hooks';
+import { createBlinkMindController } from '../blink-mind-controller';
 
 const log = debug('bmd:files-page');
-
-const plugins = [
-  ToolbarPlugin(),
-  I18nPlugin(),
-  RichTextEditorPlugin(),
-  ThemeSelectorPlugin(),
-  TopicReferencePlugin(),
-  SearchPlugin(),
-  UndoRedoPlugin(),
-  TagsPlugin(),
-  InsertImagesPlugin(),
-  TopologyDiagramPlugin(),
-  ExportTopicPlugin(),
-  JsonSerializerPlugin(),
-  DefaultPlugin()
-];
-
-function createBlinkMindController(onChange) {
-  return new Controller({ plugins, onChange });
-}
 
 export function FilesPage(props) {
   const t = useTranslation();
@@ -67,19 +32,23 @@ export class FilesPageInternal extends React.Component {
 
     const { windowData } = this.props;
     const fileModels = windowData.files.map(file => {
-      const controller = createBlinkMindController(this.onChange(file.id));
+      const { id, path, themeKey } = file;
+      const controller = createBlinkMindController(this.onChange(id));
       let docModel = null;
-      if (file.path == null) {
-        docModel = controller.run('createNewDocModel');
+      if (path == null) {
+        docModel = controller.run('createNewDocModel', {
+          controller,
+          themeKey
+        });
       } else {
-        const content = getFileContent({ path: file.path });
+        const content = getFileContent({ path });
         const obj = JSON.parse(content);
-        docModel = controller.run('deserializeDocModel', { obj, controller });
+        docModel = controller.run('deserializeDocModel', { controller, obj });
       }
       return new FileModel({
-        id: file.id,
-        path: file.path,
-        savedModel: file.path ? docModel : null,
+        id,
+        path,
+        savedModel: path ? docModel : null,
         docModel,
         controller
       });

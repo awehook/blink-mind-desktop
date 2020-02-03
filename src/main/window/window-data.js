@@ -2,9 +2,10 @@ import { getFileTitle } from '../utils';
 
 let id = 0;
 
-export function FileData(path) {
+export function FileData({ path, themeKey }) {
   this.id = ++id;
   this.path = path;
+  this.themeKey = themeKey;
 }
 
 export function WindowData(files, focusFileId) {
