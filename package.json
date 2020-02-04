@@ -53,7 +53,7 @@
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "drop-console-webpack-plugin": "^3.0.2",
-    "electron": "^7.1.9",
+    "electron": "7.1.9",
     "electron-builder": "^22.2.0",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
@@ -74,7 +74,6 @@
     "jest-watch-typeahead": "^0.2.1",
     "mini-css-extract-plugin": "0.5.0",
     "ncp": "^2.0.0",
-    "node-sass": "^4.13.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.2.1",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -108,10 +107,13 @@
     "start-m": "cross-env NODE_ENV=development ./node_modules/.bin/electron --inspect=5859 ./src/main",
     "set-debug-ns": "cross-env DEBUG=main:*",
     "dev": "yarn set-debug-ns && node .electron/dev-runner.js",
+    "elec": "electron .",
     "dbg": "yarn set-debug-ns && node .electron/dev-runner.js --dbg",
     "up-blink": "node scripts/blink.js -u",
     "link-blink": "node scripts/blink.js --link",
     "unlink-blink": "node scripts/blink.js --unlink",
+    "nlink-blink": "node scripts/blink.js --link --npm",
+    "nunlink-blink": "node scripts/blink.js --unlink --npm",
     "package": "electron-builder build --publish never",
     "pack:r": "yarn build && ncp index.html build/renderer/index.html",
     "pack:rr": "cross-env GENERATE_SOURCEMAP=false yarn pack:r",
@@ -216,6 +218,7 @@
       ]
     },
     "win": {
+      "icon": "icons/icon.png",
       "target": [
         "zip"
       ]

@@ -4,11 +4,12 @@ import { createWindowMgr, windowMgr } from './window/window-manager';
 import { ProductName } from '../common';
 import './ipc';
 import debug from 'debug';
-const log = debug('main:app');
+const log = debug('main:index');
 
-console.log('env:',process.env);
+log('env:',process.env);
 
 const appReadyCallback = () => {
+
   initStore();
   createWindowMgr();
 };
@@ -20,6 +21,6 @@ app.on('window-all-closed', () => {});
 app.on('activate', () => {
   log('activate');
   if(windowMgr.getOpenedFileWindows().size === 0) {
-    windowMgr.createWelcomeWindow();
+    windowMgr.showWelcomeWindow();
   }
 });

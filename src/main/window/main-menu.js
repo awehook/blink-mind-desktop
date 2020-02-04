@@ -1,4 +1,4 @@
-import { changeLang, isMacOS } from '../utils';
+import { isMacOS } from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
 import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
@@ -10,23 +10,13 @@ function getMenu(i18n, windowMgr) {
     submenu: [
       {
         label: t(I18nTextKey.PREFERENCES),
-        click() {}
+        click() {
+          windowMgr.showPreferencesWindow();
+        }
       },
       {
         label: `About ${ProductName}`,
         selector: 'orderFrontStandardAboutPanel:'
-      },
-      {
-        label: t(I18nTextKey.ENGLISH),
-        click() {
-          changeLang('en');
-        }
-      },
-      {
-        label: t(I18nTextKey.CHINESE_SIMPLIFIED),
-        click() {
-          changeLang('zh-CN');
-        }
       }
     ]
   };
@@ -37,7 +27,7 @@ function getMenu(i18n, windowMgr) {
       {
         label: t(I18nTextKey.NEW_FILE),
         click() {
-          windowMgr.newFile();
+          windowMgr.showWelcomeWindow();
         }
       },
       {

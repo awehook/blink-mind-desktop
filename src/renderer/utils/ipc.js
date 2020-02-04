@@ -7,6 +7,14 @@ export function getFileContent({ path }) {
   });
 }
 
+export function getStoreItem(key) {
+  return ipcRenderer.sendSync(IpcChannelName.RM_GET_STORE_ITEM, { key });
+}
+
+export function setStoreItem(key, value) {
+  return ipcRenderer.sendSync(IpcChannelName.RM_SET_STORE_ITEM, { key, value });
+}
+
 export function newFile(arg) {
   ipcRenderer.send(IpcChannelName.RM_NEW_FILE, arg);
 }

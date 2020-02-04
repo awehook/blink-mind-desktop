@@ -140,20 +140,21 @@ export class FilesPageInternal extends React.Component {
   };
 
   componentDidMount() {
-    ipcRenderer.on(IpcChannelName.MR, this.onIpcMR);
+    ipcRenderer.on(IpcChannelName.MR_FILE_WINDOW, this.onIpcMR);
   }
 
   componentWillUnmount() {
-    ipcRenderer.off(IpcChannelName.MR, this.onIpcMR);
+    ipcRenderer.off(IpcChannelName.MR_FILE_WINDOW, this.onIpcMR);
   }
 
   onChange = fileModelId => (docModel, callback) => {
-    console.log('onchange', fileModelId);
+    log('onchange', fileModelId);
     const fileModel = this.state.filesWindowModel.getFile(fileModelId);
-    const edited = fileModel.docModel !== docModel;
+    const edited = fileModel.savedModel !== docModel;
     log('edited', edited);
     remote.getCurrentWindow().setTitleFlag({ edited });
-    if (!edited) return;
+    const changed = fileModel.docModel !== docModel;
+    if (!changed) return;
     const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
       id: fileModelId,
       docModel

@@ -1,4 +1,9 @@
+import { app } from 'electron';
+import { I18nAvailableLngs, StoreItemKey } from '../common';
+import debug from 'debug';
 const ElectronStore = require('electron-store');
+const log = debug('main:store');
+
 const store = new ElectronStore({
   schema: {
     preferences: {
@@ -8,8 +13,11 @@ const store = new ElectronStore({
           type: 'object',
           properties: {
             language: {
+              type: 'string'
+            },
+            appearance: {
               type: 'string',
-              default: ''
+              default: 'light'
             }
           }
         }
@@ -27,28 +35,22 @@ const store = new ElectronStore({
   }
 });
 
-export const StoreItemKey = {
-  preferences: {
-    normal: {
-      language: 'preferences.normal.language'
-    }
-  },
-  recent: {
-    openedDir: 'recent.openedDir'
-  }
-};
-
 export function setStoreItem(key, value) {
-  store.set(key, value);
+  if (value == null) store.delete(key);
+  else store.set(key, value);
 }
 
-export function getStoreItem(key, defaultValue = null) {
-  console.log('getStoreItem',key);
+export function getStoreItem(key, defaultValue = undefined) {
   return store.get(key, defaultValue);
 }
 
 export function initStore() {
-  console.log('StoreItemKey.preferences.normal.language:');
+  log('initStore');
+  if (getStoreItem(StoreItemKey.preferences.normal.language) == null) {
+    let lng = app.getLocale();
+    if (!I18nAvailableLngs.includes(lng)) {
+      lng = 'en';
+    }
+    setStoreItem(StoreItemKey.preferences.normal.language, lng);
+  }
 }
-
-

@@ -17,7 +17,7 @@ export function save(windowMgr) {
     if (focusFile.path == null) {
       saveAs(windowMgr);
     } else {
-      focusWindow.webContents.send(IpcChannelName.MR, {
+      focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
         type: IpcType.MR_SAVE,
         id: focusFile.id,
         path: focusFile.path
@@ -31,11 +31,11 @@ export function openFile(windowMgr) {
 }
 
 export function undo(windowMgr) {
-  console.log('undo');
+  log('undo');
   ipcMR({ type: IpcType.MR_UNDO });
 }
 
 export function redo(windowMgr) {
-  console.log('redo');
+  log('redo');
   ipcMR({ type: IpcType.MR_REDO });
 }

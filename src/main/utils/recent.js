@@ -1,5 +1,6 @@
 import { app } from 'electron';
-import { getStoreItem, StoreItemKey } from '../store';
+import { StoreItemKey } from '../../common';
+import { getStoreItem } from '../store';
 
 export function getRecentOpenedDir() {
   return (

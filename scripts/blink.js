@@ -5,10 +5,16 @@ const path = require('path');
 const package = require('../package.json');
 
 program.option('-u, --upgrade', 'upgrade blink-mind version');
+program.option('--npm', 'use npm');
 program.option('--link', 'link blink-mind');
 program.option('--unlink', 'unlink blink-mind');
 
 program.parse(process.argv);
+
+let cmd = 'yarn';
+if(program.npm) {
+  cmd = 'npm'
+}
 
 if (program.upgrade) {
   const rl = readline.createInterface({
@@ -42,7 +48,7 @@ if (program.link) {
   console.log('link blink-mind packages');
   const { exec } = require('child_process');
   exec(
-    `yarn link ${getAllBlinkPackages(package).join(' ')}`,
+    `${cmd} link ${getAllBlinkPackages(package).join(' ')}`,
     (err, stdout, stderr) => {
       console.log(`stdout: ${stdout}`);
       console.error(`stderr: ${stderr}`);
@@ -57,7 +63,7 @@ if (program.unlink) {
   console.log('link blink-mind packages');
   const { exec } = require('child_process');
   exec(
-    `yarn unlink ${getAllBlinkPackages(package).join(' ')}`,
+    `${cmd} unlink ${getAllBlinkPackages(package).join(' ')}`,
     (err, stdout, stderr) => {
       console.log(`stdout: ${stdout}`);
       stderr && console.error(`stderr: ${stderr}`);

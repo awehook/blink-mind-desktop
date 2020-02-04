@@ -7,7 +7,7 @@ import theme3Img from '../images/theme-3.jpg';
 import theme4Img from '../images/theme-4.jpg';
 import themeRandomColorRoundImg from '../images/theme-random-color-round.jpg';
 import { BlinkMindController } from '../blink-mind-controller';
-import { Button, Card, Colors, Divider } from '@blueprintjs/core';
+import { Button, Colors } from '@blueprintjs/core';
 import { setColorAlpha } from '@blink-mind/renderer-react';
 import { useTranslation } from '../hooks';
 import { I18nTextKey } from '../../common';
@@ -34,6 +34,11 @@ const ButtonContainer = styled.div`
   padding: 20px;
   background-color: ${Colors.LIGHT_GRAY5};
   border-top: solid 1px ${Colors.LIGHT_GRAY2};
+  
+  .bp3-dark & {
+  border-top: solid 1px ${Colors.DARK_GRAY2};
+    background-color: ${Colors.DARK_GRAY3};
+  }
 `;
 
 const themeItemOutline = `solid 3px  ${Colors.BLUE5}`;

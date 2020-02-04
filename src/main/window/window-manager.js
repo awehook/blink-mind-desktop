@@ -1,7 +1,13 @@
 import { initI18n, i18n } from '../i18n';
 import { FileData, WindowData } from './window-data';
 import { buildMenu } from './main-menu';
-import { I18nTextKey, IpcChannelName, IpcType } from '../../common';
+import {
+  I18nTextKey,
+  IpcChannelName,
+  IpcType,
+  MrGlobalType,
+  StoreItemKey
+} from '../../common';
 import {
   app,
   BrowserWindow,
@@ -16,8 +22,9 @@ import {
   regularBlinkPath
 } from '../utils';
 import { dirname } from 'path';
-import { setStoreItem, StoreItemKey } from '../store';
+import { setStoreItem } from '../store';
 import debug from 'debug';
+import { ipcSendToAllWindow } from '../ipc';
 const log = debug('main:window-mgr');
 
 const isDev = require('electron-is-dev');
@@ -27,6 +34,7 @@ let windowMgr;
 export class WindowMgr {
   currentWindow;
   welcomeWindow;
+  preferenceWindow;
   fileToWindowMap;
   openedFileWindows;
   url;
@@ -48,15 +56,16 @@ export class WindowMgr {
 
     const i18n = initI18n((err, t) => {
       console.error('initCallback', err, t);
-      const welcomeWindow = this.createWelcomeWindow();
+      const welcomeWindow = this.showWelcomeWindow();
       buildMenu(i18n, this);
       i18n.on('languageChanged', lng => {
-        buildMenu(i18n);
-        BrowserWindow.getAllWindows().forEach(w => {
-          w.webContents.send(
-            IpcChannelName.MR_LANG_CHANGED,
-            i18n.getDataByLanguage(lng).translation
-          );
+        log('languageChanged', lng);
+        setStoreItem(StoreItemKey.preferences.normal.language, lng);
+        buildMenu(i18n, this);
+        //TODO change window title
+        ipcSendToAllWindow(IpcChannelName.MR_GLOBAL, {
+          type: MrGlobalType.SET_LANG,
+          translation: i18n.getDataByLanguage(lng).translation
         });
       });
       this.currentWindow = welcomeWindow;
@@ -105,14 +114,14 @@ export class WindowMgr {
     this.createFileWindow({ themeKey });
   }
 
-  createWelcomeWindow() {
+  showWelcomeWindow() {
     if (this.welcomeWindow) {
       this.welcomeWindow.show();
       return;
     }
     const window = new BrowserWindow({
       width: 750,
-      height: 400,
+      height: 395,
       center: true,
       resizable: false,
       minimizable: false,
@@ -150,6 +159,39 @@ export class WindowMgr {
     return window;
   }
 
+  showPreferencesWindow() {
+    if (this.preferenceWindow) {
+      this.preferenceWindow.show();
+      return;
+    }
+    const window = new BrowserWindow({
+      width: 550,
+      height: 150,
+      center: true,
+      resizable: false,
+      minimizable: false,
+      maximizable: false,
+      webPreferences: {
+        nodeIntegration: true,
+        scrollBounce: true
+      },
+      title: i18n.t(I18nTextKey.PREFERENCES)
+    });
+    window.loadURL(`${this.url}/#/preferences`);
+
+    window.webContents.on('did-finish-load', () => {
+      window.show();
+      window.focus();
+    });
+
+    window.on('closed', () => {
+      this.preferenceWindow = null;
+    });
+
+    this.preferenceWindow = window;
+    return window;
+  }
+
   closeWelcomeWindow() {
     if (this.welcomeWindow) {
       this.welcomeWindow.close();
@@ -177,7 +219,7 @@ export class WindowMgr {
 
     window.on('close', e => {
       e.preventDefault();
-      window.webContents.send(IpcChannelName.MR, {
+      window.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
         type: IpcType.MR_BEFORE_CLOSE_WINDOW
       });
     });
@@ -230,7 +272,7 @@ export class WindowMgr {
             windowData.saveAs(path);
 
             focusWindow.setTitleFlag({ edited: false });
-            focusWindow.webContents.send(IpcChannelName.MR, {
+            focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
               type: IpcType.MR_SAVE,
               id: focusFile.id,
               path

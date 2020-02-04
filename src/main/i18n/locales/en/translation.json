@@ -19,8 +19,13 @@
   "PASTE": "Paste",
   "DUPLICATE": "Duplicate",
 
-  "NEW_TAB": "New Tab",
   "PREFERENCES": "Preferences",
+  "APPEARANCE": "Appearance",
+  "LIGHT": "Light",
+  "DARK": "Dark",
+  "DISPLAY_LANGUAGE": "Display Language",
+
+  "NEW_TAB": "New Tab",
   "UNTITLED": "untitled",
   "SAVE_TIP_TITLE": "Do you want to save the changes?",
   "SAVE_TIP_CONTENT": "Your changes will be lost if you don't save them.",

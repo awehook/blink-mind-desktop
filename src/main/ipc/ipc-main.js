@@ -1,29 +1,17 @@
 import { ipcMain, BrowserWindow, dialog } from 'electron';
-import { IpcChannelName } from '../../common';
-import { i18n } from '../i18n';
+import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
+import {getTranslation, i18n} from '../i18n';
 import fs from 'fs-extra';
-import { getRecentOpenedDir ,regularBlinkPath} from '../utils';
+import { getRecentOpenedDir, regularBlinkPath } from '../utils';
+import { getStoreItem, setStoreItem } from '../store';
+import debug from 'debug';
+import { ipcSendToAllWindow } from './ipc-send';
+const log = debug('main:ipc-main');
 
-ipcMain.on(IpcChannelName.GET_INITIAL_TRANSLATIONS, (event, arg) => {
-  const lng = 'en';
-  i18n.loadLanguages(lng, (err, t) => {
-    const initial = {
-      [lng]: {
-        translation: i18n.getResourceBundle(lng, 'translation')
-      }
-    };
-    event.returnValue = initial;
-  });
+ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
+  log('RM_GET_I18N');
+  event.returnValue = getTranslation();
 });
-
-ipcMain.on(IpcChannelName.GET_I18N, (event, arg) => {
-  event.returnValue = i18n.getDataByLanguage(i18n.language).translation;
-});
-
-ipcMain.on(IpcChannelName.RM_CHANGE_LANG, (event, lang) => {
-  i18n.changeLanguage(lang);
-});
-
 
 ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {
   let { path, content } = arg;
@@ -60,4 +48,26 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
 
 ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
   event.returnValue = fs.readFileSync(path);
+});
+
+ipcMain.on(IpcChannelName.RM_GET_STORE_ITEM, (event, { key, defaultValue }) => {
+  event.returnValue = getStoreItem(key, defaultValue);
+});
+
+ipcMain.on(IpcChannelName.RM_SET_STORE_ITEM, (event, { key, value }) => {
+  log('RM_SET_STORE_ITEM', { key, value });
+  setStoreItem(key, value);
+  switch (key) {
+    case StoreItemKey.preferences.normal.appearance:
+      ipcSendToAllWindow(IpcChannelName.MR_GLOBAL, {
+        type: MrGlobalType.SET_APPEARANCE,
+        appearance: value
+      });
+      break;
+    case StoreItemKey.preferences.normal.language:
+      i18n.changeLanguage(value);
+      break;
+    default:
+      break;
+  }
 });

@@ -1,6 +1,6 @@
 {
   "LANGUAGE": "语言",
-  "CHINESE_SIMPLIFIED":  "中文简体",
+  "CHINESE_SIMPLIFIED": "中文简体",
   "ENGLISH": "英语",
 
   "WELCOME_PAGE_TITLE": "欢迎使用BlinkMind",
@@ -19,8 +19,13 @@
   "PASTE": "粘贴",
   "DUPLICATE": "复制",
 
-  "NEW_TAB": "新建标签页",
   "PREFERENCES": "首选项",
+  "APPEARANCE": "外观",
+  "LIGHT": "浅色",
+  "DARK": "深色",
+  "DISPLAY_LANGUAGE": "显示语言",
+
+  "NEW_TAB": "新建标签页",
   "UNTITLED": "未命名",
   "SAVE_TIP_TITLE": "你需要保存当前的修改吗？",
   "SAVE_TIP_CONTENT": "如果不保存，当前的修改会丢失。",
