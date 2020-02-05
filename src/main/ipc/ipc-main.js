@@ -1,6 +1,6 @@
 import { ipcMain, BrowserWindow, dialog } from 'electron';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
-import {getTranslation, i18n} from '../i18n';
+import { i18n} from '../i18n';
 import fs from 'fs-extra';
 import { getRecentOpenedDir, regularBlinkPath } from '../utils';
 import { getStoreItem, setStoreItem } from '../store';
@@ -10,7 +10,7 @@ const log = debug('main:ipc-main');
 
 ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
   log('RM_GET_I18N');
-  event.returnValue = getTranslation();
+  event.returnValue = i18n.getTranslation();
 });
 
 ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {

@@ -5,7 +5,7 @@ const mainConfig = require('./webpack.main.config');
 
 function build() {
   fs.emptyDirSync('./build/electron');
-  fs.copySync('./src/main/i18n/locales','./build/electron/locales');
+  // fs.copySync('./src/main/i18n/locales','./build/electron/locales');
   pack(mainConfig)
     .then(result => {
       console.log(`build main process ${result}`);

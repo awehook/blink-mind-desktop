@@ -1,4 +1,4 @@
-import { initI18n, i18n } from '../i18n';
+import { i18n } from '../i18n';
 import { FileData, WindowData } from './window-data';
 import { buildMenu } from './main-menu';
 import {
@@ -32,7 +32,6 @@ const isDev = require('electron-is-dev');
 let windowMgr;
 
 export class WindowMgr {
-  currentWindow;
   welcomeWindow;
   preferenceWindow;
   fileToWindowMap;
@@ -53,22 +52,17 @@ export class WindowMgr {
     this.url = isDev
       ? 'http://localhost:3008'
       : `file://${app.getAppPath()}/build/renderer/index.html`;
-
-    const i18n = initI18n((err, t) => {
-      console.error('initCallback', err, t);
-      const welcomeWindow = this.showWelcomeWindow();
+    buildMenu(i18n, this);
+    this.showWelcomeWindow();
+    i18n.on('languageChanged', ({ language, translation }) => {
+      log('languageChanged', language);
+      setStoreItem(StoreItemKey.preferences.normal.language, language);
       buildMenu(i18n, this);
-      i18n.on('languageChanged', lng => {
-        log('languageChanged', lng);
-        setStoreItem(StoreItemKey.preferences.normal.language, lng);
-        buildMenu(i18n, this);
-        //TODO change window title
-        ipcSendToAllWindow(IpcChannelName.MR_GLOBAL, {
-          type: MrGlobalType.SET_LANG,
-          translation: i18n.getDataByLanguage(lng).translation
-        });
+      //TODO change window title
+      ipcSendToAllWindow(IpcChannelName.MR_GLOBAL, {
+        type: MrGlobalType.SET_LANG,
+        translation
       });
-      this.currentWindow = welcomeWindow;
     });
 
     ipcMain.on(IpcChannelName.RM_NEW_FILE, (event, arg) => {
@@ -82,7 +76,8 @@ export class WindowMgr {
 
   openFile(path) {
     if (path == null) {
-      this.closeWelcomeWindow();
+      if(isMacOS)
+        this.closeWelcomeWindow();
       dialog
         .showOpenDialog(null, {
           defaultPath: getRecentOpenedDir(),
@@ -115,6 +110,7 @@ export class WindowMgr {
   }
 
   showWelcomeWindow() {
+    log('showWelcomeWindow');
     if (this.welcomeWindow) {
       this.welcomeWindow.show();
       return;
@@ -133,7 +129,7 @@ export class WindowMgr {
       title: i18n.t(I18nTextKey.WELCOME_PAGE_TITLE)
     });
     window.loadURL(`${this.url}/#/welcome`);
-
+    window.setMenu(null);
     window.webContents.on('did-finish-load', () => {
       window.show();
       window.focus();
@@ -178,7 +174,7 @@ export class WindowMgr {
       title: i18n.t(I18nTextKey.PREFERENCES)
     });
     window.loadURL(`${this.url}/#/preferences`);
-
+    window.setMenu(null);
     window.webContents.on('did-finish-load', () => {
       window.show();
       window.focus();
@@ -200,7 +196,7 @@ export class WindowMgr {
 
   createFileWindow(arg) {
     const { path } = arg;
-    this.closeWelcomeWindow();
+
     const window = new BrowserWindow({
       show: false,
       center: true,
@@ -215,6 +211,7 @@ export class WindowMgr {
     window.webContents.on('did-finish-load', () => {
       window.show();
       window.focus();
+      this.closeWelcomeWindow();
     });
 
     window.on('close', e => {
@@ -284,6 +281,7 @@ export class WindowMgr {
 }
 
 export function createWindowMgr() {
+  log('createWindowMgr');
   windowMgr = new WindowMgr();
 }
 

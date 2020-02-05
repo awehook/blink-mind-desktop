@@ -4,6 +4,7 @@ import { createWindowMgr, windowMgr } from './window/window-manager';
 import { ProductName } from '../common';
 import './ipc';
 import debug from 'debug';
+import {isWindows} from "./utils";
 const log = debug('main:index');
 
 log('env:',process.env);
@@ -16,7 +17,10 @@ const appReadyCallback = () => {
 app.name = ProductName;
 
 app.on('ready', appReadyCallback);
-app.on('window-all-closed', () => {});
+app.on('window-all-closed', () => {
+  if(isWindows)
+    app.quit();
+});
 
 app.on('activate', () => {
   log('activate');

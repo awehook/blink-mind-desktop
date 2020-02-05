@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { I18nTextKey, IpcChannelName, StoreItemKey } from '../../common';
 import { useTranslation } from '../hooks';
 import { ipcRenderer } from 'electron';
@@ -26,7 +26,9 @@ const ItemText = styled.div`
 export function PreferencesPage(props) {
   const t = useTranslation();
   const lng = getStoreItem(StoreItemKey.preferences.normal.language);
-  const appearance = getStoreItem(StoreItemKey.preferences.normal.appearance);
+  const _appearance = getStoreItem(StoreItemKey.preferences.normal.appearance);
+
+  const [appearance, setAppearance] = useState(_appearance);
 
   const onLngChange = e => {
     ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM, {
@@ -36,6 +38,7 @@ export function PreferencesPage(props) {
   };
 
   const onAppearanceChange = e => {
+    setAppearance(e.target.value);
     ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM, {
       key: StoreItemKey.preferences.normal.appearance,
       value: e.target.value
