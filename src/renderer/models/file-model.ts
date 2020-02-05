@@ -1,44 +1,52 @@
 import { Record } from 'immutable';
+import { Controller, DocModel } from '@blink-mind/core';
 
-const defaultFileModelRecord = {
+type FileModelRecordType = {
+  id: string;
+  path: string;
+  docModel: DocModel;
+  savedModel: DocModel;
+  controller: Controller;
+};
+
+const defaultFileModelRecord: FileModelRecordType = {
   id: null,
   path: null,
   docModel: null,
   savedModel: null,
-  controller: null,
+  controller: null
 };
 
 export class FileModel extends Record(defaultFileModelRecord) {
-  get id(){
+  get id(): string {
     return this.get('id');
   }
-  get path() {
+  get path(): string {
     return this.get('path');
   }
 
-  get savedModel() {
+  get savedModel(): DocModel {
     return this.get('savedModel');
   }
 
-  get docModel() {
+  get docModel(): DocModel {
     return this.get('docModel');
   }
 
-  get controller() {
+  get controller(): Controller {
     return this.get('controller');
   }
 
-  get isUnsaved() {
+  get isUnsaved(): boolean {
     return this.docModel !== this.savedModel;
   }
 
-
-  getContent() {
+  getContent(): string {
     const controller = this.controller;
     const obj = controller.run('serializeDocModel', {
       docModel: this.docModel,
       controller
     });
-    return  JSON.stringify(obj, null, 2);
+    return JSON.stringify(obj, null, 2);
   }
 }

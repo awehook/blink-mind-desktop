@@ -1,33 +1,40 @@
 import { Record, List } from 'immutable';
+import { FileModel } from './file-model';
 
-const defaultFileWindowModelRecord = {
+type FilesWindowModelRecordType = {
+  id: string;
+  activeFileId: string;
+  files: List<FileModel>;
+};
+
+const defaultFileWindowModelRecord: FilesWindowModelRecordType = {
   id: null,
   activeFileId: null,
   files: List()
 };
 
 export class FilesWindowModel extends Record(defaultFileWindowModelRecord) {
-  get id() {
+  get id(): string {
     return this.get('id');
   }
 
-  get activeFileId() {
+  get activeFileId(): string {
     return this.get('activeFileId');
   }
 
-  get files() {
+  get files(): List<FileModel> {
     return this.get('files');
   }
 
-  getFile(id) {
+  getFile(id): FileModel {
     return this.files.find(f => f.id === id);
   }
 
-  getUnsavedFiles() {
+  getUnsavedFiles(): List<FileModel> {
     return this.files.filter(f => f.isUnsaved);
   }
 
-  getActiveFile() {
+  getActiveFile(): FileModel {
     return this.getFile(this.activeFileId);
   }
 }

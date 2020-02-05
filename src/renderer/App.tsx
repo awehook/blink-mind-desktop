@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import * as React from "react";
+import { useEffect, useState } from 'react';
 import { Classes } from '@blueprintjs/core';
 import { I18nContext, i18nMap, setI18nMap } from './context';
 import { ipcRenderer } from 'electron';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../common';
-import { PageRouter } from './route/page-router';
+import { PageRouter } from './route';
 import './App.css';
 
 import debug from 'debug';

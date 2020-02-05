@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import cx from 'classnames';
 export function Icon(props) {
   const { className, iconName } = props;

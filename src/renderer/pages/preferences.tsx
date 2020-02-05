@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { useState } from 'react';
 import { I18nTextKey, IpcChannelName, StoreItemKey } from '../../common';
 import { useTranslation } from '../hooks';
 import { ipcRenderer } from 'electron';

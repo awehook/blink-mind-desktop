@@ -31,8 +31,8 @@ const plugins = [
   DefaultPlugin()
 ];
 
-export function createBlinkMindController(onChange) {
+export function createBlinkMindController(onChange?): Controller {
   return new Controller({ plugins, onChange });
 }
 
-export const BlinkMindController = createBlinkMindController();
+export const BlinkMindController: Controller = createBlinkMindController();

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react'
+import { useState } from 'react';
 import styled from 'styled-components';
 import defaultThemeImg from '../images/theme-default.jpg';
 import theme1Img from '../images/theme-1.jpg';

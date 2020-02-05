@@ -1,20 +1,20 @@
-import React, { useState } from 'react';
+import * as React from 'react';
+import { Component, useState } from 'react';
 import { ipcRenderer, remote } from 'electron';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { MindMap } from '../components';
-// import '@blink-mind/renderer-react/lib/main.css';
-// import '@blink-mind/plugins/lib/main.css';
 import { IpcChannelName, IpcType } from '../../common';
 import { List } from 'immutable';
 import debug from 'debug';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-import { useTranslation } from '../hooks';
+import {TranslationFunction, useTranslation} from '../hooks';
 import { createBlinkMindController } from '../blink-mind-controller';
 
 const log = debug('bmd:files-page');
 
 export function FilesPage(props) {
   const t = useTranslation();
+  //@ts-ignore
   const initWindowData = remote.getCurrentWindow().windowData;
 
   const [windowData] = useState(initWindowData);
@@ -26,7 +26,15 @@ export function FilesPage(props) {
   return <FilesPageInternal {...nProps} />;
 }
 
-export class FilesPageInternal extends React.Component {
+interface Props {
+  windowData: any;
+  t: TranslationFunction
+}
+
+interface State {
+  filesWindowModel: FilesWindowModel;
+}
+export class FilesPageInternal extends Component<Props, State> {
   constructor(props) {
     super(props);
 
@@ -102,10 +110,10 @@ export class FilesPageInternal extends React.Component {
     saveFile({ path, id, content });
     const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
       id: id,
-      path,
+      docModel: fileModel.docModel,
       isSave: true
     });
-    this.setState(newFileWindowModel);
+    this.setState({ filesWindowModel: newFileWindowModel });
   };
 
   onUndo = () => {
@@ -152,6 +160,7 @@ export class FilesPageInternal extends React.Component {
     const fileModel = this.state.filesWindowModel.getFile(fileModelId);
     const edited = fileModel.savedModel !== docModel;
     log('edited', edited);
+    //@ts-ignore
     remote.getCurrentWindow().setTitleFlag({ edited });
     const changed = fileModel.docModel !== docModel;
     if (!changed) return;
