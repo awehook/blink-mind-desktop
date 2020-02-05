@@ -10,7 +10,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "strict": true,
+//    "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "moduleResolution": "node",
@@ -18,7 +18,30 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      //      "@/*": ["src/*"],
+      "@blink-mind/core": ["src/blink-mind/packages/core/src"],
+      "@blink-mind/icons": ["src/blink-mind/packages/icons"],
+      "@blink-mind/renderer-react": ["src/blink-mind/packages/renderer-react/src"],
+      "@blink-mind/plugin-json-serializer": [
+        "src/blink-mind/packages/plugin-json-serializer/src"
+      ],
+      "@blink-mind/plugin-simple-text-editor": [
+        "src/blink-mind/packages/plugin-simple-text-editor/src"
+      ],
+      "@blink-mind/plugin-rich-text-editor": [
+        "src/blink-mind/packages/plugin-rich-text-editor/src"
+      ],
+      "@blink-mind/plugin-theme-selector": [
+        "src/blink-mind/packages/plugin-theme-selector/src"
+      ],
+      "@blink-mind/plugin-topology-diagram": [
+        "src/blink-mind/packages/plugin-topology-diagram/src"
+      ],
+      "@blink-mind/plugins": ["src/blink-mind/packages/plugins/src"]
+    }
   },
   "include": [
     "src"

@@ -269,7 +269,26 @@ module.exports = function(webpackEnv) {
         // 为了解决yarn link lerna 的monorepo 导致webpack 打包进去多个react-dom的问题
         react: path.resolve('node_modules/react'),
         'react-dom': path.resolve('node_modules/react-dom'),
-        'styled-components': path.resolve('node_modules/styled-components')
+        'styled-components': path.resolve('node_modules/styled-components'),
+
+        '@blink-mind/core': path.resolve('src/blink-mind/packages/core/src/index'),
+        '@blink-mind/icons': path.resolve('src/blink-mind/packages/icons/'),
+        '@blink-mind/renderer-react': path.resolve(
+          'src/blink-mind/packages/renderer-react/src/index'
+        ),
+        '@blink-mind/plugin-json-serializer': path.resolve(
+          'src/blink-mind/packages/plugin-json-serializer/src/index'
+        ),
+        '@blink-mind/plugin-rich-text-editor': path.resolve(
+          'src/blink-mind/packages/plugin-rich-text-editor/src/index'
+        ),
+        '@blink-mind/plugin-theme-selector': path.resolve(
+          'src/blink-mind/packages/plugin-theme-selector/src/index'
+        ),
+        '@blink-mind/plugin-topology-diagram': path.resolve(
+          'src/blink-mind/packages/plugin-topology-diagram/src/index'
+        ),
+        '@blink-mind/plugins': path.resolve('src/blink-mind/packages/plugins/src/index')
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -340,6 +359,17 @@ module.exports = function(webpackEnv) {
                 },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
+            {
+              test: /\.tsx?$/,
+              use: [
+                {
+                  loader: 'awesome-typescript-loader',
+                  options: {
+                    declaration: false
+                  }
+                }
+              ]
+            },
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: paths.appSrc,
