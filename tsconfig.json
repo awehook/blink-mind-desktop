@@ -1,25 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-//    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "module": "esnext",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react",
     "experimentalDecorators": true,
+    "suppressExcessPropertyErrors": true,
+    "downlevelIteration": true,
+    "allowJs": true,
+    "declaration": true,
+    "outDir": "./lib",
+    "target": "es5",
+    "strictNullChecks": false,
+    "sourceMap": true,
+    "skipLibCheck": true,
+    "jsx": "react",
     "baseUrl": ".",
+    "lib": ["dom", "es2015"],
     "paths": {
       //      "@/*": ["src/*"],
       "@blink-mind/core": ["src/blink-mind/packages/core/src"],
@@ -45,5 +38,8 @@
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "src/blink-mind/stories"
   ]
 }
