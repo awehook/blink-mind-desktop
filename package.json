@@ -5,18 +5,14 @@
   "private": true,
   "author": "awehook",
   "dependencies": {
-
     "electron-is-dev": "^1.1.0",
     "electron-store": "^5.1.0",
-    "electron-window-state": "^5.0.3",
-    "i18next": "^19.0.3",
-    "i18next-node-fs-backend": "^2.1.3",
+    "fs-extra": "^8.1.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "universal-analytics": "^0.4.20",
-
     "immutable": "^4.0.0-rc.12",
     "is-plain-object": "^3.0.0",
     "memoize-one": "^5.1.1",
@@ -86,7 +82,6 @@
     "eslint-plugin-jsx-a11y": "6.1.2",
     "eslint-plugin-react": "7.12.4",
     "file-loader": "2.0.0",
-    "fs-extra": "^8.1.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
@@ -124,25 +119,24 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "build:a": "cross-env ANALYZER=true node scripts/build.js",
+    "build:m:d": "rimraf build/main && tsc --project tsconfig.main.dev.json",
+    "build:m:p": "rimraf build/main && tsc --project tsconfig.main.prod.json",
+    "build:m:w": "rimraf build/main && tsc --project tsconfig.main.dev.json --watch",
+    "build:r:d": "rimraf build/renderer && yarn build && ncp index.html build/renderer/index.html",
+    "build:r:p": "rimraf build/renderer && cross-env GENERATE_SOURCEMAP=false yarn build:r:d",
     "test": "node scripts/test.js",
-    "start-r": "cross-env NODE_ENV=development node --inspect=5858 scripts/start.js",
-    "dbg:m": "cross-env DEBUG='main:*' node ./node_modules/electron/cli.js --inspect-brk .",
+    "dev:m2": "yarn set-debug-ns && node ./.electron/start-main.js",
+    "dev:r": "node ./.electron/start-renderer.js",
+    "start:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",
+    "dev:m": "yarn build:m && cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",
+    "dbg:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js --inspect-brk",
     "set-debug-ns": "cross-env DEBUG=main:*",
     "dev": "yarn set-debug-ns && node .electron/dev-runner.js",
-    "elec": "electron .",
     "dbg": "yarn set-debug-ns && node .electron/dev-runner.js --dbg",
-    "up-blink": "node scripts/blink.js -u",
-    "link-blink": "node scripts/blink.js --link",
-    "unlink-blink": "node scripts/blink.js --unlink",
-    "nlink-blink": "node scripts/blink.js --link --npm",
-    "nunlink-blink": "node scripts/blink.js --unlink --npm",
     "package": "electron-builder build --publish never",
-    "pack:r": "yarn build && ncp index.html build/renderer/index.html",
-    "pack:rr": "cross-env GENERATE_SOURCEMAP=false yarn pack:r",
-    "pack:rs": "yarn pack:r",
     "pack:m": "node ./.electron/build.js",
-    "dist": "yarn pack:rr && yarn pack:m && yarn package",
-    "distme": "yarn pack:rs && yarn pack:m && yarn package",
+    "dist": "yarn build:r:p && yarn build:m:p && yarn package",
+    "distme": "yarn build:r:d && yarn build:m:d && yarn package",
     "run:mac": "./dist/mac/BlinkMind.app/Contents/MacOS/BlinkMind"
   },
   "eslintConfig": {
@@ -210,12 +204,12 @@
       "jest-watch-typeahead/testname"
     ]
   },
-  "main": "./build/electron/main.js",
+  "main": "./build/main/main/index.js",
   "build": {
     "productName": "BlinkMind",
     "appId": "org.awehook.blinkminddesktop",
     "files": [
-      "build/electron/**/*",
+      "build/main/**/*",
       "build/renderer/**/*",
       "index.html"
     ],
@@ -242,7 +236,9 @@
     "win": {
       "icon": "icons/icon.png",
       "target": [
-        "zip"
+        "dir",
+        "msi",
+        "portable"
       ]
     },
     "linux": {

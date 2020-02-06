@@ -1,0 +1,4 @@
+[submodule "BlinkMind"]
+    path = src/blink-mind
+    url = git@e.coding.net:awehook/blink-mind.git
+    branch = dev

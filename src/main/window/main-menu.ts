@@ -1,4 +1,4 @@
-import {isMacOS, isWindows} from '../utils';
+import { isMacOS, isWindows } from '../utils';
 import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
 import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
@@ -82,7 +82,7 @@ function getMenu(i18n, windowMgr) {
         label: t(I18nTextKey.PASTE),
         role: 'paste'
       },
-      isWindows&&preferencesMenu
+      isWindows && preferencesMenu
     ]
   };
 
@@ -115,9 +115,10 @@ function getMenu(i18n, windowMgr) {
 }
 
 export function buildMenu(i18n, windowMgr) {
+  //@ts-ignore
   const menu = Menu.buildFromTemplate(getMenu(i18n, windowMgr));
   Menu.setApplicationMenu(menu);
-  if(isWindows){
+  if (isWindows) {
     windowMgr.welcomeWindow && windowMgr.welcomeWindow.setMenu(null);
     windowMgr.preferenceWindow && windowMgr.preferenceWindow.setMenu(null);
   }

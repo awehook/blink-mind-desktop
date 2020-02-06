@@ -1,9 +1,12 @@
-import en from './locales/en/translation';
-import zhCN from './locales/zh-CN/translation';
+import en from './locales/en/translation.json';
+import zhCN from './locales/zh-CN/translation.json';
 
-import EventEmitter from 'events';
-import {getStoreItem} from "../store";
-import {StoreItemKey} from "../../common";
+import { EventEmitter } from 'events';
+import { getStoreItem } from '../store';
+import { StoreItemKey } from '../../common';
+import debug from 'debug';
+
+const log = debug('main:i18n');
 
 export class I18n extends EventEmitter {
   translations = {
@@ -13,9 +16,10 @@ export class I18n extends EventEmitter {
 
   language;
 
-  constructor(){
+  constructor() {
     super();
     this.language = getStoreItem(StoreItemKey.preferences.normal.language);
+    log('constructor:', this.language);
   }
 
   changeLanguage(lng) {
@@ -26,11 +30,11 @@ export class I18n extends EventEmitter {
     });
   }
 
-  t(key){
+  t(key) {
     return this.getTranslation()[key];
   }
 
-  getTranslation(lng) {
+  getTranslation(lng?) {
     if (lng) return this.translations[lng];
     return this.translations[this.language];
   }

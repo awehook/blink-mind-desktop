@@ -74,7 +74,7 @@ export class WindowMgr {
     });
   }
 
-  openFile(path) {
+  openFile(path?) {
     if (path == null) {
       if(isMacOS)
         this.closeWelcomeWindow();
@@ -146,6 +146,7 @@ export class WindowMgr {
           'string'
         );
         appleHighlightColor = appleHighlightColor.split(' ');
+        //@ts-ignore
         global.appleHighlightColor = appleHighlightColor;
       }
     }
@@ -222,6 +223,7 @@ export class WindowMgr {
     });
 
     window.on('closed', () => {
+      //@ts-ignore
       window.windowData.files.forEach(f => {
         f.path && this.fileToWindowMap.delete(f.path);
       });
@@ -230,9 +232,12 @@ export class WindowMgr {
 
     const files = [new FileData(arg)];
 
+    //@ts-ignore
     window.windowData = new WindowData(files, files[0].id);
 
+    //@ts-ignore
     window.setTitleFlag = ({ edited }) => {
+      //@ts-ignore
       window.setTitle(window.windowData.getFocusFileTitle(edited));
     };
 
@@ -251,6 +256,7 @@ export class WindowMgr {
   saveAs() {
     const focusWindow = BrowserWindow.getFocusedWindow();
 
+    //@ts-ignore
     const windowData = focusWindow.windowData;
     if (windowData) {
       const focusFile = windowData.getFocusFile();
@@ -268,6 +274,7 @@ export class WindowMgr {
             this.fileToWindowMap.set(filePath, focusWindow);
             windowData.saveAs(path);
 
+            //@ts-ignore
             focusWindow.setTitleFlag({ edited: false });
             focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
               type: IpcType.MR_SAVE,

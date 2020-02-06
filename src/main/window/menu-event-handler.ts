@@ -10,7 +10,9 @@ export function saveAs(windowMgr) {
 
 export function save(windowMgr) {
   const focusWindow = BrowserWindow.getFocusedWindow();
+  //@ts-ignore
   focusWindow.setTitleFlag({ edited: false });
+  //@ts-ignore
   const windowData = focusWindow.windowData;
   if (windowData) {
     const focusFile = windowData.getFocusFile();
@@ -30,12 +32,12 @@ export function openFile(windowMgr) {
   windowMgr.openFile();
 }
 
-export function undo(windowMgr) {
+export function undo(windowMgr?) {
   log('undo');
   ipcMR({ type: IpcType.MR_UNDO });
 }
 
-export function redo(windowMgr) {
+export function redo(windowMgr?) {
   log('redo');
   ipcMR({ type: IpcType.MR_REDO });
 }
