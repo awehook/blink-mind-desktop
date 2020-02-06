@@ -27,9 +27,6 @@
       "@blink-mind/plugin-rich-text-editor": [
         "src/blink-mind/packages/plugin-rich-text-editor/src"
       ],
-      "@blink-mind/plugin-theme-selector": [
-        "src/blink-mind/packages/plugin-theme-selector/src"
-      ],
       "@blink-mind/plugin-topology-diagram": [
         "src/blink-mind/packages/plugin-topology-diagram/src"
       ],

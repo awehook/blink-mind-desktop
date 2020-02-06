@@ -1,5 +1,4 @@
 import { ToolbarItemTheme } from './toolbar-item-theme';
-import './toolbar.css';
 
 export function ToolbarPlugin() {
   return {

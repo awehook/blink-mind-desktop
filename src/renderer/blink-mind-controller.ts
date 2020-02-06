@@ -1,14 +1,14 @@
 import { ToolbarPlugin } from './plugins/toolbar';
 import { I18nPlugin } from './plugins';
 import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
-import { ThemeSelectorPlugin } from '@blink-mind/plugin-theme-selector';
 import {
   ExportTopicPlugin,
   InsertImagesPlugin,
   SearchPlugin,
   TagsPlugin,
   TopicReferencePlugin,
-  UndoRedoPlugin
+  UndoRedoPlugin,
+  ThemeSelectorPlugin
 } from '@blink-mind/plugins';
 import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';

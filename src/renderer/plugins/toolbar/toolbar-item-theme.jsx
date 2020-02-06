@@ -12,10 +12,21 @@ import {
 } from '@blink-mind/renderer-react';
 import { Popover } from '@blueprintjs/core';
 import React from 'react';
+import { ThemeItem } from '../../components/theme';
+import styled from 'styled-components';
+
+const PopoverContent = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 500px;
+  height: 480px;
+  overflow: auto;
+`;
 
 export function ToolbarItemTheme(props) {
+  const { controller } = props;
   const onClickSetTheme = themeKey => e => {
-    const { controller } = props;
     controller.run('setTheme', { ...props, themeKey });
   };
   const themes = [
@@ -31,17 +42,21 @@ export function ToolbarItemTheme(props) {
     <ToolbarItem className={iconClassName(IconName.THEME)} {...props}>
       <Popover enforceFocus={false}>
         <ToolbarItemPopoverTarget />
-        <div className="bm-popover-theme">
-          {themes.map(theme => (
-            <div
-              key={theme[0]}
-              className="bm-theme-item"
-              onClick={onClickSetTheme(theme[0])}
-            >
-              <img className="bm-theme-img" src={theme[1]} alt={theme[0]} />
-            </div>
-          ))}
-        </div>
+        <PopoverContent>
+          {themes.map(theme => {
+            const themeKey = theme[0];
+            const t = controller.run('getTheme',{...props,themeKey});
+            const themeItemProps = {
+              themeKey,
+              themeImg: theme[1],
+              onClick: onClickSetTheme(themeKey),
+              background: t.background,
+              zoom: 0.2,
+              margin:20
+            };
+            return <ThemeItem {...themeItemProps} />;
+          })}
+        </PopoverContent>
       </Popover>
     </ToolbarItem>
   );

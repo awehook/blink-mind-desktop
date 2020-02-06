@@ -26,6 +26,9 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
+  .default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
 
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
@@ -49,6 +52,19 @@ module.exports = function(webpackEnv) {
   const isEnvProduction = webpackEnv === 'production';
 
   console.log('isEnvProduction:', isEnvProduction);
+
+  const awesomeTsLoader = {
+    loader: 'awesome-typescript-loader',
+    options: {
+      declaration: false
+    }
+  };
+
+  if (isEnvDevelopment) {
+    awesomeTsLoader.options.getCustomTransformers = () => ({
+      before: [styledComponentsTransformer]
+    });
+  }
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -271,7 +287,9 @@ module.exports = function(webpackEnv) {
         'react-dom': path.resolve('node_modules/react-dom'),
         'styled-components': path.resolve('node_modules/styled-components'),
 
-        '@blink-mind/core': path.resolve('src/blink-mind/packages/core/src/index'),
+        '@blink-mind/core': path.resolve(
+          'src/blink-mind/packages/core/src/index'
+        ),
         '@blink-mind/icons': path.resolve('src/blink-mind/packages/icons/'),
         '@blink-mind/renderer-react': path.resolve(
           'src/blink-mind/packages/renderer-react/src/index'
@@ -282,13 +300,12 @@ module.exports = function(webpackEnv) {
         '@blink-mind/plugin-rich-text-editor': path.resolve(
           'src/blink-mind/packages/plugin-rich-text-editor/src/index'
         ),
-        '@blink-mind/plugin-theme-selector': path.resolve(
-          'src/blink-mind/packages/plugin-theme-selector/src/index'
-        ),
         '@blink-mind/plugin-topology-diagram': path.resolve(
           'src/blink-mind/packages/plugin-topology-diagram/src/index'
         ),
-        '@blink-mind/plugins': path.resolve('src/blink-mind/packages/plugins/src/index')
+        '@blink-mind/plugins': path.resolve(
+          'src/blink-mind/packages/plugins/src/index'
+        )
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
@@ -362,12 +379,7 @@ module.exports = function(webpackEnv) {
             {
               test: /\.tsx?$/,
               use: [
-                {
-                  loader: 'awesome-typescript-loader',
-                  options: {
-                    declaration: false
-                  }
-                }
+                awesomeTsLoader
               ]
             },
             {

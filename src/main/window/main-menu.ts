@@ -7,6 +7,7 @@ function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
   const preferencesMenu = {
     label: t(I18nTextKey.PREFERENCES),
+    role: 'preferences',
     click() {
       windowMgr.showPreferencesWindow();
     }
@@ -82,9 +83,10 @@ function getMenu(i18n, windowMgr) {
         label: t(I18nTextKey.PASTE),
         role: 'paste'
       },
-      isWindows && preferencesMenu
     ]
   };
+  //@ts-ignore
+  isWindows && edit.submenu.push(preferencesMenu);
 
   const view = {
     label: 'View',
@@ -111,6 +113,7 @@ function getMenu(i18n, windowMgr) {
   const menu = isMacOS
     ? [productName, file, edit, view, help]
     : [file, edit, view, help];
+  // console.log(JSON.stringify(menu,null,2));
   return menu;
 }
 

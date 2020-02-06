@@ -113,7 +113,8 @@
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-server": "3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3"
+    "workbox-webpack-plugin": "3.6.3",
+    "typescript-plugin-styled-components": "^1.4.3"
   },
   "scripts": {
     "start": "node scripts/start.js",
@@ -121,14 +122,13 @@
     "build:a": "cross-env ANALYZER=true node scripts/build.js",
     "build:m:d": "rimraf build/main && tsc --project tsconfig.main.dev.json",
     "build:m:p": "rimraf build/main && tsc --project tsconfig.main.prod.json",
-    "build:m:w": "rimraf build/main && tsc --project tsconfig.main.dev.json --watch",
     "build:r:d": "rimraf build/renderer && yarn build && ncp index.html build/renderer/index.html",
     "build:r:p": "rimraf build/renderer && cross-env GENERATE_SOURCEMAP=false yarn build:r:d",
     "test": "node scripts/test.js",
     "dev:m2": "yarn set-debug-ns && node ./.electron/start-main.js",
     "dev:r": "node ./.electron/start-renderer.js",
+    "dev:m": "yarn build:m:d --watch",
     "start:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",
-    "dev:m": "yarn build:m && cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",
     "dbg:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js --inspect-brk",
     "set-debug-ns": "cross-env DEBUG=main:*",
     "dev": "yarn set-debug-ns && node .electron/dev-runner.js",
