@@ -18,8 +18,12 @@ export class I18n extends EventEmitter {
 
   constructor() {
     super();
-    this.language = getStoreItem(StoreItemKey.preferences.normal.language);
     log('constructor:', this.language);
+  }
+
+  init() {
+    log('init');
+    this.language = getStoreItem(StoreItemKey.preferences.normal.language);
   }
 
   changeLanguage(lng) {

@@ -50,7 +50,7 @@ export class WindowMgr {
     this.fileToWindowMap = new Map();
     this.openedFileWindows = new Set();
     this.url = isDev
-      ? 'http://localhost:3008'
+      ? 'http://localhost:3018'
       : `file://${app.getAppPath()}/build/renderer/index.html`;
     buildMenu(i18n, this);
     this.showWelcomeWindow();

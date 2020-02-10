@@ -25,6 +25,8 @@
   "DARK": "深色",
   "DISPLAY_LANGUAGE": "显示语言",
 
+  "MIND_MAP": "思维导图",
+  "OUTLINER": "大纲",
   "NEW_TAB": "新建标签页",
   "UNTITLED": "未命名",
   "SAVE_TIP_TITLE": "你需要保存当前的修改吗？",
@@ -40,8 +42,8 @@
   "ONLY_LEFT": "仅左侧",
   "ONLY_RIGHT": "仅右侧",
 
-  "ADD_CANVAS": "添加画布",
-  "CANVAS": "画布",
+  "ADD_SHEET": "添加画布",
+  "SHEET": "画布",
 
   "EDIT": "编辑",
   "ADD_SIBLING": "添加兄弟节点",

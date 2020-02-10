@@ -1,6 +1,7 @@
 import { app } from 'electron';
 import { initStore } from './store';
 
+import { i18n } from './i18n';
 import { createWindowMgr, windowMgr } from './window/window-manager';
 import { ProductName } from '../common';
 import './ipc';
@@ -14,7 +15,7 @@ const appReadyCallback = () => {
   log('appReadyCallback');
   app.name = ProductName;
   initStore();
-  require('./i18n');
+  i18n.init();
   createWindowMgr();
 };
 log('app on ready');

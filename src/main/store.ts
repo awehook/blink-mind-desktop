@@ -36,6 +36,7 @@ const store = new ElectronStore({
 });
 
 export function setStoreItem(key, value) {
+  log('setStoreItem', key, value);
   if (value == null) store.delete(key);
   else store.set(key, value);
 }

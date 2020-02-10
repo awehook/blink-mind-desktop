@@ -4,10 +4,12 @@ export function ToolbarPlugin() {
   return {
     customizeToolbar(props, next) {
       const res = next();
-      res.push({
-        order: 1,
-        element: ToolbarItemTheme
-      });
+      res.push(
+        {
+          order: 1,
+          element: ToolbarItemTheme
+        }
+      );
       return res;
     }
   };

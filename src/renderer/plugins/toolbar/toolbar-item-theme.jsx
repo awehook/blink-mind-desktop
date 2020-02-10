@@ -39,20 +39,25 @@ export function ToolbarItemTheme(props) {
   ];
 
   return (
-    <ToolbarItem className={iconClassName(IconName.THEME)} {...props}>
+    <ToolbarItem
+      key="theme-selector"
+      className={iconClassName(IconName.THEME)}
+      {...props}
+    >
       <Popover enforceFocus={false}>
         <ToolbarItemPopoverTarget />
         <PopoverContent>
           {themes.map(theme => {
             const themeKey = theme[0];
-            const t = controller.run('getTheme',{...props,themeKey});
+            const t = controller.run('getTheme', { ...props, themeKey });
             const themeItemProps = {
+              key: themeKey,
               themeKey,
               themeImg: theme[1],
               onClick: onClickSetTheme(themeKey),
               background: t.background,
               zoom: 0.2,
-              margin:20
+              margin: 20
             };
             return <ThemeItem {...themeItemProps} />;
           })}

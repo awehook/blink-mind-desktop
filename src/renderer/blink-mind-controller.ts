@@ -1,5 +1,4 @@
-import { ToolbarPlugin } from './plugins/toolbar';
-import { I18nPlugin } from './plugins';
+import { I18nPlugin, ToolbarPlugin, OutlinerPlugin } from './plugins';
 import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
 import {
   ExportTopicPlugin,
@@ -16,6 +15,7 @@ import { DefaultPlugin } from '@blink-mind/renderer-react';
 import { Controller } from '@blink-mind/core';
 
 const plugins = [
+  OutlinerPlugin(),
   ToolbarPlugin(),
   I18nPlugin(),
   RichTextEditorPlugin(),

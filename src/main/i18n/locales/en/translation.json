@@ -25,6 +25,8 @@
   "DARK": "Dark",
   "DISPLAY_LANGUAGE": "Display Language",
 
+  "MIND_MAP": "Mind Map",
+  "OUTLINER": "Outliner",
   "NEW_TAB": "New Tab",
   "UNTITLED": "untitled",
   "SAVE_TIP_TITLE": "Do you want to save the changes?",
@@ -40,8 +42,8 @@
   "ONLY_LEFT": "Only Left",
   "ONLY_RIGHT": "Only Right",
 
-  "ADD_CANVAS": "Add Canvas",
-  "CANVAS": "Canvas",
+  "ADD_SHEET": "Add Sheet",
+  "SHEET": "Sheet",
 
   "EDIT": "Edit",
   "ADD_SIBLING": "Add Sibling",
