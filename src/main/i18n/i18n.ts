@@ -1,10 +1,10 @@
 import en from './locales/en/translation.json';
 import zhCN from './locales/zh-CN/translation.json';
 
-import { EventEmitter } from 'events';
-import { getStoreItem } from '../store';
-import { StoreItemKey } from '../../common';
 import debug from 'debug';
+import { EventEmitter } from 'events';
+import { StoreItemKey } from '../../common';
+import { getStoreItem } from '../store';
 
 const log = debug('main:i18n');
 

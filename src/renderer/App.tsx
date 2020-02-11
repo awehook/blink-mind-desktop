@@ -1,11 +1,11 @@
+import { Classes } from '@blueprintjs/core';
+import { ipcRenderer } from 'electron';
 import * as React from "react";
 import { useEffect, useState } from 'react';
-import { Classes } from '@blueprintjs/core';
-import { I18nContext, i18nMap, setI18nMap } from './context';
-import { ipcRenderer } from 'electron';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../common';
-import { PageRouter } from './route';
 import './App.css';
+import { I18nContext, i18nMap, setI18nMap } from './context';
+import { PageRouter } from './route';
 
 import debug from 'debug';
 import { getStoreItem } from './utils';

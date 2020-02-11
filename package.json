@@ -109,6 +109,7 @@
     "terser-webpack-plugin": "1.2.2",
     "typescript": "3.5.3",
     "typescript-plugin-styled-components": "^1.4.3",
+    "tslint": "5.10.0",
     "url-loader": "1.1.2",
     "vsce": "^1.69.0",
     "vscode": "^1.1.6",
@@ -136,6 +137,7 @@
     "dev": "yarn set-debug-ns && node .electron/dev-runner.js",
     "dbg": "yarn set-debug-ns && node .electron/dev-runner.js --dbg",
 
+    "lint": "tslint --project .",
     "lint:fix": "tslint --fix 'src/**/*.ts{,x}' -e '**/*.test.ts'",
 
     "package": "electron-builder build --publish never",

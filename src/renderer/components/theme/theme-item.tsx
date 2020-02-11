@@ -1,7 +1,7 @@
+import { setColorAlpha } from '@blink-mind/renderer-react';
+import { Colors } from '@blueprintjs/core';
 import * as React from 'react';
 import styled from 'styled-components';
-import { Colors } from '@blueprintjs/core';
-import { setColorAlpha } from '@blink-mind/renderer-react';
 
 const themeItemOutline = `solid 3px  ${Colors.BLUE5}`;
 const hoverOutline = `solid 3px  ${setColorAlpha(Colors.BLUE5, 0.5)}`;

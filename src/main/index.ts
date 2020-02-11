@@ -1,12 +1,12 @@
 import { app } from 'electron';
 import { initStore } from './store';
 
-import { i18n } from './i18n';
-import { createWindowMgr, windowMgr } from './window/window-manager';
-import { ProductName } from '../common';
-import './ipc';
 import debug from 'debug';
+import { ProductName } from '../common';
+import { i18n } from './i18n';
+import './ipc';
 import { isWindows } from './utils';
+import { createWindowMgr, windowMgr } from './window/window-manager';
 const log = debug('main:index');
 
 // log('env:', process.env);

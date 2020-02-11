@@ -1,6 +1,6 @@
-import { isMacOS } from './utils';
-import { BrowserWindow, app } from 'electron';
 import debug from 'debug';
+import { app, BrowserWindow } from 'electron';
+import { isMacOS } from './utils';
 const path = require('path');
 const os = require('os');
 
@@ -22,7 +22,7 @@ function addLocalDevTools(ext) {
 // Install `react-devtools`
 app.on('ready', () => {
   log('app.ready');
-  let installExtension = require('electron-devtools-installer');
+  const installExtension = require('electron-devtools-installer');
   installExtension
     .default(installExtension.REACT_DEVELOPER_TOOLS)
     .then(() => {})

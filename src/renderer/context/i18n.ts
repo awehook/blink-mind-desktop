@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { ipcRenderer } from 'electron';
+import * as React from 'react';
 import { IpcChannelName } from '../../common';
 
 export let i18nMap = ipcRenderer.sendSync(IpcChannelName.RM_GET_I18N);

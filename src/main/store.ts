@@ -1,6 +1,6 @@
+import debug from 'debug';
 import { app } from 'electron';
 import { I18nAvailableLngs, StoreItemKey } from '../common';
-import debug from 'debug';
 const ElectronStore = require('electron-store');
 const log = debug('main:store');
 

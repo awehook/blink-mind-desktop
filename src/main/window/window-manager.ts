@@ -1,6 +1,12 @@
-import { i18n } from '../i18n';
-import { FileData, WindowData } from './window-data';
-import { buildMenu } from './main-menu';
+import debug from 'debug';
+import {
+  app,
+  BrowserWindow,
+  dialog,
+  ipcMain,
+  systemPreferences
+} from 'electron';
+import { dirname } from 'path';
 import {
   I18nTextKey,
   IpcChannelName,
@@ -8,23 +14,17 @@ import {
   MrGlobalType,
   StoreItemKey
 } from '../../common';
-import {
-  app,
-  BrowserWindow,
-  systemPreferences,
-  ipcMain,
-  dialog
-} from 'electron';
+import { i18n } from '../i18n';
+import { ipcSendToAllWindow } from '../ipc';
+import { setStoreItem } from '../store';
 import {
   getRecentOpenedDir,
   getUntitledTile,
   isMacOS,
   regularBlinkPath
 } from '../utils';
-import { dirname } from 'path';
-import { setStoreItem } from '../store';
-import debug from 'debug';
-import { ipcSendToAllWindow } from '../ipc';
+import { buildMenu } from './main-menu';
+import { FileData, WindowData } from './window-data';
 const log = debug('main:window-mgr');
 
 const isDev = require('electron-is-dev');

@@ -5,7 +5,6 @@ export type TranslationFunction = (key: string) => string;
 
 export function useTranslation(): TranslationFunction {
   const i18n = useContext(I18nContext);
-  console.log('i18n', i18n);
   const t = key => {
     return i18n[key];
   };

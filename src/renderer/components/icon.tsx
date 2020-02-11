@@ -1,5 +1,5 @@
-import * as React from 'react';
 import cx from 'classnames';
+import * as React from 'react';
 export function Icon(props) {
   const { className, iconName } = props;
   const nProps = {

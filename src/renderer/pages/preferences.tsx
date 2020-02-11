@@ -1,11 +1,11 @@
+import { Card, HTMLSelect } from '@blueprintjs/core';
+import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import { useState } from 'react';
-import { I18nTextKey, IpcChannelName, StoreItemKey } from '../../common';
-import { useTranslation } from '../hooks';
-import { ipcRenderer } from 'electron';
 import styled from 'styled-components';
+import { I18nTextKey, IpcChannelName, StoreItemKey } from '../../common';
 import { Column } from '../components';
-import { Card, HTMLSelect } from '@blueprintjs/core';
+import { useTranslation } from '../hooks';
 import { getStoreItem } from '../utils';
 
 const Item = styled.div`

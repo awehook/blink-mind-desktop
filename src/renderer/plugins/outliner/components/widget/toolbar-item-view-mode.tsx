@@ -1,8 +1,8 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import { OpType, ViewModeMindMap } from '@blink-mind/core';
 import {BaseProps, COLORS, getI18nText, I18nKey} from '@blink-mind/renderer-react';
 import { Colors } from '@blueprintjs/core';
-import { OpType, ViewModeMindMap } from '@blink-mind/core';
+import * as React from 'react';
+import styled from 'styled-components';
 import { ViewModeOutliner } from '../../utils';
 
 const Btn = styled.div`

@@ -1,5 +1,5 @@
-import { Record } from 'immutable';
 import { Controller, DocModel } from '@blink-mind/core';
+import { Record } from 'immutable';
 
 type FileModelRecordType = {
   id: string;

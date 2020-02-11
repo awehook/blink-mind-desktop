@@ -1,18 +1,18 @@
-import { I18nPlugin, ToolbarPlugin, OutlinerPlugin } from './plugins';
+import { Controller } from '@blink-mind/core';
+import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
+import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import {
   ExportTopicPlugin,
   InsertImagesPlugin,
   SearchPlugin,
   TagsPlugin,
+  ThemeSelectorPlugin,
   TopicReferencePlugin,
-  UndoRedoPlugin,
-  ThemeSelectorPlugin
+  UndoRedoPlugin
 } from '@blink-mind/plugins';
-import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
-import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
-import { Controller } from '@blink-mind/core';
+import { I18nPlugin, OutlinerPlugin, ToolbarPlugin } from './plugins';
 
 const plugins = [
   OutlinerPlugin(),

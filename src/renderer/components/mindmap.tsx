@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Diagram } from '@blink-mind/renderer-react';
 import debug from 'debug';
+import * as React from 'react';
 import { FileModel } from '../models';
 
 const log = debug('bmd:mindmap');

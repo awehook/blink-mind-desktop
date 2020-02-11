@@ -1,7 +1,7 @@
-import { isMacOS, isWindows } from '../utils';
-import { ProductName, I18nTextKey } from '../../common';
 import { Menu } from 'electron';
-import { saveAs, save, openFile, undo, redo } from './menu-event-handler';
+import { I18nTextKey, ProductName } from '../../common';
+import { isMacOS, isWindows } from '../utils';
+import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);

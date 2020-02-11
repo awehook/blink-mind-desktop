@@ -23,8 +23,3 @@ export function ipcMR(arg) {
   const focusWindow = BrowserWindow.getFocusedWindow();
   focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, arg);
 }
-
-export function changeLang(lang) {
-  console.log('changeLang',lang);
-  i18n.changeLanguage(lang);
-}

@@ -1,10 +1,10 @@
-import { ipcMain, BrowserWindow, dialog } from 'electron';
-import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
-import { i18n} from '../i18n';
-import fs from 'fs-extra';
-import { getRecentOpenedDir, regularBlinkPath } from '../utils';
-import { getStoreItem, setStoreItem } from '../store';
 import debug from 'debug';
+import { BrowserWindow, dialog, ipcMain } from 'electron';
+import fs from 'fs-extra';
+import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
+import { i18n } from '../i18n';
+import { getStoreItem, setStoreItem } from '../store';
+import { getRecentOpenedDir, regularBlinkPath } from '../utils';
 import { ipcSendToAllWindow } from './ipc-send';
 const log = debug('main:ipc-main');
 
@@ -14,7 +14,8 @@ ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
 });
 
 ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {
-  let { path, content } = arg;
+  const { content } = arg;
+  let { path } = arg;
   if (path == null) {
     path = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
       defaultPath: getRecentOpenedDir()
@@ -33,7 +34,8 @@ ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {
 });
 
 ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
-  let { path, content } = arg;
+  const { content } = arg;
+  let { path } = arg;
   if (path == null) {
     path = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
       defaultPath: getRecentOpenedDir()

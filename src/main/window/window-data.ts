@@ -26,7 +26,7 @@ export function WindowData(files, focusFileId) {
   };
 
   this.getFocusFileTitle = edited => {
-    let focusFile = this.getFocusFile();
+    const focusFile = this.getFocusFile();
     return getFileTitle(focusFile.path, edited);
   };
 
@@ -35,7 +35,7 @@ export function WindowData(files, focusFileId) {
   };
 
   this.setPath = (id, path) => {
-    let idx = this.getFileIndex({ id });
+    const idx = this.getFileIndex({ id });
     this.files[idx].path = path;
   };
 
@@ -44,7 +44,7 @@ export function WindowData(files, focusFileId) {
   };
 
   this.pushFile = path => {
-    let fileData = new FileData(path);
+    const fileData = new FileData(path);
     this.files.push(fileData);
   };
 }

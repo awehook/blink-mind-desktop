@@ -1,6 +1,6 @@
+import debug from 'debug';
 import { BrowserWindow } from 'electron';
 import { IpcChannelName, IpcType } from '../../common';
-import debug from 'debug';
 import { ipcMR } from '../utils';
 const log = debug('main:main-menu');
 

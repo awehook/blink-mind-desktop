@@ -1,5 +1,5 @@
 import { ipcRenderer, remote } from 'electron';
-import { IpcChannelName, I18nTextKey } from '../../common';
+import { I18nTextKey, IpcChannelName } from '../../common';
 
 export function getFileContent({ path }) {
   return ipcRenderer.sendSync(IpcChannelName.RM_GET_FILE_CONTENT, {
@@ -29,7 +29,7 @@ export function saveFile({ id, path, content }) {
 
 export function saveFileWithFileModel(fileModel, t) {
   const dialog = remote.dialog;
-  let res = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
+  const res = dialog.showMessageBoxSync(remote.getCurrentWindow(), {
     type: 'question',
     title: t(I18nTextKey.SAVE_TIP_TITLE),
     message: t(I18nTextKey.SAVE_TIP_CONTENT),

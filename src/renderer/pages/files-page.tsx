@@ -1,14 +1,14 @@
+import debug from 'debug';
+import { ipcRenderer, remote } from 'electron';
+import { List } from 'immutable';
 import * as React from 'react';
 import { Component, useState } from 'react';
-import { ipcRenderer, remote } from 'electron';
-import { FileModel, FilesWindowModel, setFileModel } from '../models';
-import { MindMap } from '../components';
 import { IpcChannelName, IpcType } from '../../common';
-import { List } from 'immutable';
-import debug from 'debug';
-import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-import {TranslationFunction, useTranslation} from '../hooks';
 import { createBlinkMindController } from '../blink-mind-controller';
+import { MindMap } from '../components';
+import {TranslationFunction, useTranslation} from '../hooks';
+import { FileModel, FilesWindowModel, setFileModel } from '../models';
+import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
 
 const log = debug('bmd:files-page');
 
