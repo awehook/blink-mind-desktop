@@ -38,6 +38,8 @@
   "CANCEL": "Cancel",
   "DEFAULT": "Default",
   "SEARCH": "Search",
+
+  "LAYOUT": "Layout",
   "LEFT_AND_RIGHT": "Left And Right",
   "ONLY_LEFT": "Only Left",
   "ONLY_RIGHT": "Only Right",

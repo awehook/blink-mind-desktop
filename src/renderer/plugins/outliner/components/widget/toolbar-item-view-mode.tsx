@@ -1,6 +1,6 @@
 import * as React from 'react';
 import styled from 'styled-components';
-import { BaseProps, getI18nText, I18nKey } from '@blink-mind/renderer-react';
+import {BaseProps, COLORS, getI18nText, I18nKey} from '@blink-mind/renderer-react';
 import { Colors } from '@blueprintjs/core';
 import { OpType, ViewModeMindMap } from '@blink-mind/core';
 import { ViewModeOutliner } from '../../utils';
@@ -10,20 +10,18 @@ const Btn = styled.div`
   margin: 5px;
   padding: 5px 10px;
   border-radius: 10px;
-  background-color: ${props => (props.selected ? Colors.LIGHT_GRAY1 : null)};
-
-  color: ${props => props => (!props.selected ? Colors.GRAY3 : Colors.BLACK)};
+  background-color: ${props => (props.selected ? COLORS.LIGHT.ITEM_BG : null)};
+  color: ${props => props => (!props.selected ? COLORS.LIGHT.ITEM : Colors.BLACK)};
   cursor: pointer;
-
   &:hover {
-    color: ${props => props => (!props.selected ? Colors.BLACK : null)};
+    color: ${props => props => (!props.selected ? COLORS.LIGHT.ITEM_ACTIVE : null)};
   }
 
   .bp3-dark & {
-    background-color: ${props => (props.selected ? Colors.DARK_GRAY5 : null)};
-    color: ${props => props => (!props.selected ? Colors.GRAY3 : Colors.WHITE)};
+    background-color: ${props => (props.selected ? COLORS.DARK.ITEM_BG : null)};
+    color: ${props => props => (!props.selected ? COLORS.DARK.ITEM : COLORS.DARK.ITEM_ACTIVE)};
     &:hover {
-      color: ${props => props => (!props.selected ? Colors.WHITE : null)};
+      color: ${props => props => (!props.selected ? COLORS.DARK.ITEM_ACTIVE : null)};
     }
   }
 `;

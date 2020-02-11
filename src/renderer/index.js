@@ -11,6 +11,11 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
-const debugNameSpaces = ['bmd:*', 'plugin:toolbar'];
+const debugNameSpaces = [
+  //'bmd:*',
+  // 'plugin:toolbar',
+  'plugin:operation',
+  // 'plugin:drag-and-drop'
+];
 
 localStorage.debug = debugNameSpaces.join(',');

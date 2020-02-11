@@ -1,0 +1,12 @@
+{
+  "defaultSeverity": "error",
+//    "extends": ["tslint:recommended"],
+  "jsRules": {},
+  "rules": {
+    "ordered-imports": true,
+    "prefer-const": true,
+    "no-unused-variable": true,
+    "no-console": true
+  },
+  "rulesDirectory": ["packages/renderer-react/src/"]
+}

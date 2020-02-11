@@ -38,6 +38,8 @@
   "CANCEL": "取消",
   "DEFAULT": "默认",
   "SEARCH": "搜索",
+
+  "LAYOUT": "布局",
   "LEFT_AND_RIGHT": "左右布局",
   "ONLY_LEFT": "仅左侧",
   "ONLY_RIGHT": "仅右侧",

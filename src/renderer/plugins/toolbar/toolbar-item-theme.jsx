@@ -5,7 +5,6 @@ import theme3Img from '../../images/theme-3.jpg';
 import theme4Img from '../../images/theme-4.jpg';
 import themeRandomColorRoundImg from '../../images/theme-random-color-round.jpg';
 import {
-  iconClassName,
   ToolbarItem,
   IconName,
   ToolbarItemPopoverTarget
@@ -41,7 +40,7 @@ export function ToolbarItemTheme(props) {
   return (
     <ToolbarItem
       key="theme-selector"
-      className={iconClassName(IconName.THEME)}
+      iconName={IconName.THEME}
       {...props}
     >
       <Popover enforceFocus={false}>
