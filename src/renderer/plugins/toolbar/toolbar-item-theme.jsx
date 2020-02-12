@@ -41,6 +41,7 @@ export function ToolbarItemTheme(props) {
     <ToolbarItem
       key="theme-selector"
       iconName={IconName.THEME}
+      iconCxName='theme'
       {...props}
     >
       <Popover enforceFocus={false}>

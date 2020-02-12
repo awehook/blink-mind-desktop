@@ -38,6 +38,7 @@ function App() {
   setAppearance(appearance);
 
   const onIpcMrGlobal = (e, arg) => {
+    log('onIpcMrGlobal',arg);
     switch (arg.type) {
       case MrGlobalType.SET_LANG:
         setI18nTransaction(arg.translation);

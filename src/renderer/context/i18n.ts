@@ -9,3 +9,7 @@ export const I18nContext = React.createContext(i18nMap);
 export function setI18nMap(m) {
   i18nMap = m;
 }
+
+export function getI18nMap() {
+  return i18nMap;
+}

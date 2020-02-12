@@ -12,9 +12,9 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // serviceWorker.unregister();
 
 const debugNameSpaces = [
-  //'bmd:*',
+  'bmd:*',
   // 'plugin:toolbar',
-  'plugin:operation',
+  // 'plugin:operation',
   // 'plugin:drag-and-drop'
 ];
 

@@ -1,30 +1,8 @@
 import { OpType, ViewModeMindMap } from '@blink-mind/core';
-import {BaseProps, COLORS, getI18nText, I18nKey} from '@blink-mind/renderer-react';
-import { Colors } from '@blueprintjs/core';
+import { BaseProps, getI18nText, I18nKey } from '@blink-mind/renderer-react';
+import cx from 'classnames';
 import * as React from 'react';
-import styled from 'styled-components';
 import { ViewModeOutliner } from '../../utils';
-
-const Btn = styled.div`
-  display: inline-block;
-  margin: 5px;
-  padding: 5px 10px;
-  border-radius: 10px;
-  background-color: ${props => (props.selected ? COLORS.LIGHT.ITEM_BG : null)};
-  color: ${props => props => (!props.selected ? COLORS.LIGHT.ITEM : Colors.BLACK)};
-  cursor: pointer;
-  &:hover {
-    color: ${props => props => (!props.selected ? COLORS.LIGHT.ITEM_ACTIVE : null)};
-  }
-
-  .bp3-dark & {
-    background-color: ${props => (props.selected ? COLORS.DARK.ITEM_BG : null)};
-    color: ${props => props => (!props.selected ? COLORS.DARK.ITEM : COLORS.DARK.ITEM_ACTIVE)};
-    &:hover {
-      color: ${props => props => (!props.selected ? COLORS.DARK.ITEM_ACTIVE : null)};
-    }
-  }
-`;
 
 export function ToolbarItemViewMode(props: BaseProps) {
   const { controller, model } = props;
@@ -34,6 +12,7 @@ export function ToolbarItemViewMode(props: BaseProps) {
       controller.run('operation', {
         ...props,
         opType: OpType.SET_CONFIG,
+        allowUndo: false,
         config: {
           viewMode
         }
@@ -42,19 +21,23 @@ export function ToolbarItemViewMode(props: BaseProps) {
   };
 
   const mindmapBtnProps = {
-    selected: model.config.viewMode === ViewModeMindMap,
+    className: cx('bm-switch-btn', {
+      'bm-switch-btn-selected': model.config.viewMode === ViewModeMindMap
+    }),
     onClick: onClickSetViewMode(ViewModeMindMap)
   };
 
   const outlinerBtnProps = {
-    selected: model.config.viewMode === ViewModeOutliner,
+    className: cx('bm-switch-btn', {
+      'bm-switch-btn-selected': model.config.viewMode === ViewModeOutliner
+    }),
     onClick: onClickSetViewMode(ViewModeOutliner)
   };
 
   return (
     <span>
-      <Btn {...mindmapBtnProps}>{getI18nText(props, I18nKey.MIND_MAP)}</Btn>
-      <Btn {...outlinerBtnProps}>{getI18nText(props, I18nKey.OUTLINER)}</Btn>
+      <div {...mindmapBtnProps}>{getI18nText(props, I18nKey.MIND_MAP)}</div>
+      <div {...outlinerBtnProps}>{getI18nText(props, I18nKey.OUTLINER)}</div>
     </span>
   );
 }
