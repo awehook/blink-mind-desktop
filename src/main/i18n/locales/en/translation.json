@@ -95,6 +95,7 @@
   "BORDER": "Border",
   "WIDTH": "Width",
   "RADIUS": "Radius",
+  "FONT_FAMILY": "FontFamily",
   "FONT_SIZE": "FontSize",
   "LINE_HEIGHT": "LineHeight",
   "PADDING": "Padding",

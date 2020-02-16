@@ -12,12 +12,13 @@ import {
   UndoRedoPlugin
 } from '@blink-mind/plugins';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
-import { I18nPlugin, OutlinerPlugin, ToolbarPlugin } from './plugins';
+import { I18nPlugin, FontPlugin, OutlinerPlugin, ToolbarPlugin } from './plugins';
 
 const plugins = [
   OutlinerPlugin(),
   ToolbarPlugin(),
   I18nPlugin(),
+  FontPlugin(),
   RichTextEditorPlugin(),
   ThemeSelectorPlugin(),
   TopicReferencePlugin(),

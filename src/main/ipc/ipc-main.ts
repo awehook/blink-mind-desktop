@@ -1,6 +1,7 @@
 import debug from 'debug';
 import { BrowserWindow, dialog, ipcMain } from 'electron';
 import fs from 'fs-extra';
+import fontList from 'font-list';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
 import { i18n } from '../i18n';
 import { getStoreItem, setStoreItem } from '../store';
@@ -50,6 +51,14 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
 
 ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
   event.returnValue = fs.readFileSync(path);
+});
+
+ipcMain.on(IpcChannelName.RM_GET_FONT_LIST, event => {
+  fontList.getFonts().then(fonts => {
+    event.returnValue = fonts;
+  }).catch(err=>{
+    event.returnValue = [];
+  });
 });
 
 ipcMain.on(IpcChannelName.RM_GET_STORE_ITEM, (event, { key, defaultValue }) => {

@@ -21,7 +21,7 @@ export class MindMap extends React.Component<Props> {
     const { fileModel } = this.props;
 
     const docModel = fileModel.docModel || this.createDocModel(fileModel);
-    log('renderDiagram', docModel);
+    log('renderDiagram', docModel,docModel.currentSheetModel.focusKey);
     const diagramProps = {
       controller: fileModel.controller,
       docModel

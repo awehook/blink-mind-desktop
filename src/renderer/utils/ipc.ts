@@ -7,6 +7,10 @@ export function getFileContent({ path }) {
   });
 }
 
+export function getFontList() {
+  return ipcRenderer.sendSync(IpcChannelName.RM_GET_FONT_LIST)
+}
+
 export function getStoreItem(key) {
   return ipcRenderer.sendSync(IpcChannelName.RM_GET_STORE_ITEM, { key });
 }

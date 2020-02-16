@@ -14,7 +14,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 const debugNameSpaces = [
   'bmd:*',
   // 'plugin:toolbar',
-  // 'plugin:operation',
+  'plugin:operation',
   // 'plugin:drag-and-drop'
 ];
 

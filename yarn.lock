@@ -5649,6 +5649,11 @@ follow-redirects@^1.0.0:
   dependencies:
     debug "^3.0.0"
 
+font-list@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/font-list/-/font-list-1.2.6.tgz#2b226cda4544f9f999af4c2e5b8cd68dd67b1d2e"
+  integrity sha512-Ej2xkVjyVLyQRs9Qz8gNTJkA8GP1jSz76s6Zu46OGh1x0WdISPsuTsbIfghEVy78adakpZage0Qva+fFeAfzVw==
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
