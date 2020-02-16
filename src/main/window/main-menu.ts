@@ -76,6 +76,10 @@ function getMenu(i18n, windowMgr) {
       },
       { type: 'separator' },
       {
+        label: t(I18nTextKey.SELECT_ALL),
+        role: 'selectAll'
+      },
+      {
         label: t(I18nTextKey.COPY),
         role: 'copy'
       },

@@ -17,6 +17,7 @@ export const I18nTextKey = {
   EDIT: 'EDIT',
   UNDO: 'UNDO',
   REDO: 'REDO',
+  SELECT_ALL: 'SELECT_ALL',
   CUT: 'CUT',
   COPY: 'COPY',
   PASTE: 'PASTE',
