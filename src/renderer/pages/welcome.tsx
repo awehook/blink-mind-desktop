@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { Column, CreateFromTheme } from '../components';
+import { CreateFromTheme } from '../components';
 
 export function WelcomePage(props) {
   return (
-    <Column>
+    <div className="bm-welcome bm-card">
       <CreateFromTheme {...props} />
-    </Column>
+    </div>
   );
 }

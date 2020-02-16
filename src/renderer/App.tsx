@@ -3,7 +3,7 @@ import { ipcRenderer } from 'electron';
 import * as React from "react";
 import { useEffect, useState } from 'react';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../common';
-import './App.css';
+import './App.scss';
 import { I18nContext, i18nMap, setI18nMap } from './context';
 import { PageRouter } from './route';
 

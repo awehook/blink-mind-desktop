@@ -1,0 +1,47 @@
+@import "../blink-mind/packages/renderer-react/src/components/var";
+.mindmap {
+  width: 100%;
+  height: 100%;
+}
+
+.full {
+  width: 100%;
+  height: 100%;
+}
+
+#root {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: white;
+}
+
+.bm-welcome {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .theme-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 750px;
+  }
+
+  .btn-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: map_get($light-colors,'bg');
+    border-top: solid 1px map_get($light-colors,'line');
+
+    .bp3-dark & {
+      background-color: map_get($dark-colors,'toolbar-bg');
+      border-top: solid 1px map_get($dark-colors,'line');
+    }
+  }
+}
