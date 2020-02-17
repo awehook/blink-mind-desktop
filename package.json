@@ -47,7 +47,8 @@
     "topology-core": "^0.1.2",
     "topology-flow-diagram": "^0.0.3",
     "topology-sequence-diagram": "^0.0.6",
-    "universal-analytics": "^0.4.20"
+    "universal-analytics": "^0.4.20",
+    "react-highlight-words": "^0.16.0"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",
