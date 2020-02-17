@@ -54,11 +54,14 @@ ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
 });
 
 ipcMain.on(IpcChannelName.RM_GET_FONT_LIST, event => {
-  fontList.getFonts().then(fonts => {
-    event.returnValue = fonts;
-  }).catch(err=>{
-    event.returnValue = [];
-  });
+  fontList
+    .getFonts()
+    .then(fonts => {
+      event.returnValue = fonts.map(item => item.replace(/^"|"$/g, ''));
+    })
+    .catch(err => {
+      event.returnValue = [];
+    });
 });
 
 ipcMain.on(IpcChannelName.RM_GET_STORE_ITEM, (event, { key, defaultValue }) => {
