@@ -45,3 +45,24 @@
     }
   }
 }
+
+.bmd-toolbar {
+  background-color: map_get($light-colors, 'toolbar-bg');
+  .bp3-dark & {
+    background-color: map_get($dark-colors, 'toolbar-bg');
+  }
+  .bmd-title {
+    text-align: center;
+    color: map_get($light-colors,'text-gray');
+    .bp3-dark & {
+      color: map_get($dark-colors,'text-gray');
+    }
+    padding-top: 5px;
+    height: 20px;
+  }
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}

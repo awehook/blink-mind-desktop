@@ -34,6 +34,7 @@ let windowMgr;
 export class WindowMgr {
   welcomeWindow;
   preferenceWindow;
+  fileMap;
   fileToWindowMap;
   openedFileWindows;
   url;
@@ -47,6 +48,7 @@ export class WindowMgr {
   }
 
   init() {
+    this.fileMap = new Map();
     this.fileToWindowMap = new Map();
     this.openedFileWindows = new Set();
     this.url = isDev
@@ -76,8 +78,7 @@ export class WindowMgr {
 
   openFile(path?) {
     if (path == null) {
-      if(isMacOS)
-        this.closeWelcomeWindow();
+      if (isMacOS) this.closeWelcomeWindow();
       dialog
         .showOpenDialog(null, {
           defaultPath: getRecentOpenedDir(),
@@ -107,6 +108,10 @@ export class WindowMgr {
 
   newFile({ themeKey }) {
     this.createFileWindow({ themeKey });
+  }
+
+  getFileData(id:number) {
+    return this.fileMap.get(id);
   }
 
   showWelcomeWindow() {
@@ -205,6 +210,7 @@ export class WindowMgr {
         nodeIntegration: true,
         scrollBounce: true
       },
+      titleBarStyle: isMacOS ? 'hidden' : 'default',
       title: path == null ? getUntitledTile() : path
     });
     window.loadURL(`${this.url}/#/file`);
@@ -231,14 +237,16 @@ export class WindowMgr {
     });
 
     const files = [new FileData(arg)];
-
+    this.fileMap.set(files[0].id, files[0]);
     //@ts-ignore
     window.windowData = new WindowData(files, files[0].id);
 
     //@ts-ignore
     window.setTitleFlag = ({ edited }) => {
       //@ts-ignore
-      window.setTitle(window.windowData.getFocusFileTitle(edited));
+      window.windowData.setFocusFileEdited(edited);
+      //@ts-ignore
+      window.setTitle(window.windowData.getFocusFile().getTitle());
     };
 
     if (path) {

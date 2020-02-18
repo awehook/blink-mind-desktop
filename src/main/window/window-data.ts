@@ -2,17 +2,33 @@ import { getFileTitle } from '../utils';
 
 let id = 0;
 
-export function FileData({ path, themeKey }) {
-  this.id = ++id;
-  this.path = path;
-  this.themeKey = themeKey;
+export class FileData {
+  id: number;
+  path: string;
+  edited: boolean;
+  themeKey: string;
+  constructor({ path, edited, themeKey }) {
+    this.id = ++id;
+    this.path = path;
+    this.edited = edited;
+    this.themeKey = themeKey;
+  }
+
+  getTitle = () => {
+    return getFileTitle(this.path, this.edited);
+  };
 }
 
-export function WindowData(files, focusFileId) {
-  this.files = files;
-  this.focusFileId = focusFileId;
+export class WindowData {
+  files: FileData[];
+  focusFileId: number;
 
-  this.getFileIndex = ({ id, path }) => {
+  constructor(files, focusFileId) {
+    this.files = files;
+    this.focusFileId = focusFileId;
+  }
+
+  getFileIndex = ({ id = null, path = null }) => {
     if (id) {
       return this.files.findIndex(f => f.id === id);
     }
@@ -21,29 +37,28 @@ export function WindowData(files, focusFileId) {
     }
   };
 
-  this.getFocusFile = () => {
+  getFocusFile = () => {
     return this.files.find(f => f.id === this.focusFileId);
   };
 
-  this.getFocusFileTitle = edited => {
-    const focusFile = this.getFocusFile();
-    return getFileTitle(focusFile.path, edited);
+  setFocusFileEdited = edited => {
+    this.getFocusFile().edited = edited;
   };
 
-  this.setFocusFileId = id => {
+  setFocusFileId = id => {
     this.focusFileId = id;
   };
 
-  this.setPath = (id, path) => {
+  setPath = (id, path) => {
     const idx = this.getFileIndex({ id });
     this.files[idx].path = path;
   };
 
-  this.saveAs = newPath => {
+  saveAs = newPath => {
     this.setPath(this.focusFileId, newPath);
   };
 
-  this.pushFile = path => {
+  pushFile = path => {
     const fileData = new FileData(path);
     this.files.push(fileData);
   };

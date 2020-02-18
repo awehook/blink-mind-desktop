@@ -7,6 +7,7 @@ import { i18n } from '../i18n';
 import { getStoreItem, setStoreItem } from '../store';
 import { getRecentOpenedDir, regularBlinkPath } from '../utils';
 import { ipcSendToAllWindow } from './ipc-send';
+import { windowMgr } from '../window/window-manager';
 const log = debug('main:ipc-main');
 
 ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
@@ -47,6 +48,15 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
   }
   path = regularBlinkPath(path);
   fs.writeFile(path, content);
+});
+
+ipcMain.on(IpcChannelName.RM_MAXIMUM_WINDOW,event=>{
+  BrowserWindow.getFocusedWindow().maximize();
+});
+
+ipcMain.on(IpcChannelName.RM_GET_FOCUS_FILE_TITLE, (event, { fileId }) => {
+  //@ts-ignore
+  event.returnValue = windowMgr.getFileData(fileId).getTitle();
 });
 
 ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
