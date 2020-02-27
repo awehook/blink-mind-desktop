@@ -33,6 +33,8 @@
     "react": "^16.12.0",
     "react-color": "^2.17.3",
     "react-dom": "^16.12.0",
+    "react-highlight-words": "^0.16.0",
+    "react-motion": "^0.5.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "resize-observer-polyfill": "^1.5.1",
@@ -47,8 +49,7 @@
     "topology-core": "^0.1.2",
     "topology-flow-diagram": "^0.0.3",
     "topology-sequence-diagram": "^0.0.6",
-    "universal-analytics": "^0.4.20",
-    "react-highlight-words": "^0.16.0"
+    "universal-analytics": "^0.4.20"
   },
   "devDependencies": {
     "@babel/core": "7.2.2",

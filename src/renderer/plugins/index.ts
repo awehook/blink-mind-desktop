@@ -5,3 +5,4 @@ export * from './outliner'
 export * from './export-topic';
 export * from './insert-images';
 export * from './auth';
+export * from './debug';

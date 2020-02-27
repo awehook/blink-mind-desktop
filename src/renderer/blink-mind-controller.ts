@@ -17,10 +17,12 @@ import {
   ToolbarPlugin,
   ExportTopicPlugin,
   InsertImagesPlugin,
-  AuthPlugin
+  AuthPlugin,
+  DebugPlugin
 } from './plugins';
 
 const plugins = [
+  DebugPlugin(),
   AuthPlugin(),
   OutlinerPlugin(),
   ToolbarPlugin(),

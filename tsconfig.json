@@ -4,6 +4,7 @@
     "suppressExcessPropertyErrors": true,
     "downlevelIteration": true,
     "allowJs": true,
+    "esModuleInterop": true,
     "declaration": true,
     "outDir": "./lib",
     "target": "es5",

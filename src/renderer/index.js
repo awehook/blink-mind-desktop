@@ -10,12 +10,3 @@ ReactDOM.render(<App />, document.getElementById('root'));
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 // serviceWorker.unregister();
-
-const debugNameSpaces = [
-  'bmd:*',
-  // 'plugin:toolbar',
-  'plugin:operation',
-  // 'plugin:drag-and-drop'
-];
-
-localStorage.debug = debugNameSpaces.join(',');
