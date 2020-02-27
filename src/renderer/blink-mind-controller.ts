@@ -3,8 +3,6 @@ import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
 import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import {
-  ExportTopicPlugin,
-  InsertImagesPlugin,
   SearchPlugin,
   TagsPlugin,
   ThemeSelectorPlugin,
@@ -12,9 +10,18 @@ import {
   UndoRedoPlugin
 } from '@blink-mind/plugins';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
-import { I18nPlugin, FontPlugin, OutlinerPlugin, ToolbarPlugin } from './plugins';
+import {
+  I18nPlugin,
+  FontPlugin,
+  OutlinerPlugin,
+  ToolbarPlugin,
+  ExportTopicPlugin,
+  InsertImagesPlugin,
+  AuthPlugin
+} from './plugins';
 
 const plugins = [
+  AuthPlugin(),
   OutlinerPlugin(),
   ToolbarPlugin(),
   I18nPlugin(),

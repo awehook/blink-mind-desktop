@@ -33,6 +33,11 @@
   "SAVE_TIP_TITLE": "你需要保存当前的修改吗？",
   "SAVE_TIP_CONTENT": "如果不保存，当前的修改会丢失。",
 
+  "SUBSCRIBE": "订阅",
+  "FEATURE_LOCK_TIP1": "此功能被锁定！",
+  "FEATURE_LOCK_TIP2": "此功能对于普通用户锁定，请订阅BlinkMind来解锁！",
+  "FEATURE_ADD_IMAGE_LOCK_TIP": "免费版整个文档支持最多插入5张图片",
+
   "RENAME": "重命名",
 
   "CONFIRM": "确认",

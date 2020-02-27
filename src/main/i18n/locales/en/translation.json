@@ -33,6 +33,11 @@
   "SAVE_TIP_TITLE": "Do you want to save the changes?",
   "SAVE_TIP_CONTENT": "Your changes will be lost if you don't save them.",
 
+  "SUBSCRIBE": "Subscribe",
+  "FEATURE_LOCK_TIP1": "This Feature is Locked!",
+  "FEATURE_LOCK_TIP2": "This feature is locked for ordinary user. Please subscribe BlinkMind to unlock it! ",
+  "FEATURE_ADD_IMAGE_LOCK_TIP": "Ordinary users can insert up to 5 pictures in the entire document",
+
   "RENAME": "Rename",
 
   "CONFIRM": "Confirm",
