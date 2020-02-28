@@ -106,6 +106,12 @@ export function InsertImagesPlugin() {
         });
     },
 
+    customizeAllowUndo(ctx, next) {
+      const { opType } = ctx;
+      if (opType === OP_TYPE_ADD_IMAGE) return true;
+      return next();
+    },
+
     deserializeExtDataItem(ctx, next) {
       const { extDataKey, extDataItem } = ctx;
       if (extDataKey === EXT_DATA_KEY_IMAGES) {
@@ -130,7 +136,7 @@ export function InsertImagesPlugin() {
     },
 
     getTotalTopicImageCount(ctx) {
-      const {model} = ctx;
+      const { model } = ctx;
       let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
       return extData.images.size;
     }

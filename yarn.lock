@@ -1375,6 +1375,21 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/react-motion@^0.0.29":
+  version "0.0.29"
+  resolved "https://registry.yarnpkg.com/@types/react-motion/-/react-motion-0.0.29.tgz#1a22e11bc1452150e8aa58463f72dd921ff10721"
+  integrity sha512-MD1DbdcDKruR0zz5Z0XIlrkPdjDMgYx0AHhbaoTBpDirUTt8Bd7x6OFE458nEINZxfPW0EcEOw2O8S/WwGNLsA==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*":
+  version "16.9.23"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.9.23.tgz#1a66c6d468ba11a8943ad958a8cb3e737568271c"
+  integrity sha512-SsGVT4E7L2wLN3tPYLiF20hmZTPGuzaayVunfgXzUn1x4uHVsKH6QDJQ/TdpHqwsTLd4CwrmQ2vOgxN7gE24gw==
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
+
 "@types/react@^16.9.17":
   version "16.9.19"
   resolved "https://registry.npm.taobao.org/@types/react/download/@types/react-16.9.19.tgz?cache=0&sync_timestamp=1580843691560&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40types%2Freact%2Fdownload%2F%40types%2Freact-16.9.19.tgz#c842aa83ea490007d29938146ff2e4d9e4360c40"

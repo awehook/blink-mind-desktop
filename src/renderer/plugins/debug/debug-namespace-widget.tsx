@@ -52,8 +52,6 @@ export function DebugNamespaceWidget(props) {
   };
   const addNsBtn = <SettingItemButton {...addNsBtnProps} />;
 
-  console.log('debugStr', debugStr);
-
   return (
     <div>
       <div>
