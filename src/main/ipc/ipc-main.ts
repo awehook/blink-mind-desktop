@@ -8,6 +8,8 @@ import { getStoreItem, setStoreItem } from '../store';
 import { getRecentOpenedDir, regularBlinkPath } from '../utils';
 import { ipcSendToAllWindow } from './ipc-send';
 import { windowMgr } from '../window/window-manager';
+import {apiAgent} from "../../common";
+
 const log = debug('main:ipc-main');
 
 ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
@@ -50,7 +52,7 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
   fs.writeFile(path, content);
 });
 
-ipcMain.on(IpcChannelName.RM_MAXIMUM_WINDOW,event=>{
+ipcMain.on(IpcChannelName.RM_MAXIMUM_WINDOW, event => {
   BrowserWindow.getFocusedWindow().maximize();
 });
 
@@ -94,4 +96,9 @@ ipcMain.on(IpcChannelName.RM_SET_STORE_ITEM, (event, { key, value }) => {
     default:
       break;
   }
+});
+
+ipcMain.on(IpcChannelName.RM_SIGN_IN, (event, { email, password }) => {
+
+  apiAgent.device.signIn()
 });

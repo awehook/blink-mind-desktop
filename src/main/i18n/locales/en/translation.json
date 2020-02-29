@@ -38,6 +38,14 @@
   "FEATURE_LOCK_TIP2": "This feature is locked for ordinary user. Please subscribe BlinkMind to unlock it! ",
   "FEATURE_ADD_IMAGE_LOCK_TIP": "Ordinary users can insert up to 5 pictures in the entire document",
 
+  "LOGIN": "Login",
+  "EMAIL": "Email",
+  "PASSWORD": "Password",
+  "FORGOT_PASSWORD": "Forgot Password?",
+  "LOGIN_ERROR_TIP": "Email not found, or password not match.",
+  "NOT_HAVE_ACCOUNT": "No Account Yet? ",
+  "CREATE_ACCOUNT": "Create Account",
+
   "RENAME": "Rename",
 
   "CONFIRM": "Confirm",

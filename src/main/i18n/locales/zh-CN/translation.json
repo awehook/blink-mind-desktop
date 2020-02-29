@@ -38,6 +38,14 @@
   "FEATURE_LOCK_TIP2": "此功能对于普通用户锁定，请订阅BlinkMind来解锁！",
   "FEATURE_ADD_IMAGE_LOCK_TIP": "免费版整个文档支持最多插入5张图片",
 
+  "LOGIN": "登录",
+  "EMAIL": "邮箱",
+  "PASSWORD": "密码",
+  "FORGOT_PASSWORD": "忘记密码？",
+  "LOGIN_ERROR_TIP": "邮箱未找到，或者密码不匹配",
+  "NOT_HAVE_ACCOUNT": "还没有账号？",
+  "CREATE_ACCOUNT": "创建账号",
+
   "RENAME": "重命名",
 
   "CONFIRM": "确认",

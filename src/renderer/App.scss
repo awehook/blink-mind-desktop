@@ -46,6 +46,17 @@
   }
 }
 
+.bmd-login {
+
+  padding: 20px 10px;
+
+  form {
+    display: flex;
+  }
+
+
+}
+
 .bmd-toolbar {
   background-color: map_get($light-colors, 'toolbar-bg');
   .bp3-dark & {

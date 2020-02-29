@@ -31,8 +31,29 @@ const store = new ElectronStore({
           default: null
         }
       }
+    },
+    user: {
+      type: 'object',
+      properties: {
+        id: {
+          type: 'string'
+        },
+        email: {
+          type: 'string',
+        },
+        token: {
+          type: 'string',
+        },
+        status: {
+          type: 'number',
+        },
+
+      }
     }
-  }
+  },
+  encryptionKey: 'ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM',
+  name: 'blink-mind',
+  fileExtension: 'log',
 });
 
 export function setStoreItem(key, value) {

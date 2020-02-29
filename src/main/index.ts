@@ -16,6 +16,7 @@ const appReadyCallback = () => {
   app.name = ProductName;
   initStore();
   i18n.init();
+  require('./subscribe');
   createWindowMgr();
 };
 log('app on ready');

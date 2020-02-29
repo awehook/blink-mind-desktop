@@ -34,6 +34,7 @@ let windowMgr;
 export class WindowMgr {
   welcomeWindow;
   preferenceWindow;
+  signInWindow;
   fileMap;
   fileToWindowMap;
   openedFileWindows;
@@ -191,6 +192,38 @@ export class WindowMgr {
     });
 
     this.preferenceWindow = window;
+    return window;
+  }
+
+  showSignInWindow() {
+    if (this.signInWindow) {
+      this.signInWindow.show();
+      return;
+    }
+    const window = new BrowserWindow({
+      width: 550,
+      height: 400,
+      center: true,
+      resizable: false,
+      minimizable: false,
+      maximizable: false,
+      webPreferences: {
+        nodeIntegration: true,
+        scrollBounce: true
+      }
+    });
+    window.loadURL(`${this.url}/#/signin`);
+    window.setMenu(null);
+    window.webContents.on('did-finish-load', () => {
+      window.show();
+      window.focus();
+    });
+
+    window.on('closed', () => {
+      this.signInWindow = null;
+    });
+
+    this.signInWindow = window;
     return window;
   }
 

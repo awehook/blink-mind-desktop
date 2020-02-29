@@ -2,6 +2,7 @@ import { Menu } from 'electron';
 import { I18nTextKey, ProductName } from '../../common';
 import { isMacOS, isWindows } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
+import { subscribeMgr } from '../subscribe';
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -86,7 +87,7 @@ function getMenu(i18n, windowMgr) {
       {
         label: t(I18nTextKey.PASTE),
         role: 'paste'
-      },
+      }
     ]
   };
   //@ts-ignore
@@ -103,6 +104,29 @@ function getMenu(i18n, windowMgr) {
     ]
   };
 
+  const account = {
+    label: 'account',
+    submenu: []
+  };
+  const { user } = subscribeMgr;
+  user
+    ? account.submenu.push(
+        {
+          labal: user.email,
+          click() {}
+        },
+        {
+          labal: 'Sign Out',
+          click() {}
+        }
+      )
+    : account.submenu.push({
+        label: 'Sign In',
+        click() {
+          windowMgr.showSignInWindow();
+        }
+      });
+
   const help = {
     label: 'Help',
     role: 'help',
@@ -115,8 +139,8 @@ function getMenu(i18n, windowMgr) {
   };
 
   const menu = isMacOS
-    ? [productName, file, edit, view, help]
-    : [file, edit, view, help];
+    ? [productName, file, edit, view, account, help]
+    : [file, edit, view, account, help];
   // console.log(JSON.stringify(menu,null,2));
   return menu;
 }
