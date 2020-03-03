@@ -1,5 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
+
+const log = require('debug')('outliner:sheet');
 
 const Container = styled.div`
   width: 100%;
@@ -10,10 +12,10 @@ const Container = styled.div`
 `;
 
 export function OutlinerSheet(props) {
-
+  log('render');
   return (
     <Container>
-
+      Outliner
     </Container>
   )
 }
