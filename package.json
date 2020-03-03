@@ -120,6 +120,7 @@
     "webpack": "4.28.3",
     "webpack-bundle-analyzer": "^3.6.0",
     "webpack-dev-server": "3.1.14",
+    "webpack-jarvis": "^0.3.2",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
@@ -133,7 +134,7 @@
     "build:r:p": "rimraf build/renderer && cross-env GENERATE_SOURCEMAP=false yarn build:r:d",
     "test": "node scripts/test.js",
     "dev:m2": "yarn set-debug-ns && node ./.electron/start-main.js",
-    "dev:r": "COLOR=1 node ./.electron/start-renderer.js | cat",
+    "dev:r": "cross-env COLOR=1 node ./.electron/start-renderer.js | cat",
     "dev:r:d": "node --inspect-brk ./.electron/start-renderer.js",
     "dev:m": "yarn build:m:d --watch",
     "start:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",

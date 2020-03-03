@@ -26,6 +26,7 @@ const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin;
+const Jarvis = require('webpack-jarvis');
 const createStyledComponentsTransformer = require('typescript-plugin-styled-components')
   .default;
 const styledComponentsTransformer = createStyledComponentsTransformer();
@@ -57,15 +58,18 @@ module.exports = function(webpackEnv) {
   const awesomeTsLoader = {
     loader: 'awesome-typescript-loader',
     options: {
-      declaration: false
+      declaration: false,
+      useCache: true,
+      useBabel: true,
+      cacheDirectory: 'node_modules/.awcache'
     }
   };
-  // TODO
-  // if (isEnvDevelopment) {
-  //   awesomeTsLoader.options.getCustomTransformers = () => ({
-  //     before: [styledComponentsTransformer]
-  //   });
-  // }
+
+  if (isEnvDevelopment) {
+    awesomeTsLoader.options.getCustomTransformers = () => ({
+      before: [styledComponentsTransformer]
+    });
+  }
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -582,6 +586,7 @@ module.exports = function(webpackEnv) {
     },
     plugins: [
       process.env.ANALYZER && new BundleAnalyzerPlugin(),
+      process.env.JARVIS && new Jarvis({ port: 1337 }),
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
