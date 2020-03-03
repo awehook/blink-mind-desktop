@@ -108,7 +108,7 @@ function startRenderer() {
             reject(err);
           }
           if (isInteractive) {
-            clearConsole();
+            // clearConsole();
           }
 
           // We used to support resolving modules according to `NODE_PATH`.

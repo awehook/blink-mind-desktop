@@ -133,7 +133,7 @@
     "build:r:p": "rimraf build/renderer && cross-env GENERATE_SOURCEMAP=false yarn build:r:d",
     "test": "node scripts/test.js",
     "dev:m2": "yarn set-debug-ns && node ./.electron/start-main.js",
-    "dev:r": "node ./.electron/start-renderer.js",
+    "dev:r": "COLOR=1 node ./.electron/start-renderer.js | cat",
     "dev:r:d": "node --inspect-brk ./.electron/start-renderer.js",
     "dev:m": "yarn build:m:d --watch",
     "start:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",

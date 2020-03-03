@@ -60,12 +60,12 @@ module.exports = function(webpackEnv) {
       declaration: false
     }
   };
-
-  if (isEnvDevelopment) {
-    awesomeTsLoader.options.getCustomTransformers = () => ({
-      before: [styledComponentsTransformer]
-    });
-  }
+  // TODO
+  // if (isEnvDevelopment) {
+  //   awesomeTsLoader.options.getCustomTransformers = () => ({
+  //     before: [styledComponentsTransformer]
+  //   });
+  // }
 
   // Webpack uses `publicPath` to determine where the app is being served from.
   // It requires a trailing slash, or the file assets will get an incorrect path.
@@ -143,7 +143,7 @@ module.exports = function(webpackEnv) {
       ? shouldUseSourceMap
         ? 'eval-source-map'
         : false
-      : isEnvDevelopment && 'eval-source-map',
+      : isEnvDevelopment && 'cheap-module-eval-source-map',
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     entry: [
