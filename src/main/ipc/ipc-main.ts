@@ -100,5 +100,5 @@ ipcMain.on(IpcChannelName.RM_SET_STORE_ITEM, (event, { key, value }) => {
 
 ipcMain.on(IpcChannelName.RM_SIGN_IN, (event, { email, password }) => {
 
-  apiAgent.device.signIn()
+  // apiAgent.device.signIn()
 });

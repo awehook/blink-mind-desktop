@@ -172,7 +172,8 @@ module.exports = function(webpackEnv) {
       pathinfo: isEnvDevelopment,
       // There will be one main bundle, and one file per asynchronous chunk.
       // In development, it does not produce real files.
-      filename: 'bundle.js',
+      filename: isEnvProduction ? 'bundle.js' : 'static/js/[name].chunk.js',
+      chunkFilename: 'static/js/[name].chunk.js',
       // We inferred the "public path" (such as / or /my-project) from homepage.
       // We use "/" in development.
       publicPath: publicPath,
@@ -252,14 +253,55 @@ module.exports = function(webpackEnv) {
       // Automatically split vendor and commons
       // https://twitter.com/wSokra/status/969633336732905474
       // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
-      splitChunks: {
-        cacheGroups: {
-          default: false
-        }
-      },
+      splitChunks: isEnvProduction
+        ? {
+            cacheGroups: {
+              default: false
+            }
+          }
+        : {
+            chunks: 'all',
+            maxInitialRequests: 10,
+            cacheGroups: {
+              libs: {
+                name: 'chunk-libs',
+                test: /[\\/]node_modules[\\/]/,
+                priority: 10
+              },
+              slate: {
+                name: 'chunk-slate',
+                priority: 20,
+                test: module => {
+                  return /slate|awehook-rich-markdown-editor|outline-icons/.test(
+                    module.context
+                  );
+                }
+              },
+              blueprint: {
+                name: 'chunk-blueprint',
+                priority: 21,
+                test: /[\\/]node_modules[\\/]@blueprintjs\/.*[\\/]/
+              }
+              // blinkmind: {
+              //   name: "chunk-blinkmind",
+              //   priority: 22,
+              //   test: module => {
+              //     return /src\/blink-mind/.test(module.userRequest);
+              //   }
+              // },
+              // bmd: {
+              //   name: "chunk-bmd",
+              //   priority: 23,
+              //   test: module => {
+              //     return  /src\/renderer/.test(module.userRequest);
+              //   }
+              // }
+            },
+            name: false //在线上环境，splitChunks.name推荐被设置为false，因为它在没必要的情况下不会变更名称。
+          },
       // Keep the runtime chunk separated to enable long term caching
       // https://twitter.com/wSokra/status/969679223278505985
-      runtimeChunk: false
+      runtimeChunk: !isEnvProduction
     },
     resolve: {
       // This allows you to set a fallback for where Webpack should look for modules.
@@ -379,9 +421,7 @@ module.exports = function(webpackEnv) {
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
             {
               test: /\.tsx?$/,
-              use: [
-                awesomeTsLoader
-              ]
+              use: [awesomeTsLoader]
             },
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,

@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 export function OutlinerSheet(props) {
-  log('render');
+  // log('render');
   return (
     <Container>
       Outliner
