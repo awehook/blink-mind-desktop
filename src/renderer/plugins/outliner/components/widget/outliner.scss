@@ -1,0 +1,31 @@
+.bm-collapse-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 26px;
+  cursor: pointer;
+
+  .dot {
+    position: relative;
+    width: 16px;
+    height: 16px;
+
+    &::before {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 3px;
+      background-color: #7a7a7a;
+    }
+  }
+
+  .dot-collapse {
+    box-sizing: border-box;
+    border-radius: 8px;
+    //border: 2px solid #7a7a7a;
+    background-color: #ccc;
+  }
+}
