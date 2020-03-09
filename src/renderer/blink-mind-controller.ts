@@ -18,12 +18,14 @@ import {
   ExportTopicPlugin,
   InsertImagesPlugin,
   AuthPlugin,
-  DebugPlugin
+  DebugPlugin,
+  DescEditorPlugin
 } from './plugins';
 
 const plugins = [
+  DescEditorPlugin(),
   DebugPlugin(),
-  AuthPlugin(),
+  // AuthPlugin(),
   OutlinerPlugin(),
   ToolbarPlugin(),
   I18nPlugin(),

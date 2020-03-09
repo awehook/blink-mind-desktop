@@ -15,7 +15,8 @@
   ],
   "exclude": [
     "src/renderer",
-    "src/blink-mind"
+    "src/blink-mind",
+    "src/roosterjs"
   ]
 
 }

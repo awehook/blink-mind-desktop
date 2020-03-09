@@ -18,7 +18,9 @@
       //      "@/*": ["src/*"],
       "@blink-mind/core": ["src/blink-mind/packages/core/src"],
       "@blink-mind/icons": ["src/blink-mind/packages/icons"],
-      "@blink-mind/renderer-react": ["src/blink-mind/packages/renderer-react/src"],
+      "@blink-mind/renderer-react": [
+        "src/blink-mind/packages/renderer-react/src"
+      ],
       "@blink-mind/plugin-json-serializer": [
         "src/blink-mind/packages/plugin-json-serializer/src"
       ],
@@ -31,14 +33,42 @@
       "@blink-mind/plugin-topology-diagram": [
         "src/blink-mind/packages/plugin-topology-diagram/src"
       ],
-      "@blink-mind/plugins": ["src/blink-mind/packages/plugins/src"]
+      "@blink-mind/plugins": ["src/blink-mind/packages/plugins/src"],
+      "roosterjs": ["src/roosterjs/packages/roosterjs/lib"],
+      "roosterjs-cross-window": [
+        "src/roosterjs/packages/roosterjs-cross-window/lib"
+      ],
+      "roosterjs-editor-api": [
+        "src/roosterjs/packages/roosterjs-editor-api/lib"
+      ],
+      "roosterjs-editor-core": [
+        "src/roosterjs/packages/roosterjs-editor-core/lib"
+      ],
+      "roosterjs-editor-dom": [
+        "src/roosterjs/packages/roosterjs-editor-dom/lib"
+      ],
+      "roosterjs-editor-plugins": [
+        "src/roosterjs/packages/roosterjs-editor-plugins/lib"
+      ],
+      "roosterjs-editor-types": [
+        "src/roosterjs/packages/roosterjs-editor-types/lib"
+      ],
+      "roosterjs-html-sanitizer": [
+        "src/roosterjs/packages/roosterjs-html-sanitizer/lib"
+      ],
+      "roosterjs-plugin-image-resize": [
+        "src/roosterjs/packages/roosterjs-plugin-image-resize/lib"
+      ],
+      "roosterjs-plugin-picker": [
+        "src/roosterjs/packages/roosterjs-plugin-picker/lib"
+      ]
     }
   },
-  "include": [
-    "src"
-  ],
+  "include": ["src"],
   "exclude": [
     "src/blink-mind/stories",
-    "src/main"
+    "src/main",
+    "src/roosterjs/publish",
+    "src/**/test"
   ]
 }

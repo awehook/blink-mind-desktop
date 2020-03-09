@@ -2,3 +2,8 @@
     path = src/blink-mind
     url = git@e.coding.net:awehook/blink-mind.git
     branch = dev
+
+[submodule "src/roosterjs"]
+	path = src/roosterjs
+	url = git@e.coding.net:awehook/roosterjs.git
+	branch = my

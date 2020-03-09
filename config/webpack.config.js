@@ -352,6 +352,35 @@ module.exports = function(webpackEnv) {
         ),
         '@blink-mind/plugins': path.resolve(
           'src/blink-mind/packages/plugins/src/index'
+        ),
+
+        roosterjs: path.resolve('src/roosterjs/packages/roosterjs/lib'),
+        'roosterjs-editor-api': path.resolve(
+          'src/roosterjs/packages/roosterjs-editor-api/lib'
+        ),
+        'roosterjs-cross-window': path.resolve(
+          'src/roosterjs/packages/roosterjs-cross-window/lib'
+        ),
+        'roosterjs-editor-core': path.resolve(
+          'src/roosterjs/packages/roosterjs-editor-core/lib'
+        ),
+        'roosterjs-editor-dom': path.resolve(
+          'src/roosterjs/packages/roosterjs-editor-dom/lib'
+        ),
+        'roosterjs-editor-plugins': path.resolve(
+          'src/roosterjs/packages/roosterjs-editor-plugins/lib'
+        ),
+        'roosterjs-editor-types': path.resolve(
+          'src/roosterjs/packages/roosterjs-editor-types/lib'
+        ),
+        'roosterjs-html-sanitizer': path.resolve(
+          'src/roosterjs/packages/roosterjs-html-sanitizer/lib'
+        ),
+        'roosterjs-plugin-image-resize': path.resolve(
+          'src/roosterjs/packages/roosterjs-plugin-image-resize/lib'
+        ),
+        'roosterjs-plugin-picker': path.resolve(
+          'src/roosterjs/packages/roosterjs-plugin-picker/lib'
         )
       },
       plugins: [
