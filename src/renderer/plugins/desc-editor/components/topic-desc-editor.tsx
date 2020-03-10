@@ -4,6 +4,7 @@ import { BaseProps, useClickOutside } from '@blink-mind/renderer-react';
 import Editor from './editor/editor';
 import { getAllPluginArray, getPlugins } from './plugins';
 import Ribbon from './ribbon/Ribbon';
+
 function TopicDescEditor_(props: BaseProps, ref) {
   const divRef = useClickOutside(() => {
     console.log('useClickOutside');
@@ -20,7 +21,7 @@ function TopicDescEditor_(props: BaseProps, ref) {
   if (block.kind === 'html') {
     const plugins = getPlugins();
     return (
-      <div ref={divRef}>
+      <div className='bm-desc-editor-root' ref={divRef}>
         <Ribbon plugin={plugins.ribbon} ref={plugins.ribbon.refCallback} />
         <Editor
           ref={editorRef}

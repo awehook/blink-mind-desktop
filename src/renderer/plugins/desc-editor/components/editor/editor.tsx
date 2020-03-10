@@ -22,7 +22,7 @@ import {
   CustomReplace as CustomReplacePlugin
 } from 'roosterjs-editor-plugins';
 
-const styles = require('./Editor.scss');
+import './Editor.scss';
 const assign = require('object-assign');
 
 export interface EditorProps {
@@ -50,7 +50,7 @@ export default class Editor extends React.Component<
 
   render() {
     return (
-      <div className={styles.editor} ref={ref => (this.contentDiv = ref)} />
+      <div className='bm-html-editor' ref={ref => (this.contentDiv = ref)} />
     );
   }
 
