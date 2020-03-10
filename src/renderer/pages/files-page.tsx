@@ -6,9 +6,10 @@ import { Component, useState } from 'react';
 import { IpcChannelName, IpcType } from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
-import {TranslationFunction, useTranslation} from '../hooks';
+import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
+import {FocusMode} from "@blink-mind/core";
 
 const log = debug('bmd:files-page');
 
@@ -28,7 +29,7 @@ export function FilesPage(props) {
 
 interface Props {
   windowData: any;
-  t: TranslationFunction
+  t: TranslationFunction;
 }
 
 interface State {
@@ -105,6 +106,11 @@ export class FilesPageInternal extends Component<Props, State> {
   onSave = (e, { path, id }) => {
     log('onSave', path);
     const fileModel = this.state.filesWindowModel.getFile(id);
+    const focusMode = fileModel.docModel.currentSheetModel.focusMode;
+    log(
+      'fileModel.docModel.currentSheetModel.focusMode',
+      focusMode
+    );
     const content = fileModel.getContent();
     log('content', content);
     saveFile({ path, id, content });

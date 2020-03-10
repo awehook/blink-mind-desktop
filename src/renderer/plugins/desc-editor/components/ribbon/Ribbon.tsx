@@ -8,50 +8,54 @@ import { getFormatState } from 'roosterjs-editor-api';
 
 let styles = require('./Ribbon.scss');
 
+const log = require('debug')('rooster:ribbon');
+
 export interface RibbonProps {
-    plugin: RibbonPlugin;
-    isPopout?: boolean;
-    className?: string;
+  plugin: RibbonPlugin;
+  isPopout?: boolean;
+  className?: string;
 }
 
 export default class Ribbon extends React.Component<RibbonProps, {}> {
-    render() {
-        let plugin = this.props.plugin;
-        let editor = plugin.getEditor();
-        let format = editor && getFormatState(editor);
-        return (
-            <div className={styles.ribbon + ' ' + (this.props.className || '')}>
-                {Object.keys(ribbonButtons).map(key => (
-                    <RibbonButton
-                        key={key}
-                        plugin={plugin}
-                        format={format}
-                        button={ribbonButtons[key]}
-                        onClicked={this.onButtonClicked}
-                    />
-                ))}
-            </div>
-        );
-    }
+  render() {
+    let plugin = this.props.plugin;
 
-    private onSave = () => {
-        let editor = this.props.plugin.getEditor();
-        let w = window.open();
-        w.document.write(editor.getContent());
-    };
+    let editor = plugin.getEditor();
+    log('render',plugin);
+    let format = editor && getFormatState(editor);
+    return (
+      <div className={styles.ribbon + ' ' + (this.props.className || '')}>
+        {Object.keys(ribbonButtons).map(key => (
+          <RibbonButton
+            key={key}
+            plugin={plugin}
+            format={format}
+            button={ribbonButtons[key]}
+            onClicked={this.onButtonClicked}
+          />
+        ))}
+      </div>
+    );
+  }
 
-    private onClear = () => {
-        let editor = this.props.plugin.getEditor();
-        editor.addUndoSnapshot(() => {
-            editor.setContent('');
-        });
-    };
+  private onSave = () => {
+    let editor = this.props.plugin.getEditor();
+    let w = window.open();
+    w.document.write(editor.getContent());
+  };
 
-    private onPopOut = () => {
-        // MainPaneBase.getInstance().popout();
-    };
+  private onClear = () => {
+    let editor = this.props.plugin.getEditor();
+    editor.addUndoSnapshot(() => {
+      editor.setContent('');
+    });
+  };
 
-    private onButtonClicked = () => {
-        this.forceUpdate();
-    };
+  private onPopOut = () => {
+    // MainPaneBase.getInstance().popout();
+  };
+
+  private onButtonClicked = () => {
+    this.forceUpdate();
+  };
 }

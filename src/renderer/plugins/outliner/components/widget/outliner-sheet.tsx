@@ -13,6 +13,7 @@ const Container = styled.div`
   flex-grow: 1;
   position: relative;
   background-color: white;
+  font-size: 16px;
 `;
 
 export function OutlinerSheet(props) {

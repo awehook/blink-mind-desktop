@@ -49,8 +49,11 @@ export default class Editor extends React.Component<
   }
 
   render() {
+    const { className } = this.props;
     return (
-      <div className='bm-html-editor' ref={ref => (this.contentDiv = ref)} />
+      <div className="bm-html-editor-root">
+        <div className={className} ref={ref => (this.contentDiv = ref)} />
+      </div>
     );
   }
 
@@ -82,6 +85,10 @@ export default class Editor extends React.Component<
 
   public getContent() {
     return this.editor.getContent();
+  }
+
+  public hasFocus() {
+    return this.editor.hasFocus();
   }
 
   private initEditor() {

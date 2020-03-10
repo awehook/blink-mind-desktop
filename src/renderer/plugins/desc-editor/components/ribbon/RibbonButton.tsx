@@ -130,6 +130,7 @@ export default class RibbonButton extends React.Component<
   }
 
   private getDocument() {
+    console.log(this.props.plugin);
     return this.props.plugin.getEditor().getDocument();
   }
 }

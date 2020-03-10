@@ -66,6 +66,7 @@
   "ADD_SIBLING": "Add Sibling",
   "ADD_CHILD": "Add Child",
   "EDIT_NOTES": "Edit Notes",
+  "REMOVE_NOTES": "REMOVE_NOTES",
   "DELETE": "Delete",
   "EXPORT": "Export",
   "EXPORT_TO": "Export To",

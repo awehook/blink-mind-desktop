@@ -7,12 +7,14 @@ import { ContextMenuTarget } from '@blueprintjs/core';
 const TopicNodeWidgetRoot = styled.div`
   display: flex;
   align-content: flex-start;
+  padding: 1px 0;
 `;
 
 const OLNodeRows = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  padding-left: 2px;
 `;
 
 const OLNodeRow = styled.div`

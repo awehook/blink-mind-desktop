@@ -1,5 +1,12 @@
-import { Controller, DocModel } from '@blink-mind/core';
+import {
+  Controller,
+  DocModel,
+  FocusMode,
+  DocModelModifier,
+  BlockType
+} from '@blink-mind/core';
 import { Record } from 'immutable';
+import { TempValueKey } from '@blink-mind/renderer-react';
 
 type FileModelRecordType = {
   id: string;
@@ -43,8 +50,41 @@ export class FileModel extends Record(defaultFileModelRecord) {
 
   getContent(): string {
     const controller = this.controller;
+    let docModel = this.docModel;
+    const model = docModel.currentSheetModel;
+    const focusMode = model.focusMode;
+
+    if (focusMode === FocusMode.EDITING_CONTENT) {
+      docModel = DocModelModifier.setBlockData({
+        docModel,
+        topicKey: model.focusKey,
+        blockType: BlockType.CONTENT,
+        data: controller.run('getTempValue', {
+          key: TempValueKey.EDITOR_CONTENT
+        })
+      });
+    } else if (focusMode === FocusMode.EDITING_DESC) {
+      const data = controller.run('getTempValue', {
+        key: TempValueKey.EDITOR_CONTENT
+      });
+      console.log(data);
+      docModel = DocModelModifier.setBlockData({
+        docModel,
+        topicKey: docModel.currentSheetModel.focusKey,
+        blockType: BlockType.DESC,
+        data: model
+          .getTopic(model.focusKey)
+          .getBlock(BlockType.DESC)
+          .block.data.set(
+            'data',
+            controller.run('getTempValue', {
+              key: TempValueKey.EDITOR_CONTENT
+            })
+          )
+      });
+    }
     const obj = controller.run('serializeDocModel', {
-      docModel: this.docModel,
+      docModel,
       controller
     });
     return JSON.stringify(obj, null, 2);

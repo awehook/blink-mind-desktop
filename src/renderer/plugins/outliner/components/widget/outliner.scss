@@ -1,9 +1,14 @@
-.bm-collapse-icon {
+.bm-collapse-icons {
   display: flex;
   align-items: center;
   position: relative;
-  height: 26px;
+  height: 16px;
   cursor: pointer;
+
+  .bm-collapse-icon {
+    width: 16px;
+    height: 16px;
+  }
 
   .dot {
     position: relative;
@@ -28,4 +33,8 @@
     //border: 2px solid #7a7a7a;
     background-color: #ccc;
   }
+}
+
+.bm-content-editable-ol {
+  width: 100%;
 }

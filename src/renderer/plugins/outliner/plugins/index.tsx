@@ -1,5 +1,5 @@
 import { ToolbarPlugin } from './toolbar';
-import { RenderPlugin } from './render';
+import { RenderPlugin } from './ol-render';
 
 export function OutlinerPlugin() {
   return [

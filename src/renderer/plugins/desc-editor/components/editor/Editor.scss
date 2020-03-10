@@ -1,14 +1,23 @@
 @import '../theme/theme.scss';
 
-.bm-html-editor {
+.bm-html-editor-root {
   flex: auto;
-  border: solid 1px $primaryBorder;
   overflow: auto;
   padding: 10px;
   outline: none;
-  //position: absolute;
-  //left: 0;
-  //top: 0;
-  //right: 0;
-  //bottom: 0;
+}
+
+.bm-html-editor-outliner {
+  padding: 5px 10px;
+  border: solid 1px $primaryBorder;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+.bm-html-editor-mindmap {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 10px;
+  border: solid 1px $primaryBorder;
 }
