@@ -19,7 +19,7 @@ if (!localStorage.allDebugNS)
 
 export function DebugNamespaceWidget(props) {
   const [debugStr, setDebugStr] = useState(localStorage.debug || '');
-  const [allDebugNS,setAllDebugNS] = useState(localStorage.allDebugNS.split(','));
+  const [allDebugNS,setAllDebugNS] = useState(localStorage.allDebugNS.split(',').sort());
   const [nsName, setNsName] = useState('');
 
   const setDebugNS = nsArray => {};

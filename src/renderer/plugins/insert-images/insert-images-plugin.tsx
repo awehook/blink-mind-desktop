@@ -81,7 +81,7 @@ export function InsertImagesPlugin() {
     renderTopicNodeRows(ctx, next) {
       const { controller } = ctx;
       const res = next();
-      res.unshift(controller.run('renderTopicExtImage', ctx));
+      res.push(controller.run('renderTopicExtImage', ctx));
       return res;
     },
 

@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { OLTopicNodeWidget } from './ol-topic-node-widget';
 import { BaseProps } from '@blink-mind/renderer-react';
 
-const Root = styled.div`
-  padding: 5px 0;
+const OLTopicWidgetRoot = styled.div`
 `;
 const SubTopics = styled.div`
   padding-left: 20px;
@@ -38,9 +37,9 @@ export function OLTopicWidget(props: BaseProps) {
   const topicNode = <OLTopicNodeWidget {...propsMore} />;
 
   return (
-    <Root key={topicKey}>
+    <OLTopicWidgetRoot key={topicKey}>
       {topicNode}
       {renderSubTopics(propsMore)}
-    </Root>
+    </OLTopicWidgetRoot>
   );
 }

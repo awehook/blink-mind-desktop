@@ -1,9 +1,4 @@
-import React, {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useState
-} from 'react';
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
 import {
   BlockType,
   FocusMode,
@@ -18,7 +13,6 @@ import SaveContentPlugin from './save-content-plugin';
 import RibbonPlugin from './ribbon/RibbonPlugin';
 import SnapshotPlugin from './sidePane/snapshot/SnapshotPlugin';
 import EditorOptionsPlugin from './sidePane/editorOptions/EditorOptionsPlugin';
-import { on } from 'cluster';
 
 const log = require('debug')('node:topic-desc-editor');
 
@@ -31,21 +25,26 @@ interface Plugins {
 
 const pluginMap = new Map<KeyType, Plugins>();
 
-interface TopicDescEditorProps extends BaseProps {}
+interface TopicDescEditorProps extends BaseProps {
+  onKeyDown: (e) => void;
+}
 
-function TopicDescEditor_(props: TopicDescEditorProps, ref) {
+function RoosterDescEditor_(props: TopicDescEditorProps, ref) {
   const { controller, topic, topicKey, model } = props;
-  // const [showToolbar] = useState(false);
   const editorRef = useRef<Editor>();
   const blockData = topic.getBlock(BlockType.DESC).block.data;
   const divRef = useClickOutside(() => {
     log('clickOutside');
-    controller.run('operation', {
-      ...props,
-      opType: OpType.SET_TOPIC_BLOCK,
-      blockType: BlockType.DESC,
-      data: blockData.set('data', editorRef.current.getContent())
-    });
+    const content = editorRef.current.getContent();
+
+    //SET_TOPIC_BLOCK_DESC
+    blockData.data !== content &&
+      controller.run('operation', {
+        ...props,
+        opType: OpType.SET_TOPIC_BLOCK,
+        blockType: BlockType.DESC,
+        data: blockData.set('data', content)
+      });
   });
 
   useImperativeHandle(ref, () => ({
@@ -80,7 +79,7 @@ function TopicDescEditor_(props: TopicDescEditorProps, ref) {
         });
       }
     };
-
+    log('render');
     return (
       <div className="bm-desc-editor-root" ref={divRef} onClick={onClick}>
         <Ribbon plugin={plugins.ribbon} ref={plugins.ribbon.refCallback} />
@@ -107,4 +106,4 @@ function TopicDescEditor_(props: TopicDescEditorProps, ref) {
   return null;
 }
 
-export const TopicDescEditor = forwardRef(TopicDescEditor_);
+export const RoosterDescEditor = forwardRef(RoosterDescEditor_);

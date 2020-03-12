@@ -53,22 +53,13 @@ export class FileModel extends Record(defaultFileModelRecord) {
     let docModel = this.docModel;
     const model = docModel.currentSheetModel;
     const focusMode = model.focusMode;
-
-    if (focusMode === FocusMode.EDITING_CONTENT) {
-      docModel = DocModelModifier.setBlockData({
-        docModel,
-        topicKey: model.focusKey,
-        blockType: BlockType.CONTENT,
-        data: controller.run('getTempValue', {
-          key: TempValueKey.EDITOR_CONTENT
-        })
-      });
-    } else if (focusMode === FocusMode.EDITING_DESC) {
+    // TODO 这里也不是很保险
+    if (focusMode === FocusMode.EDITING_DESC) {
       const data = controller.run('getTempValue', {
         key: TempValueKey.EDITOR_CONTENT
       });
       console.log(data);
-      docModel = DocModelModifier.setBlockData({
+      docModel = DocModelModifier.setTopicBlockData({
         docModel,
         topicKey: docModel.currentSheetModel.focusKey,
         blockType: BlockType.DESC,

@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import { OLTopicCollapseIcon } from './ol-topic-collapse-icon';
-import { BaseProps } from '@blink-mind/renderer-react';
+import { BaseProps, BaseWidget } from '@blink-mind/renderer-react';
 import { ContextMenuTarget } from '@blueprintjs/core';
 
-const TopicNodeWidgetRoot = styled.div`
+const OLTopicNodeWidgetRoot = styled.div`
   display: flex;
   align-content: flex-start;
   padding: 1px 0;
+  margin: 10px 0;
 `;
 
 const OLNodeRows = styled.div`
@@ -29,7 +30,7 @@ interface State {
 }
 
 @ContextMenuTarget
-export class OLTopicNodeWidget extends React.Component<BaseProps, State> {
+export class OLTopicNodeWidget extends BaseWidget<BaseProps, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,19 +50,25 @@ export class OLTopicNodeWidget extends React.Component<BaseProps, State> {
     this.setState({ hover: false });
   };
 
+  onPaste = ev => {
+    // log('onPaste');
+    this.run('handleTopicPaste', { ...this.props, ev });
+  };
+
   render() {
     const props = this.props;
-    const { controller } = props;
+    const { controller, model, topicKey } = props;
     const rootProps = {
       onMouseEnter: this.onMouseEnter,
-      onMouseLeave: this.onMouseLeave
+      onMouseLeave: this.onMouseLeave,
+      onPaste: this.onPaste
     };
     const collpaseProps = {
       ...props,
       hover: this.state.hover
     };
     return (
-      <TopicNodeWidgetRoot {...rootProps}>
+      <OLTopicNodeWidgetRoot {...rootProps}>
         <OLTopicCollapseIcon {...collpaseProps} />
         <OLNodeRows>
           {controller.run('renderTopicNodeRows', props)}
@@ -70,7 +77,7 @@ export class OLTopicNodeWidget extends React.Component<BaseProps, State> {
           {/*  {controller.run('renderTopicNodeLastRowOthers', props)}*/}
           {/*</OLNodeRow>*/}
         </OLNodeRows>
-      </TopicNodeWidgetRoot>
+      </OLTopicNodeWidgetRoot>
     );
   }
 }

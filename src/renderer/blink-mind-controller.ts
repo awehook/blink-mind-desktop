@@ -19,14 +19,14 @@ import {
   InsertImagesPlugin,
   AuthPlugin,
   DebugPlugin,
-  DescEditorPlugin
+  RoosterDescEditorPlugin
 } from './plugins';
 
 const plugins = [
-  DescEditorPlugin(),
   DebugPlugin(),
   // AuthPlugin(),
   OutlinerPlugin(),
+  RoosterDescEditorPlugin(),
   ToolbarPlugin(),
   I18nPlugin(),
   FontPlugin(),

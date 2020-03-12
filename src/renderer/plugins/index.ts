@@ -6,4 +6,4 @@ export * from './export-topic';
 export * from './insert-images';
 export * from './auth';
 export * from './debug';
-export * from './desc-editor';
+export * from './rooster-desc-editor';

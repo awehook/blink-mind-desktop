@@ -2,10 +2,11 @@ import React from 'react';
 import { ViewModeOutliner } from '../utils';
 import { OutlinerSheet } from '../components/widget';
 import { BlockType, DescBlockData } from '@blink-mind/core';
-import { OLTopicBlockContent } from '../components/widget/ol-topic-block-content';
-import { OLTopicWidget } from '../components/widget/ol-topic-widget';
-import { TopicDescEditor } from '../../desc-editor/components';
-// import { OLTopicContentEditor } from '../components/widget/ol-topic-content-editor';
+import {
+  OLTopicBlockContent,
+  OLTopicWidget,
+  OLTopicBlockDesc
+} from '../components';
 
 export function RenderPlugin() {
   return {
@@ -26,14 +27,6 @@ export function RenderPlugin() {
 
     renderOLTopicWidget(ctx) {
       return <OLTopicWidget {...ctx} />;
-    },
-
-    renderTopicContentEditor(ctx, next) {
-      // const { model } = ctx;
-      // if (model.config.viewMode === ViewModeOutliner) {
-      //   return <OLTopicContentEditor {...ctx} />;
-      // }
-      return next();
     },
 
     renderTopicNodeRows(ctx, next) {
@@ -82,7 +75,7 @@ export function RenderPlugin() {
       const { model, topic } = ctx;
       if (model.config.viewMode === ViewModeOutliner) {
         const block = topic.getBlock(BlockType.DESC).block;
-        if (block && !block.data.collapse) return <TopicDescEditor {...ctx} />;
+        if (block && !block.data.collapse) return <OLTopicBlockDesc {...ctx} />;
         return null;
       }
       return next();

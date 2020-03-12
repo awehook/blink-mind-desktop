@@ -1,11 +1,11 @@
 import React from 'react';
-import { TopicDescEditor } from './components';
+import { RoosterDescEditor } from './components';
 import { BlockType } from '@blink-mind/core';
 
-export function DescEditorPlugin() {
+export function RoosterDescEditorPlugin() {
   return {
     renderTopicDescEditor(props) {
-      return <TopicDescEditor {...props} />;
+      return <RoosterDescEditor {...props} />;
     },
 
     serializeBlockData(props, next) {

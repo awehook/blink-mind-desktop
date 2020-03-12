@@ -19,7 +19,6 @@
     "css-shorthand-expand": "^1.2.0",
     "debug": "2.6.9",
     "document.contains": "^1.0.1",
-    "draft-js": "^0.11.4",
     "electron-is-dev": "^1.1.0",
     "electron-store": "^5.1.0",
     "file-saver": "^2.0.2",
