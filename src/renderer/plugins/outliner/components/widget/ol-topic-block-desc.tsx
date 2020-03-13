@@ -1,21 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
-const OLTopicBlockDescRoot = styled.div`
-  user-select: text;
-  padding: 5px;
-  margin-top: 10px;
-  max-height: 60vh;
-  width: auto;
-  max-width: 80vw;
-  overflow: auto;
-  border: #00bbcc 1px solid;
-`;
+import { OpType } from '@blink-mind/core';
 export function OLTopicBlockDesc(props) {
-  const { block } = props;
+  const { controller, block } = props;
+
+  const onDoubleClick = e => {
+    controller.run('operation', {
+      ...props,
+      opType: OpType.START_EDITING_DESC
+    });
+  };
 
   return block ? (
-    <OLTopicBlockDescRoot
+    <div
+      className="bm-topic-block-desc"
       dangerouslySetInnerHTML={{ __html: block.data.data }}
+      onDoubleClick={onDoubleClick}
     />
   ) : null;
 }

@@ -1,24 +1,17 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { OlNodeLayer } from './ol-node-layer';
-import './outliner.scss';
+
+const BreadCrumbsDiv = styled.div`
+  position: relative;
+  height: 80px;
+`;
 
 const log = require('debug')('outliner:sheet');
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  padding: 20px 0 0 50px;
-  overflow: auto;
-  flex-grow: 1;
-  position: relative;
-  background-color: white;
-  font-size: 16px;
-`;
-
 export function OutlinerSheet(props) {
   log('render');
-  const { controller } = props;
+  const { controller, model } = props;
   const [diagramState, setDiagramState] = useState(
     controller.run('getInitialSheetState', props)
   );
@@ -27,10 +20,25 @@ export function OutlinerSheet(props) {
     diagramState,
     setDiagramState
   };
+
+  let breadcrumbs = null;
+  if (model.editorRootTopicKey !== model.rootTopicKey) {
+    const bcProps = {
+      ...props,
+      topicKey: model.focusKey,
+      topic: model.getTopic(model.focusKey)
+    };
+    breadcrumbs = (
+      <BreadCrumbsDiv>
+        {controller.run('renderEditorRootBreadcrumbs', bcProps)}
+      </BreadCrumbsDiv>
+    );
+  }
   return (
-    <Container>
+    <div className="bm-outliner">
+      {breadcrumbs}
       <OlNodeLayer {...props} />
       {controller.run('renderSheetCustomize', nProps)}
-    </Container>
+    </div>
   );
 }

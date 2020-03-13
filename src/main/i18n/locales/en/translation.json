@@ -155,6 +155,9 @@
   "REFERENCED_TOPICS": "Referenced Topics",
   "GOTO_ORIGINAL_TOPIC": "Goto Original Topic",
 
+  "INDENT": "Indent",
+  "OUTDENT": "Outdent",
+
   "SELECT_REF_TOPICS_TIP": "Please select the topics you want to reference. After selection, click the confirm button.",
   "TAG_NAME_OVER_MAX_TIP": "The length of tag name over the maximum length: 50!",
   "DELETE_TAG_TIP": "All the relationship about this tag will be lost if you delete this tag! Are you confirm?",

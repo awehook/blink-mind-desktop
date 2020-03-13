@@ -21,8 +21,6 @@ import {
   getDefaultContentEditFeatures,
   CustomReplace as CustomReplacePlugin
 } from 'roosterjs-editor-plugins';
-
-import './Editor.scss';
 const assign = require('object-assign');
 
 export interface EditorProps {
@@ -127,7 +125,7 @@ export default class Editor extends React.Component<
       plugins: plugins,
       defaultFormat: defaultFormat,
       undo: this.props.undo,
-      initialContent: this.props.content
+      initialContent: this.props.content,
     };
     this.editor = new RoosterJsEditor(this.contentDiv, options);
   }

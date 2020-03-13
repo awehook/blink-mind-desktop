@@ -3,14 +3,7 @@ import styled from 'styled-components';
 import { OLTopicNodeWidget } from './ol-topic-node-widget';
 import { BaseProps } from '@blink-mind/renderer-react';
 
-const OLTopicWidgetRoot = styled.div`
-  
-`;
-const SubTopics = styled.div`
-  position: relative;
-  margin-left: 30px;
-  border-left: 1px solid #ddd;
-`;
+const OLTopicWidgetRoot = styled.div``;
 
 export function OLTopicWidget(props: BaseProps) {
   const { controller, model, topicKey } = props;
@@ -20,8 +13,7 @@ export function OLTopicWidget(props: BaseProps) {
   const renderSubTopics = props => {
     if (topic.collapse || topic.subKeys.size === 0) return null;
     return (
-      <SubTopics>
-
+      <div className="bm-sub-topics">
         {topic.subKeys.map(subKey => {
           return controller.run('renderOLTopicWidget', {
             ...props,
@@ -29,7 +21,7 @@ export function OLTopicWidget(props: BaseProps) {
             topicKey: subKey
           });
         })}
-      </SubTopics>
+      </div>
     );
   };
 

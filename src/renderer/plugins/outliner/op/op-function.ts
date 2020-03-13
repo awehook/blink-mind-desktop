@@ -7,6 +7,7 @@ export function indent({
   model,
   topicKeys
 }: BaseSheetModelModifierArg): SheetModelModifierResult {
+  if (topicKeys == null) topicKeys = model.focusOrSelectedKeys;
   let firstKey = topicKeys[0];
   if (firstKey === model.editorRootTopicKey) return model;
   let pTopic = model.getParentTopic(firstKey);
@@ -37,6 +38,7 @@ export function outdent({
   model,
   topicKeys
 }: BaseSheetModelModifierArg): SheetModelModifierResult {
+  if (topicKeys == null) topicKeys = model.focusOrSelectedKeys;
   let firstKey = topicKeys[0];
   if (firstKey === model.editorRootTopicKey) return model;
   let pItem = model.getParentTopic(firstKey);

@@ -1,0 +1,26 @@
+@import '../../../blink-mind/packages/renderer-react/src/components/var';
+@import './components/theme/theme';
+.bm-desc-editor-root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  color: map_get($light-colors,'text');
+}
+
+.bm-html-editor-root {
+  flex: auto;
+  overflow: auto;
+  padding: 10px;
+  outline: none;
+}
+
+
+.bm-html-editor {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 10px;
+  border: solid 1px $primaryBorder;
+}

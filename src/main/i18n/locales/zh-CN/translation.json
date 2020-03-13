@@ -155,6 +155,9 @@
   "REFERENCED_TOPICS": "被引用的节点",
   "GOTO_ORIGINAL_TOPIC": "跳转到原始节点",
 
+  "INDENT": "缩进",
+  "OUTDENT": "反向缩进",
+
   "SELECT_REF_TOPICS_TIP": "请选择要引用的节点，选择完之后，请点击确认按钮。",
   "TAG_NAME_OVER_MAX_TIP": "标签名超出最大长度：50 ！",
   "DELETE_TAG_TIP": "如果你删除此标签，和此标签关联的节点的关联关系将会丢失，确认要删除吗？",
