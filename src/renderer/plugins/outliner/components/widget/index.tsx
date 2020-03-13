@@ -3,3 +3,4 @@ export * from './toolbar-item-view-mode';
 export * from './ol-topic-block-desc';
 export * from './ol-topic-block-content';
 export * from './ol-topic-widget';
+export * from './ol-root-topic-widget';

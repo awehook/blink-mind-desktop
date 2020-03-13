@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { OlNodeLayer } from './ol-node-layer';
 import './outliner.scss';
@@ -18,9 +18,19 @@ const Container = styled.div`
 
 export function OutlinerSheet(props) {
   log('render');
+  const { controller } = props;
+  const [diagramState, setDiagramState] = useState(
+    controller.run('getInitialSheetState', props)
+  );
+  const nProps = {
+    ...props,
+    diagramState,
+    setDiagramState
+  };
   return (
     <Container>
       <OlNodeLayer {...props} />
+      {controller.run('renderSheetCustomize', nProps)}
     </Container>
   );
 }

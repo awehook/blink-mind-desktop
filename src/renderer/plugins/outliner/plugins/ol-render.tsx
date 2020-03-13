@@ -1,12 +1,13 @@
 import React from 'react';
 import { ViewModeOutliner } from '../utils';
-import { OutlinerSheet } from '../components/widget';
-import { BlockType, DescBlockData } from '@blink-mind/core';
+import { OLRootTopicWidget, OutlinerSheet } from '../components/widget';
+import { BlockType } from '@blink-mind/core';
 import {
   OLTopicBlockContent,
   OLTopicWidget,
   OLTopicBlockDesc
 } from '../components';
+import {PropKey} from "@blink-mind/renderer-react";
 
 export function RenderPlugin() {
   return {
@@ -17,11 +18,37 @@ export function RenderPlugin() {
       return next();
     },
 
-    deserializeBlockData(ctx, next) {
-      const { block } = ctx;
-      if (block.type === BlockType.DESC) {
-        return new DescBlockData(block.data);
+    renderSheetCustomize(ctx,next) {
+      const { controller, model } = ctx;
+      if (model.config.viewMode === ViewModeOutliner) {
+        const zIndex = controller.getValue(
+          PropKey.DIAGRAM_CUSTOMIZE_BASE_Z_INDEX
+        );
+        const nProps = {
+          ...ctx,
+          zIndex,
+          topicKey: model.focusKey,
+          topic: model.getTopic(model.focusKey)
+        };
+
+        const dialog = controller.run('renderDialog', {
+          ...nProps,
+          zIndex: zIndex + 1
+        });
+        const drawer = controller.run('renderDrawer', {
+          ...nProps,
+          zIndex: zIndex + 1
+        });
+
+        return [dialog, drawer];
       }
+      return next();
+    },
+
+    renderRootTopicWidget(ctx, next) {
+      const { model } = ctx;
+      if (model.config.viewMode === ViewModeOutliner)
+        return <OLRootTopicWidget {...ctx} />;
       return next();
     },
 
@@ -73,9 +100,13 @@ export function RenderPlugin() {
 
     renderTopicBlockDesc(ctx, next) {
       const { model, topic } = ctx;
+
       if (model.config.viewMode === ViewModeOutliner) {
         const block = topic.getBlock(BlockType.DESC).block;
-        if (block && !block.data.collapse) return <OLTopicBlockDesc {...ctx} />;
+        if (block && !block.data.collapse) {
+          const props = { ...ctx, block };
+          return <OLTopicBlockDesc {...props} />;
+        }
         return null;
       }
       return next();

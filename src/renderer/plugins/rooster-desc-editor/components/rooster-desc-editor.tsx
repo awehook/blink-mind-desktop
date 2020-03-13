@@ -85,11 +85,7 @@ function RoosterDescEditor_(props: TopicDescEditorProps, ref) {
         <Ribbon plugin={plugins.ribbon} ref={plugins.ribbon.refCallback} />
         <Editor
           ref={editorRef}
-          className={
-            model.config.viewMode === ViewModeMindMap
-              ? 'bm-html-editor-mindmap'
-              : 'bm-html-editor-outliner'
-          }
+          className='bm-html-editor'
           plugins={[
             plugins.ribbon,
             plugins.snapshot,

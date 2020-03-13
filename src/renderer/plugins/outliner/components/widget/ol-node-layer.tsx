@@ -7,12 +7,13 @@ export class OlNodeLayer extends React.Component<BaseProps> {
     const props = this.props;
     const { model, controller } = props;
     const topicKey = model.editorRootTopicKey;
-
+    const topic = model.getTopic(topicKey);
     const nProps = {
       ...props,
-      topicKey
+      topicKey,
+      topic
     };
 
-    return controller.run('renderOLTopicWidget', nProps);
+    return controller.run('renderRootTopicWidget', nProps);
   }
 }

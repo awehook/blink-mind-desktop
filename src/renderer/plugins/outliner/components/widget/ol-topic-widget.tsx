@@ -4,9 +4,12 @@ import { OLTopicNodeWidget } from './ol-topic-node-widget';
 import { BaseProps } from '@blink-mind/renderer-react';
 
 const OLTopicWidgetRoot = styled.div`
+  
 `;
 const SubTopics = styled.div`
-  padding-left: 20px;
+  position: relative;
+  margin-left: 30px;
+  border-left: 1px solid #ddd;
 `;
 
 export function OLTopicWidget(props: BaseProps) {
@@ -18,6 +21,7 @@ export function OLTopicWidget(props: BaseProps) {
     if (topic.collapse || topic.subKeys.size === 0) return null;
     return (
       <SubTopics>
+
         {topic.subKeys.map(subKey => {
           return controller.run('renderOLTopicWidget', {
             ...props,
