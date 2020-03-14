@@ -1,6 +1,8 @@
 import {
   BaseSheetModelModifierArg,
-  SheetModelModifierResult
+  SheetModelModifierResult,
+  getSiblingAncestorKeys,
+  getRangeSubKeys
 } from '@blink-mind/core';
 
 export function indent({
@@ -63,4 +65,15 @@ export function outdent({
     topics.set(pItem.key, pItem).set(ppItem.key, ppItem)
   );
   return model;
+}
+
+export function selectWithMouseMove({
+  model,
+  topicKey
+}: BaseSheetModelModifierArg): SheetModelModifierResult {
+  let focusKey = model.focusKey;
+  let [key1, key2] = getSiblingAncestorKeys(model, focusKey, topicKey);
+  const selectedKeys =
+    key1 === key2 ? [key1] : getRangeSubKeys(model, key1, key2);
+  return model.set('selectedKeys', selectedKeys);
 }

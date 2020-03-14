@@ -13,6 +13,13 @@
     background-color: map_get($dark-colors, 'zindex-bg');
   }
 
+  .bm-topic-widget-selected {
+    background-color: map_get($light-colors, 'selected-bg');
+    .bp3-dark & {
+      background-color: map_get($dark-colors, 'selected-bg');
+    }
+  }
+
   .bm-sub-topics {
     position: relative;
     margin-left: 30px;
@@ -36,8 +43,6 @@
     color: map_get($light-colors, 'text');
   }
 }
-
-
 
 .bm-collapse-icons {
   display: flex;

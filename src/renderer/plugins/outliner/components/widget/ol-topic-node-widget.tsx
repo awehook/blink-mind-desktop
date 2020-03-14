@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { OLTopicCollapseIcon } from './ol-topic-collapse-icon';
-import { BaseProps, BaseWidget } from '@blink-mind/renderer-react';
-import { ContextMenuTarget } from '@blueprintjs/core';
+import { BaseProps } from '@blink-mind/renderer-react';
+import { OlOpType } from '../../op';
+
+const log = require('debug')('node:topic-node-widget');
 
 const OLTopicNodeWidgetRoot = styled.div`
   display: flex;
   align-content: flex-start;
-  padding: 1px 0;
-  margin: 10px 0;
+  padding: 8px 0;
 `;
 
 const OLNodeRows = styled.div`
@@ -18,66 +19,44 @@ const OLNodeRows = styled.div`
   padding-left: 2px;
 `;
 
-const OLNodeRow = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  position: relative;
-`;
+export function OLTopicNodeWidget(props: BaseProps) {
+  const { controller, model, topicKey } = props;
 
-interface State {
-  hover: boolean;
-}
+  const [hover, setHover] = useState(false);
 
-@ContextMenuTarget
-export class OLTopicNodeWidget extends BaseWidget<BaseProps, State> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hover: false
-    };
-  }
+  const onMouseEnter = e => {
+    // log('onMouseEnter');
+    setHover(true);
 
-  public renderContextMenu() {
-    return null;
-  }
-
-  onMouseEnter = () => {
-    this.setState({ hover: true });
+    e.nativeEvent.which === 1 &&
+      controller.run('operation', {
+        ...props,
+        opType: OlOpType.SELECT_WITH_MOUSE_MOVE
+      });
   };
 
-  onMouseLeave = () => {
-    this.setState({ hover: false });
+  const onMouseLeave = () => {
+    setHover(false);
   };
 
-  onPaste = ev => {
+  const onPaste = ev => {
     // log('onPaste');
     this.run('handleTopicPaste', { ...this.props, ev });
   };
 
-  render() {
-    const props = this.props;
-    const { controller, model, topicKey } = props;
-    const rootProps = {
-      onMouseEnter: this.onMouseEnter,
-      onMouseLeave: this.onMouseLeave,
-      onPaste: this.onPaste
-    };
-    const collpaseProps = {
-      ...props,
-      hover: this.state.hover
-    };
-    return (
-      <OLTopicNodeWidgetRoot {...rootProps}>
-        <OLTopicCollapseIcon {...collpaseProps} />
-        <OLNodeRows>
-          {controller.run('renderTopicNodeRows', props)}
-          {/*<OLNodeRow>*/}
-          {/*  {controller.run('renderTopicBlocks', props)}*/}
-          {/*  {controller.run('renderTopicNodeLastRowOthers', props)}*/}
-          {/*</OLNodeRow>*/}
-        </OLNodeRows>
-      </OLTopicNodeWidgetRoot>
-    );
-  }
+  const rootProps = {
+    onMouseEnter,
+    onMouseLeave,
+    onPaste
+  };
+  const collpaseProps = {
+    ...props,
+    hover
+  };
+  return (
+    <OLTopicNodeWidgetRoot {...rootProps}>
+      <OLTopicCollapseIcon {...collpaseProps} />
+      <OLNodeRows>{controller.run('renderTopicNodeRows', props)}</OLNodeRows>
+    </OLTopicNodeWidgetRoot>
+  );
 }

@@ -35,15 +35,15 @@ export function OLTopicBlockContent(props: BaseProps) {
       case Key.Tab:
         controller.run('operation', {
           ...props,
-          opType: e.shiftKey ? OlOpType.OUTDENT : OlOpType.INDENT,
+          opType: e.shiftKey ? OlOpType.OUTDENT : OlOpType.INDENT
         });
         return true;
     }
     return false;
   };
 
-  const onClick = () => {
-    if (model.editingContentKey !== topicKey) {
+  const onMouseDown = () => {
+    if (model.editingContentKey !== topicKey || model.selectedKeys != null) {
       controller.run('operation', {
         ...props,
         opType: OpType.START_EDITING_CONTENT
@@ -81,7 +81,7 @@ export function OLTopicBlockContent(props: BaseProps) {
   };
 
   return (
-    <OLTopicBlockContentRoot onClick={onClick} onContextMenu={onContextMenu}>
+    <OLTopicBlockContentRoot onMouseDown={onMouseDown} onContextMenu={onContextMenu}>
       {controller.run('renderTopicContentEditor', {
         ...props,
         handleKeyDown,
