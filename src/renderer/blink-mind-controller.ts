@@ -1,6 +1,5 @@
 import { Controller } from '@blink-mind/core';
 import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
-import RichTextEditorPlugin from '@blink-mind/plugin-rich-text-editor';
 import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import {
   SearchPlugin,
@@ -30,14 +29,13 @@ const plugins = [
   ToolbarPlugin(),
   I18nPlugin(),
   FontPlugin(),
-  RichTextEditorPlugin(),
   ThemeSelectorPlugin(),
   TopicReferencePlugin(),
   SearchPlugin(),
   UndoRedoPlugin(),
   TagsPlugin(),
   InsertImagesPlugin(),
-  TopologyDiagramPlugin(),
+  // TopologyDiagramPlugin(),
   ExportTopicPlugin(),
   JsonSerializerPlugin(),
   DefaultPlugin()

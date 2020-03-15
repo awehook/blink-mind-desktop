@@ -1,4 +1,10 @@
-import { indent, outdent, selectWithMouseMove, OlOpType } from '../op';
+import {
+  indent,
+  outdent,
+  selectWithMouseMove,
+  OlOpType,
+  olMoveFocus
+} from '../op';
 import { toDocModelModifierFunc } from '@blink-mind/core';
 
 export function OpPlugin() {
@@ -11,6 +17,7 @@ export function OpPlugin() {
         OlOpType.SELECT_WITH_MOUSE_MOVE,
         toDocModelModifierFunc(selectWithMouseMove)
       );
+      opMap.set(OlOpType.MOVE_FOCUS, toDocModelModifierFunc(olMoveFocus));
       return opMap;
     },
 

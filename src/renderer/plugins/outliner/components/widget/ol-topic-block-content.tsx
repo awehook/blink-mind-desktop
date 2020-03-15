@@ -79,13 +79,14 @@ export function OLTopicBlockContent(props: BaseProps) {
     }
   };
 
+  // 为什么把readOnly 设置为false, 是因为
   return (
     <OLTopicBlockContentRoot onMouseDown={onMouseDown} onContextMenu={onContextMenu}>
       {controller.run('renderTopicContentEditor', {
         ...props,
         handleKeyDown,
         className: 'bm-content-editable-ol',
-        readOnly: false
+        readOnly: model.focusKey !== topicKey
       })}
     </OLTopicBlockContentRoot>
   );

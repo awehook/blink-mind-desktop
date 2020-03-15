@@ -1,14 +1,11 @@
-import React from 'react';
+import React, { useImperativeHandle, useState } from 'react';
 import cx from 'classnames';
 import { BaseProps } from '@blink-mind/renderer-react';
 import { BlockType, OpType } from '@blink-mind/core';
 
-interface Props extends BaseProps {
-  hover: boolean;
-}
-
-export function OLTopicCollapseIcon(props: Props) {
-  const { controller, hover, topic } = props;
+export function OLTopicCollapseIcon_(props: BaseProps, ref) {
+  const { controller, topic } = props;
+  const [hover, _setHover] = useState(false);
   const canCollapse = topic.subKeys.size > 0;
   const collapse = topic.collapse && canCollapse;
   const dotClassName =
@@ -18,6 +15,12 @@ export function OLTopicCollapseIcon(props: Props) {
           'bm-minus': !collapse
         })
       : cx('dot', { 'dot-collapse': collapse });
+
+  useImperativeHandle(ref, () => ({
+    setHover(v) {
+      _setHover(v);
+    }
+  }));
 
   const onClickDot = () => {
     if (canCollapse) {
@@ -35,7 +38,7 @@ export function OLTopicCollapseIcon(props: Props) {
 
   const descBlock = topic.getBlock(BlockType.DESC).block;
 
-  let descCollapseIcon = <div className='bm-collapse-icon'/>;
+  let descCollapseIcon = <div className="bm-collapse-icon" />;
   if (descBlock) {
     const descCollapseIconProps = {
       className: cx('icon', 'iconfont', {
@@ -63,3 +66,5 @@ export function OLTopicCollapseIcon(props: Props) {
     </div>
   );
 }
+
+export const OLTopicCollapseIcon = React.forwardRef(OLTopicCollapseIcon_);

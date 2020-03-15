@@ -2,7 +2,12 @@ import {
   BaseSheetModelModifierArg,
   SheetModelModifierResult,
   getSiblingAncestorKeys,
-  getRangeSubKeys
+  getRangeSubKeys,
+  KeyType,
+  SheetModel,
+  getVisualBottomDescendantKey,
+  SheetModelModifier,
+  FocusMode
 } from '@blink-mind/core';
 
 export function indent({
@@ -76,4 +81,58 @@ export function selectWithMouseMove({
   const selectedKeys =
     key1 === key2 ? [key1] : getRangeSubKeys(model, key1, key2);
   return model.set('selectedKeys', selectedKeys);
+}
+
+export function olMoveFocus({
+  model,
+  topicKey,
+  dir
+}: BaseSheetModelModifierArg & { dir: 'U' | 'D' }): SheetModelModifierResult {
+  let focusKey =
+    dir === 'U'
+      ? getVisualUpTopicKey(model, topicKey)
+      : getVisualDownTopicKey(model, topicKey);
+  if (focusKey)
+    model = SheetModelModifier.focusTopic({
+      model,
+      topicKey: focusKey,
+      focusMode: FocusMode.EDITING_CONTENT
+    });
+  return model;
+}
+
+/**
+ * 获取视觉上面元素的key,需要考虑到元素展开和收缩的情况
+ * @param model
+ * @param key
+ */
+function getVisualUpTopicKey(model: SheetModel, key: KeyType): KeyType {
+  let previousSiblingKey = model.getPreviousSiblingKey(key);
+  if (!previousSiblingKey) {
+    return model.getParentKey(key) !== model.editorRootTopicKey
+      ? model.getParentKey(key)
+      : null;
+  }
+  return getVisualBottomDescendantKey(model, previousSiblingKey);
+}
+
+/**
+ * 获取视觉下面元素的key,需要考虑到元素展开和收缩的情况
+ * @param model
+ * @param key
+ */
+function getVisualDownTopicKey(model: SheetModel, key: KeyType): KeyType {
+  const topic = model.getTopic(key);
+  if (topic.subKeys.size > 0 && !topic.collapse) {
+    return topic.subKeys.first();
+  }
+  const nextSiblingKey = model.getNextSiblingKey(key);
+  if (nextSiblingKey) return nextSiblingKey;
+  let parentKey = topic.parentKey;
+  while (parentKey !== model.editorRootTopicKey) {
+    if (model.getNextSiblingKey(parentKey))
+      return model.getNextSiblingKey(parentKey);
+    parentKey = model.getParentKey(parentKey);
+  }
+  return null;
 }
