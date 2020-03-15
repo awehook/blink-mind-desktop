@@ -1,4 +1,4 @@
-import { BaseSheetModelModifierArg } from '@blink-mind/core';
+import {BaseDocModelModifierArg, BaseSheetModelModifierArg} from '@blink-mind/core';
 import { swap } from '@blink-mind/renderer-react';
 import { List } from 'immutable';
 import {
@@ -9,13 +9,13 @@ import {
 import { EXT_DATA_KEY_IMAGES } from './utils';
 
 export function addImage({
-  model,
+  docModel,
   topicKey,
   image
-}: BaseSheetModelModifierArg & {
+}: BaseDocModelModifierArg & {
   image: ImageRecord;
 }) {
-  let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+  let extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
   const topicImage = new TopicImageRecord({
     key: image.key,
     width: image.width,
@@ -33,24 +33,24 @@ export function addImage({
         return topics.update(topicKey, list => list.push(topicImage));
       }
     });
-  model = model.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
-  return model;
+  docModel = docModel.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
+  return docModel;
 }
 
-export function deleteTopicImage({ model, topicKey, imageKey }) {
-  let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+export function deleteTopicImage({ docModel, topicKey, imageKey }) {
+  let extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
   extData = extData.updateIn(['topics', topicKey], list =>
     list.delete(list.findIndex(v => v.key === imageKey))
   );
   if (getUsedImageKeyTopicCount(extData, imageKey) === 0) {
     extData = extData.update('images', images => images.delete(imageKey));
   }
-  model = model.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
-  return model;
+  docModel = docModel.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
+  return docModel;
 }
 
-export function addTopicImage({ model, topicKey, imageKey }) {
-  let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+export function addTopicImage({ docModel, topicKey, imageKey }) {
+  let extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
   const image = extData.images.get(imageKey);
   if (image == null) {
     throw new Error(`imageKey ${imageKey} not exist`);
@@ -67,13 +67,13 @@ export function addTopicImage({ model, topicKey, imageKey }) {
     extData = extData.update('topics', topics =>
       topics.set(topicKey, topicData)
     );
-    model = model.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
+    docModel = docModel.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
   }
-  return model;
+  return docModel;
 }
 
-export function setTopicImage({ model, topicKey, imageKey, imageData }) {
-  let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+export function setTopicImage({ docModel, topicKey, imageKey, imageData }) {
+  let extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
   let topicData = extData.topics.get(topicKey);
   if (topicData == null) {
     throw new Error(`topicKey ${topicKey} does not has imageData`);
@@ -88,12 +88,12 @@ export function setTopicImage({ model, topicKey, imageKey, imageData }) {
     topicImage.merge(imageData)
   );
   extData = extData.update('topics', topics => topics.set(topicKey, topicData));
-  model = model.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
-  return model;
+  docModel = docModel.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
+  return docModel;
 }
 
-export function moveTopicImage({ model, topicKey, imageKey, moveDir }) {
-  let extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+export function moveTopicImage({ docModel, topicKey, imageKey, moveDir }) {
+  let extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
   let topicData = extData.topics.get(topicKey);
   const index = topicData.findIndex(v => v.key === imageKey);
   if (moveDir === 'up') {
@@ -102,8 +102,8 @@ export function moveTopicImage({ model, topicKey, imageKey, moveDir }) {
     topicData = swap(topicData, index, index + 1);
   }
   extData = extData.update('topics', topics => topics.set(topicKey, topicData));
-  model = model.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
-  return model;
+  docModel = docModel.setIn(['extData', EXT_DATA_KEY_IMAGES], extData);
+  return docModel;
 }
 
 export function getUsedImageKeyTopicCount(

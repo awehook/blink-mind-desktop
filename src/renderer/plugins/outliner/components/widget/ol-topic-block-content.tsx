@@ -14,13 +14,12 @@ const OLTopicBlockContentRoot = styled.div`
 
 export function OLTopicBlockContent(props: BaseProps) {
   const { controller, model, topic, topicKey } = props;
-  const isEditorRoot = model.editorRootTopicKey === topicKey;
   const handleKeyDown = e => {
     console.log('onKeyDown');
     switch (e.keyCode) {
       case Key.Enter:
         if (e.shiftKey) return false;
-        isEditorRoot
+        topic.subKeys.size>0 && !topic.collapse
           ? controller.run('operation', {
               ...props,
               opType: OpType.ADD_CHILD,

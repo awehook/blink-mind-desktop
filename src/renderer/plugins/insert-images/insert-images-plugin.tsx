@@ -64,17 +64,11 @@ export function InsertImagesPlugin() {
 
     getOpMap(ctx, next) {
       const opMap = next();
-      opMap.set(OP_TYPE_ADD_IMAGE, toDocModelModifierFunc(addImage));
-      opMap.set(OP_TYPE_ADD_TOPIC_IMAGE, toDocModelModifierFunc(addTopicImage));
-      opMap.set(
-        OP_TYPE_DELETE_TOPIC_IMAGE,
-        toDocModelModifierFunc(deleteTopicImage)
-      );
-      opMap.set(OP_TYPE_SET_TOPIC_IMAGE, toDocModelModifierFunc(setTopicImage));
-      opMap.set(
-        OP_TYPE_MOVE_TOPIC_IMAGE,
-        toDocModelModifierFunc(moveTopicImage)
-      );
+      opMap.set(OP_TYPE_ADD_IMAGE, addImage);
+      opMap.set(OP_TYPE_ADD_TOPIC_IMAGE, addTopicImage);
+      opMap.set(OP_TYPE_DELETE_TOPIC_IMAGE, deleteTopicImage);
+      opMap.set(OP_TYPE_SET_TOPIC_IMAGE, setTopicImage);
+      opMap.set(OP_TYPE_MOVE_TOPIC_IMAGE, moveTopicImage);
       return opMap;
     },
 
@@ -90,8 +84,8 @@ export function InsertImagesPlugin() {
     },
 
     getTopicImages(ctx): TopicImageData[] {
-      const { model, topicKey } = ctx;
-      const extData = model.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+      const { docModel, topicKey } = ctx;
+      const extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
       if (!extData.topics.has(topicKey)) return [];
       return extData.topics
         .get(topicKey)
