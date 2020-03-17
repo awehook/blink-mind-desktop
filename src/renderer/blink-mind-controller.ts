@@ -34,7 +34,7 @@ const plugins = [
   I18nPlugin(),
   FontPlugin(),
   ThemeSelectorPlugin(),
-  TopicReferencePlugin(),
+  // TopicReferencePlugin(),
   SearchPlugin(),
   UndoRedoPlugin(),
   TagsPlugin(),

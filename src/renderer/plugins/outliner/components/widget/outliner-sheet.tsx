@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { OlNodeLayer } from './ol-node-layer';
+import { MindMapSheet_ } from '../../../../../blink-mind/packages/renderer-react/src/components/widgets/sheet';
 
 const BreadCrumbsDiv = styled.div`
   position: relative;
@@ -9,7 +10,7 @@ const BreadCrumbsDiv = styled.div`
 
 const log = require('debug')('outliner:sheet');
 
-export function OutlinerSheet(props) {
+export function OutlinerSheet_(props) {
   log('render');
   const { controller, model } = props;
   const [diagramState, setDiagramState] = useState(
@@ -42,3 +43,11 @@ export function OutlinerSheet(props) {
     </div>
   );
 }
+
+export const OutlinerSheet = React.memo(
+  OutlinerSheet_,
+  (prevProps, nextProps) => {
+    const { controller } = prevProps;
+    return controller.run('sheetAreEqual', { prevProps, nextProps });
+  }
+);
