@@ -10,6 +10,7 @@ import {
 } from '@blink-mind/plugins';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
 import {
+  AnaPlugin,
   I18nPlugin,
   FontPlugin,
   OutlinerPlugin,
@@ -21,8 +22,11 @@ import {
   RoosterDescEditorPlugin
 } from './plugins';
 
+const isDev = require('electron-is-dev');
+
 const plugins = [
-  DebugPlugin(),
+  AnaPlugin(),
+  isDev && DebugPlugin(),
   // AuthPlugin(),
   OutlinerPlugin(),
   RoosterDescEditorPlugin(),

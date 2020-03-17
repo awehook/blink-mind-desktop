@@ -9,7 +9,7 @@ import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-import {FocusMode} from "@blink-mind/core";
+import { FocusMode } from '@blink-mind/core';
 
 const log = debug('bmd:files-page');
 
@@ -43,13 +43,16 @@ export class FilesPageInternal extends Component<Props, State> {
     const fileModels = windowData.files.map(file => {
       const { id, path, themeKey } = file;
       const controller = createBlinkMindController(this.onChange(id));
+      controller.run('pgv');
       let docModel = null;
       if (path == null) {
+        controller.run('clickStat', { evtName: 'new_file' });
         docModel = controller.run('createNewDocModel', {
           controller,
           themeKey
         });
       } else {
+        controller.run('clickStat', { evtName: 'open_file' });
         const content = getFileContent({ path });
         const obj = JSON.parse(content);
         docModel = controller.run('deserializeDocModel', { controller, obj });
@@ -107,10 +110,7 @@ export class FilesPageInternal extends Component<Props, State> {
     log('onSave', path);
     const fileModel = this.state.filesWindowModel.getFile(id);
     const focusMode = fileModel.docModel.currentSheetModel.focusMode;
-    log(
-      'fileModel.docModel.currentSheetModel.focusMode',
-      focusMode
-    );
+    log('fileModel.docModel.currentSheetModel.focusMode', focusMode);
     const content = fileModel.getContent();
     log('content', content);
     saveFile({ path, id, content });

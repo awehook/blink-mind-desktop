@@ -6,7 +6,7 @@ import {
   ipcMain,
   systemPreferences
 } from 'electron';
-import { dirname } from 'path';
+import { dirname, join } from 'path';
 import {
   I18nTextKey,
   IpcChannelName,
@@ -241,8 +241,10 @@ export class WindowMgr {
       center: true,
       webPreferences: {
         nodeIntegration: true,
+        preload: join(__dirname,'./sentry'),
         scrollBounce: true
       },
+
       titleBarStyle: isMacOS ? 'hidden' : 'default',
       title: path == null ? getUntitledTile() : path
     });

@@ -16,6 +16,7 @@ const appReadyCallback = () => {
   app.name = ProductName;
   initStore();
   i18n.init();
+  require('./sentry');
   require('./subscribe');
   createWindowMgr();
 };
