@@ -30,6 +30,10 @@ if (!isWindows) {
   app.on('window-all-closed', () => {});
 }
 
+app.on('before-quit',()=>{
+  windowMgr.destroyWelcomeWindow();
+});
+
 app.on('will-finish-launching', () => {
   log('will-finish-launching');
   // initStore();

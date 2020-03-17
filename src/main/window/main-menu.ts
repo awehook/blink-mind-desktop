@@ -1,9 +1,8 @@
 import { Menu } from 'electron';
 import { I18nTextKey, ProductName } from '../../common';
-import { isMacOS, isWindows } from '../utils';
+import { isMacOS, isWindows, IsDev } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
 import { subscribeMgr } from '../subscribe';
-const isDev = require('electron-is-dev');
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -104,7 +103,8 @@ function getMenu(i18n, windowMgr) {
       { role: 'togglefullscreen' }
     ]
   };
-  if (isDev) {
+  const envDevTools = parseInt(process.env.DEV_TOOLS, 10) === 1;
+  if (IsDev) {
     view.submenu.push({ role: 'toggledevtools' });
   }
 

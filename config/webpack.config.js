@@ -444,7 +444,7 @@ module.exports = function(webpackEnv) {
                   }
                 }
               : {
-                  test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+                  test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/,/\.svg$/],
                   loader: require.resolve('file-loader'),
                   options: {
                     publicPath: '..',

@@ -1,6 +1,6 @@
 import { Controller } from '@blink-mind/core';
 import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
-import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
+// import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
 import {
   SearchPlugin,
   TagsPlugin,
@@ -22,8 +22,10 @@ import {
   DebugPlugin,
   RoosterDescEditorPlugin
 } from './plugins';
+import { ipcRenderer } from 'electron';
+import { IpcChannelName } from '../common';
 
-const isDev = require('electron-is-dev');
+const isDev = ipcRenderer.sendSync(IpcChannelName.RM_GET_IS_DEV);
 
 const plugins = [
   AnaPlugin(),

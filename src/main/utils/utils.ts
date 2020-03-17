@@ -23,3 +23,11 @@ export function ipcMR(arg) {
   const focusWindow = BrowserWindow.getFocusedWindow();
   focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, arg);
 }
+
+export function isDev() {
+  const envDevTools = parseInt(process.env.DEV_TOOLS, 10) === 1;
+  const dev = require('electron-is-dev');
+  return envDevTools || dev;
+}
+
+export const IsDev = isDev();

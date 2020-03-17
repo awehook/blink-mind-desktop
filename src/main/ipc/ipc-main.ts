@@ -5,10 +5,10 @@ import fontList from 'font-list';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
 import { i18n } from '../i18n';
 import { getStoreItem, setStoreItem } from '../store';
-import { getRecentOpenedDir, regularBlinkPath } from '../utils';
+import { getRecentOpenedDir, regularBlinkPath, IsDev } from '../utils';
 import { ipcSendToAllWindow } from './ipc-send';
 import { windowMgr } from '../window/window-manager';
-import {apiAgent} from "../../common";
+import { apiAgent } from '../../common';
 
 const log = debug('main:ipc-main');
 
@@ -76,6 +76,10 @@ ipcMain.on(IpcChannelName.RM_GET_FONT_LIST, event => {
     });
 });
 
+ipcMain.on(IpcChannelName.RM_GET_IS_DEV, event => {
+  event.returnValue = IsDev;
+});
+
 ipcMain.on(IpcChannelName.RM_GET_STORE_ITEM, (event, { key, defaultValue }) => {
   event.returnValue = getStoreItem(key, defaultValue);
 });
@@ -99,6 +103,5 @@ ipcMain.on(IpcChannelName.RM_SET_STORE_ITEM, (event, { key, value }) => {
 });
 
 ipcMain.on(IpcChannelName.RM_SIGN_IN, (event, { email, password }) => {
-
   // apiAgent.device.signIn()
 });

@@ -238,6 +238,12 @@ export class WindowMgr {
     }
   }
 
+  destroyWelcomeWindow() {
+    if (this.welcomeWindow) {
+      this.welcomeWindow.destroy();
+    }
+  }
+
   createFileWindow(arg) {
     const { path } = arg;
 
