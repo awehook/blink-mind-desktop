@@ -163,5 +163,8 @@
   "DELETE_TAG_TIP": "如果你删除此标签，和此标签关联的节点的关联关系将会丢失，确认要删除吗？",
   "DELETE_TOPOLOGY_TIP": "确认删除此拓扑图吗？",
   "DELETE_REFERENCE_TIP": "确认删除此引用吗？",
-  "FILE_FORMAT_ERROR": "文件格式错误！"
+  "FILE_FORMAT_ERROR": "文件格式错误！",
+
+  "NOT_IN_TEST_TIME_TITLE": "当前版本无法继续使用",
+  "NOT_IN_TEST_TIME": "已经超出软件测试截止时间，当前版本已经无法继续使用，请前往官网查看最新消息。"
 }

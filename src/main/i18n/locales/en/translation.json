@@ -163,5 +163,8 @@
   "DELETE_TAG_TIP": "All the relationship about this tag will be lost if you delete this tag! Are you confirm?",
   "DELETE_TOPOLOGY_TIP": "Are you confirm to delete this topology diagram?",
   "DELETE_REFERENCE_TIP": "Are you confirm to remove this reference",
-  "FILE_FORMAT_ERROR": "File Format Error!"
+  "FILE_FORMAT_ERROR": "File Format Error!",
+
+  "NOT_IN_TEST_TIME_TITLE": "Current version is no longer available",
+  "NOT_IN_TEST_TIME": "The software test deadline has been exceeded and the current version is no longer available, please go to the official website for the latest news."
 }

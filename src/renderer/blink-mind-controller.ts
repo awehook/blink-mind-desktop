@@ -11,6 +11,7 @@ import {
 import { DefaultPlugin } from '@blink-mind/renderer-react';
 import {
   AnaPlugin,
+  ExpirePlugin,
   I18nPlugin,
   FontPlugin,
   OutlinerPlugin,
@@ -26,6 +27,7 @@ const isDev = require('electron-is-dev');
 
 const plugins = [
   AnaPlugin(),
+  ExpirePlugin(),
   isDev && DebugPlugin(),
   // AuthPlugin(),
   OutlinerPlugin(),
