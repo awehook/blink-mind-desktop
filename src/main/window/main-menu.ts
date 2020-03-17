@@ -3,6 +3,7 @@ import { I18nTextKey, ProductName } from '../../common';
 import { isMacOS, isWindows } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
 import { subscribeMgr } from '../subscribe';
+const isDev = require('electron-is-dev');
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -98,11 +99,14 @@ function getMenu(i18n, windowMgr) {
     submenu: [
       { role: 'reload' },
       { role: 'forcereload' },
-      { role: 'toggledevtools' }, // !! 这里加入打开调试工具, 如果你不希望打开请去掉这行
+
       { type: 'separator' },
       { role: 'togglefullscreen' }
     ]
   };
+  if (isDev) {
+    view.submenu.push({ role: 'toggledevtools' });
+  }
 
   const account = {
     label: 'account',
@@ -139,7 +143,14 @@ function getMenu(i18n, windowMgr) {
   };
 
   const menu = isMacOS
-    ? [productName, file, edit, view, account, help]
+    ? [
+        productName,
+        file,
+        edit,
+        view,
+        //account,
+        help
+      ]
     : [file, edit, view, account, help];
   // console.log(JSON.stringify(menu,null,2));
   return menu;
