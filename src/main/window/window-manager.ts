@@ -32,7 +32,7 @@ const isDev = require('electron-is-dev');
 let windowMgr;
 
 export class WindowMgr {
-  welcomeWindow;
+  welcomeWindow: BrowserWindow;
   preferenceWindow;
   signInWindow;
   fileMap;
@@ -121,6 +121,7 @@ export class WindowMgr {
       this.welcomeWindow.show();
       return;
     }
+    log('createWelcomeWindow');
     const window = new BrowserWindow({
       width: 750,
       height: 395,
@@ -130,6 +131,7 @@ export class WindowMgr {
       maximizable: false,
       webPreferences: {
         nodeIntegration: true,
+        preload: join(__dirname,'./welcome-preload'),
         scrollBounce: true
       },
       title: i18n.t(I18nTextKey.WELCOME_PAGE_TITLE)
@@ -141,8 +143,11 @@ export class WindowMgr {
       window.focus();
     });
 
-    window.on('closed', () => {
-      this.welcomeWindow = null;
+
+
+    window.on('close', (e) => {
+      window.hide();
+      e.preventDefault();
     });
 
     function init() {
@@ -241,7 +246,7 @@ export class WindowMgr {
       center: true,
       webPreferences: {
         nodeIntegration: true,
-        preload: join(__dirname,'./sentry'),
+        preload: join(__dirname,'./preload'),
         scrollBounce: true
       },
 
