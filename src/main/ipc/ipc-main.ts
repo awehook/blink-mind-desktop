@@ -53,6 +53,7 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
 });
 
 ipcMain.on(IpcChannelName.RM_MAXIMUM_WINDOW, event => {
+  log('RM_MAXIMUM_WINDOW');
   BrowserWindow.getFocusedWindow().maximize();
 });
 

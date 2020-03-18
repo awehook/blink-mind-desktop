@@ -257,11 +257,12 @@ export class WindowMgr {
       center: true,
       webPreferences: {
         nodeIntegration: true,
-        preload: join(__dirname, './preload'),
+        preload: join(__dirname, './file-window-preload'),
         scrollBounce: true
       },
-
-      titleBarStyle: isMacOS ? 'hidden' : 'default',
+      frame: false,
+      titleBarStyle: 'hidden',
+        //isMacOS ? 'hidden' : 'default',
       title: path == null ? getUntitledTile() : path
     });
     window.loadURL(`${this.url}/#/file`);

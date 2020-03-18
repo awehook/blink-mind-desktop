@@ -9,8 +9,19 @@
   height: 100%;
 }
 
+.titlebar {
+  background: map_get($light-colors,'toolbar-bg') !important;
+  //color: map_get($light-colors,'text') !important;
+  .bp3-dark & {
+    background: map_get($dark-colors,'toolbar-bg') !important;
+    color: map_get($dark-colors,'text') !important;
+  }
+}
+
 #root {
-  position: fixed;
+  // 由于在windows系统上定制菜单
+  position: absolute;
+  overflow: hidden;
   left: 0;
   top: 0;
   width: 100%;
@@ -63,6 +74,12 @@
     background-color: map_get($dark-colors, 'toolbar-bg');
   }
   .bmd-title {
+    .bmd-windows & {
+      position: fixed;
+      left: 50vw;
+      top: 5px;
+      z-index: 100000;
+    }
     text-align: center;
     color: map_get($light-colors,'text-gray');
     .bp3-dark & {
@@ -75,7 +92,9 @@
   flex-direction: column;
   align-items: stretch;
   -webkit-user-select: none;
-  -webkit-app-region: drag;
+  .bmd-osx & {
+    -webkit-app-region: drag;
+  }
 }
 
 
