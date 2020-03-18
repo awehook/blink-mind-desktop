@@ -57,8 +57,8 @@ export function OLTopicBlockContent_(props: BaseProps) {
       controller.run('operation', {
         ...props,
         // // 为什么要这样写？ 因为由于componentAreEqual影响，导致某些时候不进行渲染，从而导致此处的docModel
-        // docModel: controller.currentModel,
-        // model: controller.currentModel.currentSheetModel,
+        // docModel: controller.docModel,
+        // model: controller.docModel.currentSheetModel,
         opType: OpType.START_EDITING_CONTENT
       });
     }

@@ -1,9 +1,13 @@
 import { getFontList } from '../utils';
 
 export function FontPlugin() {
+  let fontList;
   return {
     getFontList(ctx) {
-      return getFontList();
+      if (!fontList) {
+        fontList = getFontList();
+      }
+      return fontList;
     }
   };
 }
