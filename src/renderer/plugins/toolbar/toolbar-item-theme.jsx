@@ -1,5 +1,6 @@
 import defaultThemeImg from '../../images/theme-default.jpg';
-import theme1Img from '../../images/theme-1.jpg';
+import themeDark1Img from '../../images/theme-dark1.jpg';
+// import theme1Img from '../../images/theme-1.jpg';
 import theme2Img from '../../images/theme-2.jpg';
 import theme3Img from '../../images/theme-3.jpg';
 import theme4Img from '../../images/theme-4.jpg';
@@ -30,10 +31,11 @@ export function ToolbarItemTheme(props) {
   };
   const themes = [
     ['default', defaultThemeImg],
-    ['theme1', theme1Img],
+    // ['theme1', theme1Img],
     ['theme2', theme2Img],
     ['theme3', theme3Img],
     ['theme4', theme4Img],
+    ['dark-theme1', themeDark1Img],
     ['random-color-round', themeRandomColorRoundImg]
   ];
 
@@ -41,7 +43,7 @@ export function ToolbarItemTheme(props) {
     <ToolbarItem
       key="theme-selector"
       iconName={IconName.THEME}
-      iconCxName='theme'
+      iconCxName="theme"
       {...props}
     >
       <Popover enforceFocus={false}>
