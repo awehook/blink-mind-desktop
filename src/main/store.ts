@@ -1,5 +1,5 @@
 import debug from 'debug';
-import { app } from 'electron';
+import { app, nativeTheme } from 'electron';
 import { I18nAvailableLngs, StoreItemKey } from '../common';
 const ElectronStore = require('electron-store');
 const log = debug('main:store');
@@ -17,7 +17,6 @@ const store = new ElectronStore({
             },
             appearance: {
               type: 'string',
-              default: 'light'
             }
           }
         }
@@ -39,21 +38,20 @@ const store = new ElectronStore({
           type: 'string'
         },
         email: {
-          type: 'string',
+          type: 'string'
         },
         token: {
-          type: 'string',
+          type: 'string'
         },
         status: {
-          type: 'number',
-        },
-
+          type: 'number'
+        }
       }
     }
   },
   encryptionKey: 'ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM',
   name: 'blink-mind',
-  fileExtension: 'log',
+  fileExtension: 'log'
 });
 
 export function setStoreItem(key, value) {
@@ -74,5 +72,15 @@ export function initStore() {
       lng = 'en';
     }
     setStoreItem(StoreItemKey.preferences.normal.language, lng);
+  }
+  log(
+    'initStore appearance',
+    getStoreItem(StoreItemKey.preferences.normal.appearance)
+  );
+  if (getStoreItem(StoreItemKey.preferences.normal.appearance) == null) {
+    setStoreItem(
+      StoreItemKey.preferences.normal.appearance,
+      nativeTheme.shouldUseDarkColors ? 'dark' : 'light'
+    );
   }
 }

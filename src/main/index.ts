@@ -46,3 +46,5 @@ app.on('activate', () => {
     windowMgr.showWelcomeWindow();
   }
 });
+
+app.setAboutPanelOptions({applicationName: 'BlinkMind(Insider Preview)'});
