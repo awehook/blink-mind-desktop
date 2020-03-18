@@ -21,7 +21,8 @@ import {
   getRecentOpenedDir,
   getUntitledTile,
   isMacOS,
-  regularBlinkPath
+  regularBlinkPath,
+  isWindows
 } from '../utils';
 import { buildMenu } from './main-menu';
 import { FileData, WindowData } from './window-data';
@@ -111,7 +112,7 @@ export class WindowMgr {
     this.createFileWindow({ themeKey });
   }
 
-  getFileData(id:number) {
+  getFileData(id: number) {
     return this.fileMap.get(id);
   }
 
@@ -131,7 +132,7 @@ export class WindowMgr {
       maximizable: false,
       webPreferences: {
         nodeIntegration: true,
-        preload: join(__dirname,'./welcome-preload'),
+        preload: join(__dirname, './welcome-preload'),
         scrollBounce: true
       },
       title: i18n.t(I18nTextKey.WELCOME_PAGE_TITLE)
@@ -146,8 +147,12 @@ export class WindowMgr {
 
 
     window.on('close', (e) => {
-      window.hide();
-      e.preventDefault();
+      if (isWindows) {
+        this.welcomeWindow = null;
+      } else {
+        window.hide();
+        e.preventDefault();
+      }
     });
 
     function init() {
@@ -252,7 +257,7 @@ export class WindowMgr {
       center: true,
       webPreferences: {
         nodeIntegration: true,
-        preload: join(__dirname,'./preload'),
+        preload: join(__dirname, './preload'),
         scrollBounce: true
       },
 

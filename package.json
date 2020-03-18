@@ -140,6 +140,7 @@
     "test": "node scripts/test.js",
     "dev:m2": "yarn set-debug-ns && node ./.electron/start-main.js",
     "dev:r": "cross-env COLOR=1 node ./.electron/start-renderer.js | cat",
+    "dev:rw": "cross-env COLOR=1 node ./.electron/start-renderer.js",
     "dev:r:d": "node --inspect-brk ./.electron/start-renderer.js",
     "dev:m": "yarn build:m:d --watch",
     "start:m": "cross-env DEBUG=main:* node ./node_modules/electron/cli.js ./build/main/main/index.dev.js",
@@ -253,8 +254,7 @@
       "icon": "icons/icon.png",
       "target": [
         "dir",
-        "msi",
-        "portable"
+        "msi"
       ]
     },
     "linux": {

@@ -115,21 +115,21 @@ function getMenu(i18n, windowMgr) {
   const { user } = subscribeMgr;
   user
     ? account.submenu.push(
-        {
-          labal: user.email,
-          click() {}
-        },
-        {
-          labal: 'Sign Out',
-          click() {}
-        }
-      )
+      {
+        labal: user.email,
+        click() { }
+      },
+      {
+        labal: 'Sign Out',
+        click() { }
+      }
+    )
     : account.submenu.push({
-        label: 'Sign In',
-        click() {
-          windowMgr.showSignInWindow();
-        }
-      });
+      label: 'Sign In',
+      click() {
+        windowMgr.showSignInWindow();
+      }
+    });
 
   const help = {
     label: 'Help',
@@ -144,14 +144,16 @@ function getMenu(i18n, windowMgr) {
 
   const menu = isMacOS
     ? [
-        productName,
-        file,
-        edit,
-        view,
-        //account,
-        help
-      ]
-    : [file, edit, view, account, help];
+      productName,
+      file,
+      edit,
+      view,
+      //account,
+      help
+    ]
+    : [file, edit, view,
+      // account, 
+      help];
   // console.log(JSON.stringify(menu,null,2));
   return menu;
 }

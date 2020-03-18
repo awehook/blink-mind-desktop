@@ -1,13 +1,11 @@
 import { app } from 'electron';
 import { initStore } from './store';
-
-import debug from 'debug';
 import { ProductName } from '../common';
 import { i18n } from './i18n';
 import './ipc';
 import { isWindows } from './utils';
 import { createWindowMgr, windowMgr } from './window/window-manager';
-const log = debug('main:index');
+const log = require('debug')('main:index');
 
 // log('env:', process.env);
 
@@ -25,20 +23,24 @@ app.on('ready', () => {
   log('app ready');
   appReadyCallback();
 });
+
+app.on('window-all-closed', () => {
+  app.exit();
+});
+
 if (!isWindows) {
-  log("app.on('ready', appReadyCallback);");
-  app.on('window-all-closed', () => {});
+  app.on('before-quit', () => {
+    windowMgr.destroyWelcomeWindow();
+  });
+
+  app.setAboutPanelOptions({ applicationName: 'BlinkMind(Insider Preview)' });
 }
 
-app.on('before-quit',()=>{
-  windowMgr.destroyWelcomeWindow();
-});
-
-app.on('will-finish-launching', () => {
-  log('will-finish-launching');
-  // initStore();
-  // createWindowMgr();
-});
+// app.on('will-finish-launching', () => {
+//   log('will-finish-launching');
+//   // initStore();
+//   // createWindowMgr();
+// });
 
 app.on('activate', () => {
   log('activate');
@@ -46,5 +48,3 @@ app.on('activate', () => {
     windowMgr.showWelcomeWindow();
   }
 });
-
-app.setAboutPanelOptions({applicationName: 'BlinkMind(Insider Preview)'});
