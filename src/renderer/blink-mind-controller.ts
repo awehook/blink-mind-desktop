@@ -22,7 +22,7 @@ import {
   InsertImagesPlugin,
   AuthPlugin,
   DebugPlugin,
-  RoosterDescEditorPlugin
+  RoosterDescEditorPlugin, ValidateModelPlugin
 } from './plugins';
 import { isDev } from './utils';
 
@@ -32,6 +32,7 @@ const plugins = [
   ExpirePlugin(),
   isDev && DebugPlugin(),
   // AuthPlugin(),
+  ValidateModelPlugin(),
   SearchPlugin(),
   OutlinerPlugin(),
   RoosterDescEditorPlugin(),

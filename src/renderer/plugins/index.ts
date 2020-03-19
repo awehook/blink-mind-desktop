@@ -10,3 +10,4 @@ export * from './rooster-desc-editor';
 export * from './ana';
 export * from './expire';
 export * from './bug-collect';
+export * from './validate-model';
