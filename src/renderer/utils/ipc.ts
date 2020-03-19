@@ -62,3 +62,5 @@ export function saveFileWithFileModel(fileModel, t) {
       break;
   }
 }
+
+export const isDev = ipcRenderer.sendSync(IpcChannelName.RM_GET_IS_DEV);

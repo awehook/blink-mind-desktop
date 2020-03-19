@@ -11,7 +11,7 @@ const log = require('debug')('outliner:sheet');
 
 export function OutlinerSheet_(props) {
   log('render');
-  const { controller, model } = props;
+  const { controller, docModel, model } = props;
   const [diagramState, setDiagramState] = useState(
     controller.run('getInitialSheetState', props)
   );
@@ -35,7 +35,11 @@ export function OutlinerSheet_(props) {
     );
   }
   useEffect(() => {
-    controller.run('moveTopicToCenter', { ...props, topicKey: model.focusKey });
+    model === docModel.currentSheetModel &&
+      controller.run('moveTopicToCenter', {
+        ...props,
+        topicKey: model.focusKey
+      });
   }, []);
 
   return (

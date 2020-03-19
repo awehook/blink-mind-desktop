@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/electron';
 import { Controller } from '@blink-mind/core';
 import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 // import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
@@ -10,6 +11,7 @@ import {
 } from '@blink-mind/plugins';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
 import {
+  BugCollectPlugin,
   AnaPlugin,
   ExpirePlugin,
   I18nPlugin,
@@ -22,12 +24,10 @@ import {
   DebugPlugin,
   RoosterDescEditorPlugin
 } from './plugins';
-import { ipcRenderer } from 'electron';
-import { IpcChannelName } from '../common';
-
-const isDev = ipcRenderer.sendSync(IpcChannelName.RM_GET_IS_DEV);
+import { isDev } from './utils';
 
 const plugins = [
+  BugCollectPlugin(),
   AnaPlugin(),
   ExpirePlugin(),
   isDev && DebugPlugin(),
