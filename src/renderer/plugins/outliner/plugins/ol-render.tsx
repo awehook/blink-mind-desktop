@@ -39,8 +39,8 @@ export function OlRenderPlugin() {
           ...nProps,
           zIndex: zIndex + 1
         });
-
-        return [dialog, drawer];
+        const viewportViewer = controller.run('renderViewPortViewer', nProps);
+        return [dialog, drawer, viewportViewer];
       }
       return next();
     },
