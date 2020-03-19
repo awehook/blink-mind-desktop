@@ -255,6 +255,7 @@
       "icon": "icons/icon.png",
       "target": [
         "dir",
+        "zip",
         "msi"
       ]
     },

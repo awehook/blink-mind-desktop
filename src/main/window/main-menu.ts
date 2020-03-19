@@ -1,4 +1,4 @@
-import { Menu } from 'electron';
+import { Menu, shell } from 'electron';
 import { I18nTextKey, ProductName } from '../../common';
 import { isMacOS, isWindows, IsDev } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
@@ -136,8 +136,10 @@ function getMenu(i18n, windowMgr) {
     role: 'help',
     submenu: [
       {
-        label: 'About BlinkMind',
-        selector: 'orderFrontStandardAboutPanel:'
+        label: 'Website',
+        click() {
+          shell.openExternal('https://github.com/awehook/blink-mind-package');
+        }
       }
     ]
   };
@@ -154,9 +156,9 @@ function getMenu(i18n, windowMgr) {
     : [
         file,
         edit,
-        view
+        view,
         // account,
-        // help
+        help
       ];
   // console.log(JSON.stringify(menu,null,2));
   return menu;
