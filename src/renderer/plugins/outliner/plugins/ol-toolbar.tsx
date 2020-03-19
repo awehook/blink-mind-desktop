@@ -1,6 +1,6 @@
 import { ToolbarItemViewMode } from '../components/widget';
 
-export function ToolbarPlugin() {
+export function OlToolbarPlugin() {
   return {
     customizeToolbar(props, next) {
       const res = next();

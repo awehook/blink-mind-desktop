@@ -1,8 +1,15 @@
-import { ToolbarPlugin } from './toolbar';
-import { RenderPlugin } from './ol-render';
-import { OpPlugin } from './op';
+import { OlToolbarPlugin } from './ol-toolbar';
+import { OlRenderPlugin } from './ol-render';
+import { OlOpPlugin } from './ol-op';
 import { ContextMenuPlugin } from './ol-context-menu';
+import { OlLayoutPlugin } from './ol-layout';
 
 export function OutlinerPlugin() {
-  return [ToolbarPlugin(), RenderPlugin(), OpPlugin(), ContextMenuPlugin()];
+  return [
+    OlToolbarPlugin(),
+    OlRenderPlugin(),
+    OlOpPlugin(),
+    ContextMenuPlugin(),
+    OlLayoutPlugin()
+  ];
 }

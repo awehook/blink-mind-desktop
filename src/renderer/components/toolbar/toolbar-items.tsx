@@ -26,7 +26,7 @@ export function ToolbarItems(props: BaseProps) {
         <ToolbarItemMore {...props} />
         {viewMode === ViewModeMindMap && <ToolbarItemTheme {...props} />}
         {viewMode === ViewModeMindMap && <ToolbarItemLayout {...props} />}
-        {viewMode === ViewModeMindMap && <ToolbarItemSearch {...props} />}
+        <ToolbarItemSearch {...props} />
 
         <ToolbarGroupItemUndoRedo {...props} />
       </ToolbarItemGroup>

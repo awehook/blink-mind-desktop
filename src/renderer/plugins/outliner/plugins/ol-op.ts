@@ -5,9 +5,9 @@ import {
   OlOpType,
   olMoveFocus
 } from '../op';
-import { toDocModelModifierFunc } from '@blink-mind/core';
+import { FocusMode, OpType, toDocModelModifierFunc } from '@blink-mind/core';
 
-export function OpPlugin() {
+export function OlOpPlugin() {
   return {
     getOpMap(ctx, next) {
       const opMap = next();

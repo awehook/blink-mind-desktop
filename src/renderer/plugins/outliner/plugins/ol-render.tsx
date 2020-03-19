@@ -7,9 +7,9 @@ import {
   OLTopicWidget,
   OLTopicBlockDesc
 } from '../components';
-import {PropKey} from "@blink-mind/renderer-react";
+import { PropKey } from '@blink-mind/renderer-react';
 
-export function RenderPlugin() {
+export function OlRenderPlugin() {
   return {
     renderSheet(ctx, next) {
       const { model } = ctx;
@@ -18,7 +18,7 @@ export function RenderPlugin() {
       return next();
     },
 
-    renderSheetCustomize(ctx,next) {
+    renderSheetCustomize(ctx, next) {
       const { controller, model } = ctx;
       if (model.config.viewMode === ViewModeOutliner) {
         const zIndex = controller.getValue(

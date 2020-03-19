@@ -32,6 +32,7 @@ const plugins = [
   ExpirePlugin(),
   isDev && DebugPlugin(),
   // AuthPlugin(),
+  SearchPlugin(),
   OutlinerPlugin(),
   RoosterDescEditorPlugin(),
   ToolbarPlugin(),
@@ -39,7 +40,7 @@ const plugins = [
   FontPlugin(),
   ThemeSelectorPlugin(),
   // TopicReferencePlugin(),
-  SearchPlugin(),
+
   UndoRedoPlugin(),
   TagsPlugin(),
   InsertImagesPlugin(),

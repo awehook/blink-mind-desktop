@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { OlNodeLayer } from './ol-node-layer';
-import { olTopicWidgetRefKey } from '../../utils';
 
 const BreadCrumbsDiv = styled.div`
   position: relative;
@@ -12,7 +11,7 @@ const log = require('debug')('outliner:sheet');
 
 export function OutlinerSheet_(props) {
   log('render');
-  const { controller, model, getRef } = props;
+  const { controller, model } = props;
   const [diagramState, setDiagramState] = useState(
     controller.run('getInitialSheetState', props)
   );
@@ -36,11 +35,7 @@ export function OutlinerSheet_(props) {
     );
   }
   useEffect(() => {
-    const focusTopicDiv: HTMLElement = getRef(
-      olTopicWidgetRefKey(model.focusKey)
-    );
-
-    focusTopicDiv && focusTopicDiv.scrollIntoView();
+    controller.run('moveTopicToCenter', { ...props, topicKey: model.focusKey });
   }, []);
 
   return (
