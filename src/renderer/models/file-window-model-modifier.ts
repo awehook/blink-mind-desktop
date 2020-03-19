@@ -2,11 +2,12 @@ import { FilesWindowModel } from './files-window-model';
 
 export function setFileModel(
   filesWindowModel: FilesWindowModel,
-  { id, docModel, isSave = false }
+  { id, docModel, path = undefined, isSave = false }
 ): FilesWindowModel {
   const index = filesWindowModel.files.findIndex(v => v.id === id);
   filesWindowModel = filesWindowModel.updateIn(['files', index], fileModel => {
     fileModel = fileModel.set('docModel', docModel);
+    if(path) fileModel = fileModel.set('path',path);
     if (isSave) fileModel = fileModel.set('savedModel', docModel);
     return fileModel;
   });

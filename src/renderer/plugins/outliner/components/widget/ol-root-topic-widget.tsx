@@ -12,8 +12,12 @@ const Title = styled.div`
 `;
 const SubTopics = styled.div``;
 
+const EmptyDiv = styled.div`
+  height: 80vh;
+`;
+
 export function OLRootTopicWidget(props: BaseProps) {
-  const { controller, topicKey, topic } = props;
+  const { controller, topic } = props;
 
   return (
     <OLRootTopicWidgetRoot>
@@ -28,6 +32,7 @@ export function OLRootTopicWidget(props: BaseProps) {
           });
         })}
       </SubTopics>
+      <EmptyDiv/>
     </OLRootTopicWidgetRoot>
   );
 }

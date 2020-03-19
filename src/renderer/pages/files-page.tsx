@@ -9,7 +9,6 @@ import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-import { FocusMode } from '@blink-mind/core';
 
 const log = debug('bmd:files-page');
 
@@ -117,6 +116,7 @@ export class FilesPageInternal extends Component<Props, State> {
     const newFileWindowModel = setFileModel(this.state.filesWindowModel, {
       id: id,
       docModel: fileModel.docModel,
+      path,
       isSave: true
     });
     this.setState({ filesWindowModel: newFileWindowModel });
