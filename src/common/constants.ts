@@ -1,6 +1,6 @@
 export const ProductName = "BlinkMind";
 
-export const Version = '0.1.1-beta.1';
+export const Version = '0.1.1-beta.2';
 
 export const ApiServerUrl = "http://localhost:8008/api/v1";
 
