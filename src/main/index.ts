@@ -8,6 +8,10 @@ import { createWindowMgr, windowMgr } from './window/window-manager';
 const log = require('debug')('main:index');
 
 // log('env:', process.env);
+const gotTheLock = app.requestSingleInstanceLock();
+if(!gotTheLock) {
+  app.exit();
+}
 
 const appReadyCallback = () => {
   log('appReadyCallback');
