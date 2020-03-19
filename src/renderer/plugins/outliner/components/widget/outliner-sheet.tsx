@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { OlNodeLayer } from './ol-node-layer';
-import { MindMapSheet_ } from '../../../../../blink-mind/packages/renderer-react/src/components/widgets/sheet';
+import { olTopicWidgetRefKey } from '../../utils';
 
 const BreadCrumbsDiv = styled.div`
   position: relative;
@@ -12,7 +12,7 @@ const log = require('debug')('outliner:sheet');
 
 export function OutlinerSheet_(props) {
   log('render');
-  const { controller, model } = props;
+  const { controller, model, getRef } = props;
   const [diagramState, setDiagramState] = useState(
     controller.run('getInitialSheetState', props)
   );
@@ -35,6 +35,14 @@ export function OutlinerSheet_(props) {
       </BreadCrumbsDiv>
     );
   }
+  useEffect(() => {
+    const focusTopicDiv: HTMLElement = getRef(
+      olTopicWidgetRefKey(model.focusKey)
+    );
+
+    focusTopicDiv && focusTopicDiv.scrollIntoView();
+  }, []);
+
   return (
     <div className="bm-outliner">
       {breadcrumbs}

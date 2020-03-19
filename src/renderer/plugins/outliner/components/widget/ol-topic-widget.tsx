@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { OLTopicNodeWidget } from './ol-topic-node-widget';
 import { BaseProps } from '@blink-mind/renderer-react';
 import cx from 'classnames';
 import { OlTopicNodeWrapper } from './ol-topic-node-wrapper';
+import { olTopicWidgetRefKey } from '../../utils';
 
 const OLTopicWidgetRoot = styled.div``;
 
 export function OLTopicWidget(props: BaseProps) {
-  const { controller, model, topicKey } = props;
+  const { controller, model, topicKey, saveRef } = props;
 
   const topic = model.getTopic(topicKey);
 
@@ -39,6 +39,7 @@ export function OLTopicWidget(props: BaseProps) {
 
   return (
     <OLTopicWidgetRoot
+      ref={saveRef(olTopicWidgetRefKey(topicKey))}
       className={cx({ 'bm-topic-widget-selected': isSelected })}
       key={topicKey}
     >
