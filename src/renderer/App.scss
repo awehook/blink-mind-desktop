@@ -92,7 +92,7 @@
   flex-direction: column;
   align-items: stretch;
   -webkit-user-select: none;
-  .bmd-osx & {
+  .bmd-mac & {
     -webkit-app-region: drag;
   }
 }

@@ -1,0 +1,41 @@
+productName: BlinkMind
+appId: org.awehook.blinkminddesktop
+fileAssociations:
+- ext: bmind
+  name: Blink Mind File
+  role: Editor
+
+files:
+- "build/main/**/*"
+- "build/renderer/**/*"
+- "index.html"
+- "icons/**/*"
+
+nsis:
+  artifactName: ${productName}-${version}.${ext}
+  oneClick: false
+  perMachine: true
+  allowElevation: true
+  allowToChangeInstallationDirectory: true
+
+dmg:
+  contents:
+  - x: 410
+    y: 150
+    type: "link"
+    path: "/Applications"
+  - x: 130
+    y: 150
+    type: "file"
+
+mac:
+  icon: icons/icon.png,
+  target:
+  - dmg
+win:
+  icon: icons/icon.png
+  target:
+  - nsis
+  - msi
+directories:
+  output: dist

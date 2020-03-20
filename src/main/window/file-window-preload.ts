@@ -1,8 +1,8 @@
 import './preload';
-import { isWindows } from '../utils';
+import { isMacOS, isWindows } from '../utils';
 
-if(isWindows) {
-  window.addEventListener('DOMContentLoaded', event => {
+window.addEventListener('DOMContentLoaded', event => {
+  if (isWindows) {
     console.log('titlebar');
     const customTitlebar = require('custom-electron-titlebar');
     new customTitlebar.Titlebar({
@@ -11,6 +11,8 @@ if(isWindows) {
     });
 
     document.body.classList.add('bmd-windows');
-  });
-}
-
+  }
+  if (isMacOS) {
+    document.body.classList.add('bmd-mac');
+  }
+});

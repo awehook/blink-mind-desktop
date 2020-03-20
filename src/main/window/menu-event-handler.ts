@@ -2,6 +2,7 @@ import debug from 'debug';
 import { BrowserWindow } from 'electron';
 import { IpcChannelName, IpcType } from '../../common';
 import { ipcMR } from '../utils';
+import {WindowMgr} from "./window-manager";
 const log = debug('main:main-menu');
 
 export function saveAs(windowMgr) {
@@ -28,7 +29,7 @@ export function save(windowMgr) {
   }
 }
 
-export function openFile(windowMgr) {
+export function openFile(windowMgr:WindowMgr) {
   windowMgr.openFile();
 }
 

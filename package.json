@@ -1,7 +1,8 @@
 {
   "name": "blink-mind-desktop",
   "productName": "BlinkMind",
-  "version": "0.1.1-beta.2",
+  "description": "Full featured mindmap and outliner app",
+  "version": "0.1.1-beta.3",
   "private": true,
   "author": "awehook",
   "dependencies": {
@@ -22,6 +23,7 @@
     "debug": "2.6.9",
     "document.contains": "^1.0.1",
     "electron-is-dev": "^1.1.0",
+    "electron-log": "^4.1.0",
     "electron-store": "^5.1.0",
     "file-saver": "^2.0.2",
     "font-list": "^1.2.6",
@@ -226,17 +228,22 @@
   "build": {
     "productName": "BlinkMind",
     "appId": "org.awehook.blinkminddesktop",
-    "fileAssociations":[
+    "fileAssociations": [
       {
-        "ext": "bmind",
-        "name": "Blink Mind File",
-        "role": "Editor"
+        "ext": [
+          "bmind"
+        ],
+        "name": "BlinkMind",
+        "description": "Blink Mind Document",
+        "role": "Editor",
+        "icon": "icons/icon.icns"
       }
     ],
     "files": [
       "build/main/**/*",
       "build/renderer/**/*",
-      "index.html"
+      "index.html",
+      "icons/**/*"
     ],
     "dmg": {
       "contents": [
@@ -252,6 +259,13 @@
         }
       ]
     },
+    "nsis": {
+      "artifactName": "${productName}-${version}.${ext}",
+      "oneClick": false,
+      "perMachine": true,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true
+    },
     "mac": {
       "icon": "icons/icon.png",
       "target": [
@@ -261,8 +275,7 @@
     "win": {
       "icon": "icons/icon.png",
       "target": [
-        "dir",
-        "zip",
+        "nsis",
         "msi"
       ]
     },

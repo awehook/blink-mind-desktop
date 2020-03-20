@@ -37,19 +37,19 @@ export class WindowMgr {
   preferenceWindow;
   signInWindow;
   fileMap;
-  fileToWindowMap;
-  openedFileWindows;
+  fileToWindowMap: Map<string, BrowserWindow>;
+  openedFileWindows: Set<BrowserWindow>;
   url;
 
-  constructor() {
-    this.init();
+  constructor(filesToOpen: string[]) {
+    this.init(filesToOpen);
   }
 
   getOpenedFileWindows() {
     return this.openedFileWindows;
   }
 
-  init() {
+  init(filesToOpen: string[]) {
     this.fileMap = new Map();
     this.fileToWindowMap = new Map();
     this.openedFileWindows = new Set();
@@ -57,7 +57,7 @@ export class WindowMgr {
       ? 'http://localhost:3018'
       : `file://${app.getAppPath()}/build/renderer/index.html`;
     buildMenu(i18n, this);
-    this.showWelcomeWindow();
+
     i18n.on('languageChanged', ({ language, translation }) => {
       log('languageChanged', language);
       setStoreItem(StoreItemKey.preferences.normal.language, language);
@@ -76,6 +76,20 @@ export class WindowMgr {
     ipcMain.on(IpcChannelName.RM_OPEN_FILE, () => {
       this.openFile();
     });
+    if (filesToOpen.length === 0) this.showWelcomeWindow();
+    else {
+      this.openFilesToOpen(filesToOpen);
+    }
+  }
+
+  openFilesToOpen(toOpenFiles: string[]) {
+    for (let fpath of toOpenFiles) {
+      if (this.fileToWindowMap.has(fpath)) {
+        this.fileToWindowMap.get(fpath).focus();
+      } else {
+        this.openFile(fpath);
+      }
+    }
   }
 
   openFile(path?) {
@@ -144,9 +158,7 @@ export class WindowMgr {
       window.focus();
     });
 
-
-
-    window.on('close', (e) => {
+    window.on('close', e => {
       if (isWindows) {
         this.welcomeWindow = null;
       } else {
@@ -262,7 +274,7 @@ export class WindowMgr {
       },
       frame: false,
       titleBarStyle: 'hidden',
-        //isMacOS ? 'hidden' : 'default',
+      //isMacOS ? 'hidden' : 'default',
       title: path == null ? getUntitledTile() : path
     });
     window.loadURL(`${this.url}/#/file`);
@@ -347,9 +359,9 @@ export class WindowMgr {
   }
 }
 
-export function createWindowMgr() {
+export function createWindowMgr(filesToOpen: string[]) {
   log('createWindowMgr');
-  windowMgr = new WindowMgr();
+  windowMgr = new WindowMgr(filesToOpen);
 }
 
 export { windowMgr };
