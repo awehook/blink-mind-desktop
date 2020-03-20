@@ -226,6 +226,13 @@
   "build": {
     "productName": "BlinkMind",
     "appId": "org.awehook.blinkminddesktop",
+    "fileAssociations":[
+      {
+        "ext": "bmind",
+        "name": "Blink Mind File",
+        "role": "Editor"
+      }
+    ],
     "files": [
       "build/main/**/*",
       "build/renderer/**/*",
