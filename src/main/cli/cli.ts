@@ -4,16 +4,22 @@ export class Cli {
   filesToOpen: string[];
   constructor() {
     elog.log('process.argv', process.argv);
-    this.filesToOpen = [];
     this.argv = process.argv.slice(1);
-    this.parseArgs();
+    const { filesToOpen } = this.parseArgs(this.argv);
+    this.filesToOpen = filesToOpen;
   }
 
-  parseArgs() {
-    for (let arg of this.argv) {
-      if (!arg.startsWith('-') && !arg.startsWith('--') && (arg.endsWith('.bmind') || arg.endsWith('.blinkmind'))) {
-        this.filesToOpen.push(arg);
+  parseArgs(argv) {
+    const filesToOpen = [];
+    for (let arg of argv) {
+      if (
+        !arg.startsWith('-') &&
+        !arg.startsWith('--') &&
+        (arg.endsWith('.bmind') || arg.endsWith('.blinkmind'))
+      ) {
+        filesToOpen.push(arg);
       }
     }
+    return { filesToOpen };
   }
 }

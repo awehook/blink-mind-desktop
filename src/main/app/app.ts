@@ -20,13 +20,17 @@ export class App {
     // log('app on ready');
     app.on('ready', this.onReady);
 
+    app.on('second-instance', (event, argv, workingDirectory) => {
+      const { filesToOpen } = this.cli.parseArgs(argv.slice(1));
+      this.openFilesToOpen(filesToOpen);
+    });
+
     app.on('open-file', (event, pathname) => {
       elog.log('open-file', pathname);
       log('open-file', pathname);
       if (isDir(pathname)) return;
-      this.filesToOpen.push(pathname);
       if (app.isReady()) {
-        this.openFilesToOpen();
+        this.openFilesToOpen([pathname]);
       }
     });
 
@@ -52,9 +56,8 @@ export class App {
     });
   }
 
-  openFilesToOpen() {
-    windowMgr.openFilesToOpen(this.filesToOpen.slice());
-    this.filesToOpen = [];
+  openFilesToOpen(filesToOpen) {
+    windowMgr.openFilesToOpen(filesToOpen.slice());
   }
 
   onReady = () => {
