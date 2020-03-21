@@ -6,8 +6,9 @@ import {
   ipcMain,
   systemPreferences
 } from 'electron';
-import { dirname, join } from 'path';
+import { dirname, join, resolve } from 'path';
 import {
+  BlinkMindExtName,
   I18nTextKey,
   IpcChannelName,
   IpcType,
@@ -333,9 +334,10 @@ export class WindowMgr {
     if (windowData) {
       const focusFile = windowData.getFocusFile();
       const oldFilePath = focusFile.path;
+      const defaultName = i18n.t(I18nTextKey.UNTITLED) + BlinkMindExtName;
       dialog
         .showSaveDialog(focusWindow, {
-          defaultPath: getRecentOpenedDir()
+          defaultPath: resolve(getRecentOpenedDir(), defaultName)
         })
         .then(v => {
           const { filePath, canceled } = v;

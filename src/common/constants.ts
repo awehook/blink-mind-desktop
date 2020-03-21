@@ -21,9 +21,9 @@ export const WebsiteRoute = {
   ForgotPassword: '/user/forgotpassword',
 };
 
-export const ExtName = '.bmind';
+export const BlinkMindExtName = '.bmind';
 
-export const ExtNames = ['.bmind','.blinkmind'];
+export const BlinkMindExtNames = ['.bmind','.blinkmind'];
 
 export const I18nAvailableLngs = ['en','zh-CN'];
 

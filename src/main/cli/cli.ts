@@ -11,7 +11,7 @@ export class Cli {
 
   parseArgs() {
     for (let arg of this.argv) {
-      if (!arg.startsWith('-') && !arg.startsWith('--')) {
+      if (!arg.startsWith('-') && !arg.startsWith('--') && (arg.endsWith('.bmind') || arg.endsWith('.blinkmind'))) {
         this.filesToOpen.push(arg);
       }
     }

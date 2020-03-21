@@ -1,8 +1,15 @@
 import debug from 'debug';
 import { BrowserWindow, dialog, ipcMain } from 'electron';
 import fs from 'fs-extra';
+import { resolve } from 'path';
 import fontList from 'font-list';
-import { IpcChannelName, MrGlobalType, StoreItemKey } from '../../common';
+import {
+  BlinkMindExtName,
+  I18nTextKey,
+  IpcChannelName,
+  MrGlobalType,
+  StoreItemKey
+} from '../../common';
 import { i18n } from '../i18n';
 import { getStoreItem, setStoreItem } from '../store';
 import { getRecentOpenedDir, regularBlinkPath, IsDev } from '../utils';
@@ -18,11 +25,13 @@ ipcMain.on(IpcChannelName.RM_GET_I18N, (event, arg) => {
 });
 
 ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {
+  log('RM_SAVE_SYNC');
   const { content } = arg;
   let { path } = arg;
   if (path == null) {
+    const defaultName = i18n.t(I18nTextKey.UNTITLED) + BlinkMindExtName;
     path = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
-      defaultPath: getRecentOpenedDir()
+      defaultPath: resolve(getRecentOpenedDir(), defaultName)
     });
   }
 
@@ -38,11 +47,14 @@ ipcMain.on(IpcChannelName.RM_SAVE_SYNC, (event, arg) => {
 });
 
 ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
+  log('RM_SAVE');
   const { content } = arg;
   let { path } = arg;
   if (path == null) {
+    const defaultName = i18n.t(I18nTextKey.UNTITLED) + BlinkMindExtName;
+    console.log(defaultName);
     path = dialog.showSaveDialogSync(BrowserWindow.getFocusedWindow(), {
-      defaultPath: getRecentOpenedDir()
+      defaultPath: resolve(getRecentOpenedDir(), defaultName)
     });
   }
   if (path == null) {

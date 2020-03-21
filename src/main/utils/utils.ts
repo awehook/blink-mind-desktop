@@ -1,17 +1,17 @@
 import { BrowserWindow } from 'electron';
 import { extname } from 'path';
-import { ExtName, ExtNames, I18nTextKey, IpcChannelName } from '../../common';
+import { BlinkMindExtName, BlinkMindExtNames, I18nTextKey, IpcChannelName } from '../../common';
 import { i18n } from '../i18n';
 
 export function regularBlinkPath(path) {
-  if (ExtNames.indexOf(extname(path)) === -1) {
-    path = path + ExtName;
+  if (BlinkMindExtNames.indexOf(extname(path)) === -1) {
+    path = path + BlinkMindExtName;
   }
   return path;
 }
 
 export function getUntitledTile() {
-  return i18n.t(I18nTextKey.UNTITLED) + ExtName;
+  return i18n.t(I18nTextKey.UNTITLED) + BlinkMindExtName;
 }
 
 export function getFileTitle(path, edited) {

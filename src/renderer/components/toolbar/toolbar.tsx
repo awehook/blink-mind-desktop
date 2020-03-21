@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { remote,ipcRenderer } from 'electron';
 import { BaseProps, getI18nText } from '@blink-mind/renderer-react';
-import { ExtName, I18nTextKey, IpcChannelName } from '../../../common';
+import { BlinkMindExtName, I18nTextKey, IpcChannelName } from '../../../common';
 
 export function Toolbar(props: BaseProps) {
   const { controller } = props;
@@ -11,7 +11,7 @@ export function Toolbar(props: BaseProps) {
   const focusFile = files.find(f => f.id === focusFileId);
   let title = focusFile.path;
   if (title) title = title.split(/[\\/]/).pop();
-  title = title || getI18nText(props, I18nTextKey.UNTITLED) + ExtName;
+  title = title || getI18nText(props, I18nTextKey.UNTITLED) + BlinkMindExtName;
   title = `${title} ${
     focusFile.edited ? '-' + getI18nText(props, I18nTextKey.EDITED) : ''
   }`;
