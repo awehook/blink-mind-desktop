@@ -5,12 +5,16 @@ import { initStore } from '../store';
 import { i18n } from '../i18n';
 import { createWindowMgr, windowMgr } from '../window/window-manager';
 import { isDir, isWindows } from '../utils';
+import { Cli } from '../cli';
 const log = require('debug')('main:app');
 
 export class App {
-  constructor() {}
-
-  toOpenFiles: string[] = [];
+  constructor(cli: Cli) {
+    this.cli = cli;
+    this.filesToOpen = this.cli.filesToOpen;
+  }
+  cli: Cli;
+  filesToOpen: string[] = [];
 
   init() {
     // log('app on ready');
@@ -20,7 +24,7 @@ export class App {
       elog.log('open-file', pathname);
       log('open-file', pathname);
       if (isDir(pathname)) return;
-      this.toOpenFiles.push(pathname);
+      this.filesToOpen.push(pathname);
       if (app.isReady()) {
         this.openFilesToOpen();
       }
@@ -49,8 +53,8 @@ export class App {
   }
 
   openFilesToOpen() {
-    windowMgr.openFilesToOpen(this.toOpenFiles.slice());
-    this.toOpenFiles = [];
+    windowMgr.openFilesToOpen(this.filesToOpen.slice());
+    this.filesToOpen = [];
   }
 
   onReady = () => {
@@ -60,7 +64,7 @@ export class App {
     i18n.init();
     require('../sentry');
     require('../subscribe');
-    createWindowMgr(this.toOpenFiles.slice());
-    this.toOpenFiles = [];
+    createWindowMgr(this.filesToOpen.slice());
+    this.filesToOpen = [];
   };
 }

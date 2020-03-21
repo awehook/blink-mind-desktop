@@ -1,6 +1,7 @@
 import { app } from 'electron';
 import './ipc';
 import { App } from './app';
+import { Cli } from "./cli";
 const log = require('debug')('main:index');
 
 // log('env:', process.env);
@@ -9,5 +10,7 @@ if (!gotTheLock) {
   app.exit();
 }
 
-const blinkApp = new App();
+const cli = new Cli();
+
+const blinkApp = new App(cli);
 blinkApp.init();

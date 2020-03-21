@@ -1,41 +1,50 @@
+directories:
+  output: dist
+  buildResources: build
 productName: BlinkMind
 appId: org.awehook.blinkminddesktop
 fileAssociations:
-- ext: bmind
-  name: Blink Mind File
-  role: Editor
-
+  - ext:
+      - bmind
+    name: BlinkMind
+    description: Blink Mind Document
+    role: Editor
+    icon: icons/icon.icns
 files:
-- "build/main/**/*"
-- "build/renderer/**/*"
-- "index.html"
-- "icons/**/*"
-
+  - filter:
+      - build/main/**/*
+      - build/renderer/**/*
+      - index.html
+      - icons/**/*
+dmg:
+  contents:
+    - x: 130
+      'y': 220
+    - x: 410
+      'y': 220
+      type: link
+      path: /Applications
 nsis:
-  artifactName: ${productName}-${version}.${ext}
+  artifactName: '${productName}-${version}.${ext}'
   oneClick: false
   perMachine: true
   allowElevation: true
   allowToChangeInstallationDirectory: true
-
-dmg:
-  contents:
-  - x: 410
-    y: 150
-    type: "link"
-    path: "/Applications"
-  - x: 130
-    y: 150
-    type: "file"
-
 mac:
-  icon: icons/icon.png,
+  icon: icons/icon.icns
   target:
-  - dmg
+    - dmg
 win:
-  icon: icons/icon.png
+  artifactName: '${productName}-${version}.${ext}'
+  icon: icons/icon.ico
   target:
-  - nsis
-  - msi
-directories:
-  output: dist
+    - nsis
+#    - msi
+linux:
+  target:
+    - deb
+    - rpm
+    - snap
+    - AppImage
+  category: Development
+electronVersion: 7.1.9
