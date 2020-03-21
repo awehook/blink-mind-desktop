@@ -75,7 +75,7 @@ ipcMain.on(IpcChannelName.RM_GET_FOCUS_FILE_TITLE, (event, { fileId }) => {
 });
 
 ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
-  event.returnValue = fs.readFileSync(path);
+  event.returnValue = fs.readFileSync(path, 'utf8');
 });
 
 ipcMain.on(IpcChannelName.RM_GET_FONT_LIST, event => {
