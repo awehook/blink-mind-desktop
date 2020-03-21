@@ -9,7 +9,7 @@ fileAssociations:
     name: BlinkMind
     description: Blink Mind Document
     role: Editor
-    icon: icons/icon.icns
+    icon: icons/icon.ico
 files:
   - filter:
       - build/main/**/*

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512px" height="512px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 61.2 (89653) - https://sketch.com -->
+    <title>Group 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <radialGradient cx="50%" cy="100%" fx="50%" fy="100%" r="100%" id="radialGradient-1">
+            <stop stop-color="#C30F04" offset="0%"></stop>
+            <stop stop-color="#FCCC12" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="最终版本备份" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-2">
+            <circle id="Oval" fill="url(#radialGradient-1)" cx="256" cy="256" r="256"></circle>
+            <g id="Group" transform="translate(57.000000, 134.000000)" fill="#FFFFFF">
+                <path d="M173.753175,0.715315356 L198.753175,44.0165855 L63.0470947,122.365586 L198.753175,200.715315 L173.753175,244.016586 L0.548094716,144.016586 L13.0480947,122.365586 L0.548094716,100.715315 L173.753175,0.715315356 Z M224.036803,0.451905284 L397.241883,100.451905 L384.741883,122.101905 L397.241883,143.753175 L224.036803,243.753175 L199.036803,200.451905 L334.742883,122.102905 L199.036803,43.7531755 L224.036803,0.451905284 Z M199.488708,82 C221.580098,82 239.488708,99.90861 239.488708,122 C239.488708,144.09139 221.580098,162 199.488708,162 C177.397318,162 159.488708,144.09139 159.488708,122 C159.488708,99.90861 177.397318,82 199.488708,82 Z" id="Combined-Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
