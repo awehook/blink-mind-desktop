@@ -47,4 +47,4 @@ linux:
     - snap
     - AppImage
   category: Development
-electronVersion: 7.1.9
+electronVersion: 8.1.1
