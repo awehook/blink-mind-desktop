@@ -3,6 +3,7 @@ import { OlRenderPlugin } from './ol-render';
 import { OlOpPlugin } from './ol-op';
 import { ContextMenuPlugin } from './ol-context-menu';
 import { OlLayoutPlugin } from './ol-layout';
+import { OlHotKeyPlugin } from './ol-hotkey';
 
 export function OutlinerPlugin() {
   return [
@@ -10,6 +11,7 @@ export function OutlinerPlugin() {
     OlRenderPlugin(),
     OlOpPlugin(),
     ContextMenuPlugin(),
-    OlLayoutPlugin()
+    OlLayoutPlugin(),
+    OlHotKeyPlugin()
   ];
 }

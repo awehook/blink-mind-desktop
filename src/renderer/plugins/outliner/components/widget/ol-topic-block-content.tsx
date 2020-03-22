@@ -3,23 +3,22 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Key } from 'ts-keycode-enum';
 import { FocusMode, OpType } from '@blink-mind/core';
-import { OlOpType } from '../../op';
 import { BaseProps, PropKey } from '@blink-mind/renderer-react';
 import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
-import { OutlinerSheet_ } from './outliner-sheet';
 
 const OLTopicBlockContentRoot = styled.div`
   width: 100%;
 `;
 
 export function OLTopicBlockContent_(props: BaseProps) {
+  // 为什么这里不能用controller.model 呢？用了之后outliner输入光标会出现问题,添加一个sibling的时候光标没有聚焦在sibling上面
   const { controller, model, topic, topicKey } = props;
   const handleKeyDown = e => {
     // console.log('onKeyDown');
     switch (e.keyCode) {
       case Key.Backspace:
-        if (topic.contentData === '') {
+        if (topic.contentData === '' || model.selectedKeys) {
           controller.run('operation', {
             ...props,
             opType: OpType.DELETE_TOPIC
@@ -27,27 +26,6 @@ export function OLTopicBlockContent_(props: BaseProps) {
           return true;
         }
         break;
-      case Key.Enter:
-        if (e.shiftKey) return false;
-        (topic.subKeys.size > 0 && !topic.collapse) ||
-        topicKey === model.editorRootTopicKey
-          ? controller.run('operation', {
-              ...props,
-              opType: OpType.ADD_CHILD,
-              addAtFront: true
-            })
-          : controller.run('operation', {
-              ...props,
-              opType: OpType.ADD_SIBLING
-            });
-        return true;
-
-      case Key.Tab:
-        controller.run('operation', {
-          ...props,
-          opType: e.shiftKey ? OlOpType.OUTDENT : OlOpType.INDENT
-        });
-        return true;
     }
     return false;
   };
