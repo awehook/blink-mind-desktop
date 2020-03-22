@@ -4,7 +4,7 @@ export function BugCollectPlugin() {
   return {
     captureError(ctx) {
       const { error } = ctx;
-      if (isDev) throw error;
+      if (isDev) console.log(error);
       else Sentry.captureException(error);
     }
   };

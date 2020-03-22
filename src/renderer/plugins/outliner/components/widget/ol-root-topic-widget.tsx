@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { BaseProps } from '@blink-mind/renderer-react';
 import styled from 'styled-components';
 const OLRootTopicWidgetRoot = styled.div`
@@ -18,9 +18,34 @@ const EmptyDiv = styled.div`
 
 export function OLRootTopicWidget(props: BaseProps) {
   const { controller, topic } = props;
+  const divRef = useRef<HTMLElement>();
+
+  const setZoomFactor = z => {
+    if (divRef.current) {
+      divRef.current.style.transform = `scale(${z})`;
+      divRef.current.style.transformOrigin = '0 0';
+    }
+  };
+
+  useEffect(() => {
+    controller.run('addZoomFactorChangeEventListener', {
+      ...props,
+      listener: setZoomFactor
+    });
+    return () => {
+      controller.run('removeZoomFactorChangeEventListener', {
+        ...props,
+        listener: setZoomFactor
+      });
+    };
+  });
+
+  const onWheel = ev => {
+    controller.run('setZoomFactorOnWheel', { ...props, ev });
+  };
 
   return (
-    <OLRootTopicWidgetRoot>
+    <OLRootTopicWidgetRoot ref={divRef} onWheel={onWheel}>
       <Title>{controller.run('renderTopicBlockContent', props)}</Title>
 
       <SubTopics>
@@ -32,7 +57,7 @@ export function OLRootTopicWidget(props: BaseProps) {
           });
         })}
       </SubTopics>
-      <EmptyDiv/>
+      <EmptyDiv />
     </OLRootTopicWidgetRoot>
   );
 }

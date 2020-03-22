@@ -57,6 +57,7 @@ export class FilesPageInternal extends Component<Props, State> {
         docModel = controller.run('deserializeDocModel', { controller, obj });
       }
       docModel = controller.run('validateModel', { docModel, controller });
+      controller.docModel = docModel;
       return new FileModel({
         id,
         path,
