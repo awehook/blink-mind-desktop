@@ -19,7 +19,6 @@ const EmptyDiv = styled.div`
 export function OLRootTopicWidget(props: BaseProps) {
   const { controller, topic } = props;
   const divRef = useRef<HTMLElement>();
-
   const setZoomFactor = z => {
     if (divRef.current) {
       divRef.current.style.transform = `scale(${z})`;
@@ -28,6 +27,10 @@ export function OLRootTopicWidget(props: BaseProps) {
   };
 
   useEffect(() => {
+    if (divRef.current) {
+      divRef.current.style.transform = `scale(${controller.run('getZoomFactor',props) || 1})`;
+      divRef.current.style.transformOrigin = '0 0';
+    }
     controller.run('addZoomFactorChangeEventListener', {
       ...props,
       listener: setZoomFactor
