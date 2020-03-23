@@ -31,6 +31,8 @@ export class App {
       if (isDir(pathname)) return;
       if (app.isReady()) {
         this.openFilesToOpen([pathname]);
+      } else {
+        this.filesToOpen = [pathname];
       }
     });
 
