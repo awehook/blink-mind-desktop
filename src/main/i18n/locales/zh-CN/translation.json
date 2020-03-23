@@ -67,6 +67,7 @@
   "ADD_CHILD": "添加子节点",
   "EDIT_NOTES": "编辑备注",
   "REMOVE_NOTES": "删除备注",
+  "CONVERT_TO_PLAIN_TEXT": "转换为纯文本",
   "DELETE": "删除",
   "EXPORT": "导出",
   "EXPORT_TO": "导出为",

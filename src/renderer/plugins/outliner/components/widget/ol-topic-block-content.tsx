@@ -52,7 +52,6 @@ export function OLTopicBlockContent_(props: BaseProps) {
   const onContextMenuClose = () => {};
 
   const onContextMenu = e => {
-    console.log('onContextMenu');
     controller.run('operation', {
       ...props,
       opType: OpType.FOCUS_TOPIC,
