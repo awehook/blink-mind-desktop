@@ -1,4 +1,36 @@
 @import "../blink-mind/packages/renderer-react/src/components/var";
+
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  background: #F0F0F0;
+  .bp3-dark & {
+    background-color: #0000;
+    //border-left: 1px solid map_get($dark-colors,'line');
+  }
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C0C0C0;
+  .bp3-dark & {
+    background: #58595a
+    //background: map_get($dark-colors,'item-bg');
+  }
+
+  &:hover {
+    background: #B0B0B0;
+    .bp3-dark & {
+      //background: #414956
+      background: #4b5362;
+    }
+  }
+}
+
 .mindmap {
   width: 100%;
   height: 100%;
