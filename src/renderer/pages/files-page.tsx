@@ -1,8 +1,8 @@
 import debug from 'debug';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer, remote, shell } from 'electron';
 import { List } from 'immutable';
 import * as React from 'react';
-import { Component, useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import { IpcChannelName, IpcType } from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
@@ -12,12 +12,27 @@ import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
 
 const log = debug('bmd:files-page');
 
+const handleElementClick = e => {
+  const hrefEle = e.target.closest('a[href]');
+  if (hrefEle) {
+    e.preventDefault();
+    shell.openExternal(hrefEle.href);
+  }
+};
+
 export function FilesPage(props) {
   const t = useTranslation();
   //@ts-ignore
   const initWindowData = remote.getCurrentWindow().windowData;
 
   const [windowData] = useState(initWindowData);
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleElementClick);
+    return () => {
+      document.body.removeEventListener('click', handleElementClick);
+    };
+  });
 
   const nProps = {
     windowData,
