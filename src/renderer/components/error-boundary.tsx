@@ -1,11 +1,18 @@
 import React from 'react';
 import * as Sentry from '@sentry/electron';
+import styled from 'styled-components';
 import { isDev } from '../utils';
 interface Props {}
 interface State {
   error: Error;
   errorInfo: any;
 }
+
+const ErrorRoot = styled.div`
+  color: black;
+  padding: 100px;
+`;
+
 export class ErrorBoundary extends React.Component<Props, State> {
   constructor(props) {
     super(props);
@@ -27,11 +34,11 @@ export class ErrorBoundary extends React.Component<Props, State> {
     if (this.state.errorInfo) {
       // Error path
       return (
-        <div>
+        <ErrorRoot>
           <h2>Regrettably something went wrong.</h2>
           <h2>
             If you want to continue from your saved file, please try to click
-            menu item [View->Force Reload]
+            menu item [View->Force Reload].
           </h2>
           <h2>
             If [View->Force Reload] faild, please quit this application and
@@ -42,7 +49,7 @@ export class ErrorBoundary extends React.Component<Props, State> {
             <br />
             {this.state.errorInfo.componentStack}
           </details>
-        </div>
+        </ErrorRoot>
       );
     }
     // Normally, just render children

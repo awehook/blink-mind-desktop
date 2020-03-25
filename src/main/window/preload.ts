@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/electron';
 import { Version } from '../../common/';
-import { IsDev } from '../utils';
+import { IsDev, platform } from '../utils';
 import getmac from 'getmac';
 export const macaddr = getmac();
 
@@ -10,7 +10,7 @@ if (!IsDev) {
   });
 
   Sentry.configureScope(scope => {
-    scope.setUser({ id: macaddr });
+    scope.setUser({ id: `${platform}-${macaddr}` });
     scope.setExtra('version', Version);
     // scope.clear();
   });
