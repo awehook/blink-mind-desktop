@@ -27,6 +27,12 @@ export function OLTopicWidget(props: BaseProps) {
     );
   };
 
+  const topicStyle = controller.run('getTopicContentStyle', props);
+
+  const { fontSize, fontFamily, color, lineHeight } = topicStyle;
+
+  const style = { fontSize, fontFamily, color, lineHeight };
+
   const propsMore = {
     ...props,
     topic
@@ -39,6 +45,7 @@ export function OLTopicWidget(props: BaseProps) {
 
   return (
     <OLTopicWidgetRoot
+      style={style}
       ref={saveRef(olTopicWidgetRefKey(topicKey))}
       className={cx({ 'bm-topic-widget-selected': isSelected })}
       key={topicKey}

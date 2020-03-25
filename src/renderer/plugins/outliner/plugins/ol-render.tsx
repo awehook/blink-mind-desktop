@@ -39,8 +39,9 @@ export function OlRenderPlugin() {
           ...nProps,
           zIndex: zIndex + 1
         });
+        const rightTopPanel = controller.run('renderRightTopPanel', nProps);
         const viewportViewer = controller.run('renderViewPortViewer', nProps);
-        return [dialog, drawer, viewportViewer];
+        return [dialog, drawer, rightTopPanel,  viewportViewer];
       }
       return next();
     },

@@ -3,14 +3,14 @@ import { ipcRenderer, remote, shell } from 'electron';
 import { List } from 'immutable';
 import * as React from 'react';
 import { Component, useEffect, useState } from 'react';
-import { IpcChannelName, IpcType } from '../../common';
+import {IpcChannelName, IpcType, StoreItemKey} from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-
 const log = debug('bmd:files-page');
+
 
 const handleElementClick = e => {
   const hrefEle = e.target.closest('a[href]');

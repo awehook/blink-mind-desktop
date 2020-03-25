@@ -9,7 +9,7 @@ import { PageRouter } from './route';
 
 import debug from 'debug';
 import { getStoreItem } from './utils';
-
+import * as DarkReader from 'darkreader';
 const log = debug('bmd:app');
 
 function App() {
@@ -32,6 +32,15 @@ function App() {
         document.body.classList.remove(Classes.DARK);
       }
     }
+
+    // if (v === 'dark') {
+    //   console.log('enable dark mode');
+    //   DarkReader.enable({
+    //     brightness: 0,
+    //     contrast: 0,
+    //     sepia: 0
+    //   });
+    // }
   };
 
   const appearance = getStoreItem(StoreItemKey.preferences.normal.appearance);

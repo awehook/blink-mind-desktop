@@ -7,6 +7,7 @@
   font-size: 16px;
 
   .bp3-dark & {
+    color: #ddd;
     background-color: map_get($dark-colors, 'zindex-bg');
   }
 

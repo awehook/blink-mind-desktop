@@ -85,6 +85,10 @@ function getMenu(i18n, windowMgr) {
         role: 'copy'
       },
       {
+        label: t(I18nTextKey.CUT),
+        role: 'cut'
+      },
+      {
         label: t(I18nTextKey.PASTE),
         role: 'paste'
       }
