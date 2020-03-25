@@ -8,6 +8,7 @@ const OLNodeLayerRoot = styled.div`
   padding: 20px 0 0 50px;
   overflow: auto;
   flex-grow: 1;
+  //background: ${props => props.theme.background};
 `;
 
 export class OlNodeLayer extends React.Component<BaseProps> {

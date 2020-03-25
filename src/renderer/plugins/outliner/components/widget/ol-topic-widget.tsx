@@ -26,12 +26,15 @@ export function OLTopicWidget(props: BaseProps) {
       </div>
     );
   };
-
-  const topicStyle = controller.run('getTopicContentStyle', props);
-
-  const { fontSize, fontFamily, color, lineHeight } = topicStyle;
-
-  const style = { fontSize, fontFamily, color, lineHeight };
+  const topicContentStyle = controller.run('getTopicContentStyle', props);
+  const { fontSize, fontFamily, lineHeight } = topicContentStyle;
+  const style: any = { fontSize, fontFamily, lineHeight };
+  if (topic.style) {
+    const topicStyle = JSON.parse(topic.style);
+    const { contentStyle = {} } = topicStyle;
+    const { color } = contentStyle;
+    style.color = color;
+  }
 
   const propsMore = {
     ...props,
