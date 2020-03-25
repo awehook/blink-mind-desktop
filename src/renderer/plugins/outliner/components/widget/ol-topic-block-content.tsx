@@ -8,7 +8,8 @@ import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
 
 const OLTopicBlockContentRoot = styled.div`
-  width: 100%;
+  //width: 100%;
+  //flex-grow: 1;
 `;
 
 export function OLTopicBlockContent_(props: BaseProps) {

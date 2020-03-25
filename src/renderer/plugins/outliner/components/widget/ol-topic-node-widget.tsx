@@ -9,6 +9,7 @@ const OLNodeRows = styled.div`
   flex-direction: column;
   flex-grow: 1;
   padding-left: 2px;
+  padding-right: 100px;
 `;
 
 export function OLTopicNodeWidgetFC(props: BaseProps) {
