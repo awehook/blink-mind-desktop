@@ -1,15 +1,14 @@
 import { Classes } from '@blueprintjs/core';
 import { ipcRenderer } from 'electron';
-import * as React from "react";
+import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IpcChannelName, MrGlobalType, StoreItemKey } from '../common';
 import './App.scss';
 import { I18nContext, i18nMap, setI18nMap } from './context';
 import { PageRouter } from './route';
-
+import { ErrorBoundary } from './components';
 import debug from 'debug';
 import { getStoreItem } from './utils';
-import * as DarkReader from 'darkreader';
 const log = debug('bmd:app');
 
 function App() {
@@ -47,7 +46,7 @@ function App() {
   setAppearance(appearance);
 
   const onIpcMrGlobal = (e, arg) => {
-    log('onIpcMrGlobal',arg);
+    log('onIpcMrGlobal', arg);
     switch (arg.type) {
       case MrGlobalType.SET_LANG:
         setI18nTransaction(arg.translation);
@@ -67,9 +66,11 @@ function App() {
     };
   });
   return (
-    <I18nContext.Provider value={i18nValue}>
-      <PageRouter />
-    </I18nContext.Provider>
+    <ErrorBoundary>
+      <I18nContext.Provider value={i18nValue}>
+        <PageRouter />
+      </I18nContext.Provider>
+    </ErrorBoundary>
   );
 }
 
