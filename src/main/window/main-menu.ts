@@ -144,6 +144,18 @@ function getMenu(i18n, windowMgr) {
         click() {
           shell.openExternal('https://github.com/awehook/blink-mind-package');
         }
+      },
+      {
+        label: 'Watch BlinkMindDesktop for update info',
+        click() {
+          shell.openExternal('https://github.com/awehook/blink-mind-package');
+        }
+      },
+      {
+        label: 'Follow @awehook on Github',
+        click() {
+          shell.openExternal('https://github.com/awehook');
+        }
       }
     ]
   };

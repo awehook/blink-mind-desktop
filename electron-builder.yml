@@ -39,6 +39,7 @@ win:
   icon: icons/icon.ico
   target:
     - nsis
+    - zip
 #    - msi
 linux:
   target:
