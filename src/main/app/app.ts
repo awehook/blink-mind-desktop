@@ -21,6 +21,7 @@ export class App {
     app.on('ready', this.onReady);
 
     app.on('second-instance', (event, argv, workingDirectory) => {
+      elog.log('second-instance', argv, 'workingDirectory:', workingDirectory);
       const { filesToOpen } = this.cli.parseArgs(argv.slice(1));
       this.openFilesToOpen(filesToOpen);
     });

@@ -31,7 +31,7 @@ const log = debug('main:window-mgr');
 
 const isDev = require('electron-is-dev');
 
-let windowMgr;
+let windowMgr: WindowMgr;
 
 export class WindowMgr {
   welcomeWindow: BrowserWindow;
