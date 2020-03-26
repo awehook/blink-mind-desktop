@@ -26,23 +26,6 @@ export function OlHotKeyPlugin() {
 
       const viewModeOutlinerTopicHotKeys = new Map<string, IHotkeyProps>([
         [
-          'ENTER',
-          {
-            label: 'enter',
-            combo: 'enter',
-            allowInInput: true,
-            preventDefault: true,
-            stopPropagation: true,
-            onKeyDown: () => {
-              const topic = model.currentFocusTopic;
-              (topic.subKeys.size > 0 && !topic.collapse) ||
-              topic.key === model.editorRootTopicKey
-                ? op(OpType.ADD_CHILD, { ...ctx, addAtFront: true })
-                : op(OpType.ADD_SIBLING, ctx);
-            }
-          }
-        ],
-        [
           'INDENT',
           {
             label: 'indent',

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Key } from 'ts-keycode-enum';
 import { FocusMode, OpType } from '@blink-mind/core';
-import { BaseProps, PropKey } from '@blink-mind/renderer-react';
+import { BaseProps, PropKey, op } from '@blink-mind/renderer-react';
 import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
 
@@ -18,6 +18,19 @@ export function OLTopicBlockContent_(props: BaseProps) {
   const handleKeyDown = e => {
     // console.log('onKeyDown');
     switch (e.keyCode) {
+      case Key.Enter:
+        if (!e.shiftKey) {
+          (topic.subKeys.size > 0 && !topic.collapse) ||
+          topic.key === model.editorRootTopicKey
+            ? op(controller, {
+                ...props,
+                opType: OpType.ADD_CHILD,
+                addAtFront: true
+              })
+            : op(controller, { ...props, opType: OpType.ADD_SIBLING });
+          return true;
+        }
+        break;
       case Key.Backspace:
         if (topic.contentData === '' || model.selectedKeys) {
           controller.run('operation', {
