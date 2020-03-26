@@ -13,9 +13,20 @@ const OLNodeRows = styled.div`
 `;
 
 export function OLTopicNodeWidgetFC(props: BaseProps) {
-  const { controller } = props;
+  const { controller, topic } = props;
+  const topicContentStyle = controller.run('getTopicContentStyle', props);
+  const { fontSize, fontFamily, lineHeight } = topicContentStyle;
+  const style: any = { fontSize, fontFamily, lineHeight };
+  if (topic.style) {
+    const topicStyle = JSON.parse(topic.style);
+    const { contentStyle = {} } = topicStyle;
+    const { color } = contentStyle;
+    style.color = color;
+  }
   return (
-    <OLNodeRows>{controller.run('renderTopicNodeRows', props)}</OLNodeRows>
+    <OLNodeRows style={style}>
+      {controller.run('renderTopicNodeRows', props)}
+    </OLNodeRows>
   );
 }
 
