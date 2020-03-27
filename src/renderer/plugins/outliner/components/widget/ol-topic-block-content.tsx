@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import { Key } from 'ts-keycode-enum';
 import { FocusMode, OpType } from '@blink-mind/core';
-import { BaseProps, PropKey, op } from '@blink-mind/renderer-react';
+import {
+  BaseProps,
+  PropKey,
+  op,
+  selectToEnd,
+  selectToStart
+} from '@blink-mind/renderer-react';
 import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
 
@@ -11,33 +17,97 @@ const OLTopicBlockContentRoot = styled.div`
   //width: 100%;
   //flex-grow: 1;
 `;
-
-export function OLTopicBlockContent_(props: BaseProps) {
+interface Props extends BaseProps {
+  addRowClickHandler: (handler) => () => void;
+}
+export function OLTopicBlockContent_(props: Props) {
   // 为什么这里不能用controller.model 呢？用了之后outliner输入光标会出现问题,添加一个sibling的时候光标没有聚焦在sibling上面
-  const { controller, model, topic, topicKey } = props;
+  const { controller, model, topic, topicKey, addRowClickHandler } = props;
+
+  const innerEditorDivRef = useRef<HTMLElement>();
+  // 由于在执行cut的时候, ReactContentEditable 会先执行onInput, 加这个变量可以避免这种情况
+  let _handleOnInput = false;
+
+  const handleOnInput = e => {
+    return _handleOnInput;
+  };
+
+  const handleRowClick = e => {
+    onMouseDown();
+  };
+  useEffect(() => {
+    if (addRowClickHandler) {
+      const res = addRowClickHandler(handleRowClick);
+      return () => {
+        res();
+      };
+    }
+  });
+
   const handleKeyDown = e => {
     // console.log('onKeyDown');
+    const innerEditorDiv = innerEditorDivRef.current;
+    const sel = window.getSelection();
+    const callback = () => () => {
+      document.execCommand('paste');
+      navigator.clipboard.writeText('');
+    };
     switch (e.keyCode) {
       case Key.Enter:
         if (!e.shiftKey) {
+          selectToEnd(innerEditorDiv, sel);
+          document.execCommand('cut');
           (topic.subKeys.size > 0 && !topic.collapse) ||
           topic.key === model.editorRootTopicKey
             ? op(controller, {
                 ...props,
                 opType: OpType.ADD_CHILD,
-                addAtFront: true
+                addAtFront: true,
+                callback
               })
-            : op(controller, { ...props, opType: OpType.ADD_SIBLING });
+            : op(controller, {
+                ...props,
+                opType: OpType.ADD_SIBLING,
+                callback
+              });
           return true;
         }
         break;
       case Key.Backspace:
-        if (topic.contentData === '' || model.selectedKeys) {
+        console.log('backspace');
+        if (model.selectedKeys) {
+          _handleOnInput = true;
           controller.run('operation', {
             ...props,
             opType: OpType.DELETE_TOPIC
           });
+          _handleOnInput = false;
           return true;
+        }
+        if (sel.isCollapsed) {
+          const oldRange = sel.getRangeAt(0);
+          selectToStart(innerEditorDiv, sel);
+          if (sel.toString().length === 0) {
+            _handleOnInput = true;
+            const range = new Range();
+            range.setStartBefore(innerEditorDiv.firstChild);
+            range.setEndAfter(innerEditorDiv.lastChild);
+            sel.removeAllRanges();
+            sel.addRange(range);
+            console.log('cut');
+            document.execCommand('cut');
+            console.log('operation');
+            controller.run('operation', {
+              ...props,
+              opType: OpType.DELETE_TOPIC,
+              callback
+            });
+            _handleOnInput = false;
+            return true;
+          } else {
+            sel.removeAllRanges();
+            sel.addRange(oldRange);
+          }
         }
         break;
     }
@@ -93,6 +163,8 @@ export function OLTopicBlockContent_(props: BaseProps) {
       {controller.run('renderTopicContentEditor', {
         ...props,
         handleKeyDown,
+        handleOnInput,
+        innerEditorDivRef,
         className: 'bm-content-editable-ol',
         readOnly: model.focusKey !== topicKey
       })}

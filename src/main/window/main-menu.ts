@@ -90,7 +90,8 @@ function getMenu(i18n, windowMgr) {
       },
       {
         label: t(I18nTextKey.PASTE),
-        role: 'paste'
+        // role: 'paste as plaintext',
+        accelerator: 'CommandOrControl+V',
       }
     ]
   };
