@@ -16,6 +16,7 @@ import { getRecentOpenedDir, regularBlinkPath, IsDev } from '../utils';
 import { ipcSendToAllWindow } from './ipc-send';
 import { windowMgr } from '../window/window-manager';
 import { apiAgent } from '../../common';
+import * as Sentry from '@sentry/electron';
 
 const log = debug('main:ipc-main');
 
@@ -78,15 +79,14 @@ ipcMain.on(IpcChannelName.RM_GET_FILE_CONTENT, (event, { path }) => {
   event.returnValue = fs.readFileSync(path, 'utf8');
 });
 
-ipcMain.on(IpcChannelName.RM_GET_FONT_LIST, event => {
-  fontList
-    .getFonts()
-    .then(fonts => {
-      event.returnValue = fonts.map(item => item.replace(/^"|"$/g, ''));
-    })
-    .catch(err => {
-      event.returnValue = [];
-    });
+ipcMain.handle(IpcChannelName.RM_GET_FONT_LIST, async event => {
+  try {
+    const fonts = await fontList.getFonts();
+    return fonts.map(item => item.replace(/^"|"$/g, ''));
+  } catch (e) {
+    Sentry.captureException(e);
+    return [];
+  }
 });
 
 ipcMain.on(IpcChannelName.RM_GET_IS_DEV, event => {

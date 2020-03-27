@@ -1,12 +1,12 @@
 import { getFontList } from '../utils';
+let fontList;
+getFontList().then(res => {
+  fontList = res;
+});
 
 export function FontPlugin() {
-  let fontList;
   return {
     getFontList(ctx) {
-      if (!fontList) {
-        fontList = getFontList();
-      }
       return fontList;
     }
   };

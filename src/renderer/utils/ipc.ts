@@ -7,8 +7,8 @@ export function getFileContent({ path }) {
   });
 }
 
-export function getFontList() {
-  return ipcRenderer.sendSync(IpcChannelName.RM_GET_FONT_LIST)
+export async function getFontList() {
+  return  await ipcRenderer.invoke(IpcChannelName.RM_GET_FONT_LIST)
 }
 
 export function getStoreItem(key) {
