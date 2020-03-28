@@ -3,14 +3,13 @@ import { ipcRenderer, remote, shell } from 'electron';
 import { List } from 'immutable';
 import * as React from 'react';
 import { Component, useEffect, useState } from 'react';
-import {IpcChannelName, IpcType, StoreItemKey} from '../../common';
+import { IpcChannelName, IpcType, StoreItemKey } from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
 const log = debug('bmd:files-page');
-
 
 const handleElementClick = e => {
   const hrefEle = e.target.closest('a[href]');
@@ -101,10 +100,16 @@ export class FilesPageInternal extends Component<Props, State> {
   // 菜单的save => MR_SAVE => onSave => RM_SAVE
   // 菜单save: 判断path 是否为null, 是：saveAs 不是：save
 
-  onIpcMR = (e, arg) => {
+  onIpcMRFileWindow = (e, arg) => {
     const { type } = arg;
-    log('onIpcMR', type);
+    log('onIpcMRFileWindow', type);
     switch (type) {
+      case IpcType.MR_PASTE:
+        this.getActiveFileModel().controller.run('setPasteType', {
+          pasteType: arg.pasteType
+        });
+        document.execCommand('paste');
+        break;
       case IpcType.MR_SAVE:
         this.onSave(e, arg);
         break;
@@ -171,11 +176,11 @@ export class FilesPageInternal extends Component<Props, State> {
   };
 
   componentDidMount() {
-    ipcRenderer.on(IpcChannelName.MR_FILE_WINDOW, this.onIpcMR);
+    ipcRenderer.on(IpcChannelName.MR_FILE_WINDOW, this.onIpcMRFileWindow);
   }
 
   componentWillUnmount() {
-    ipcRenderer.off(IpcChannelName.MR_FILE_WINDOW, this.onIpcMR);
+    ipcRenderer.off(IpcChannelName.MR_FILE_WINDOW, this.onIpcMRFileWindow);
   }
 
   onChange = fileModelId => (docModel, callback) => {

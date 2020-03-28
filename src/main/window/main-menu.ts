@@ -1,8 +1,9 @@
 import { Menu, shell } from 'electron';
-import { I18nTextKey, ProductName } from '../../common';
+import {I18nTextKey, IpcChannelName, IpcType, PasteType, ProductName} from '../../common';
 import { isMacOS, isWindows, IsDev } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
 import { subscribeMgr } from '../subscribe';
+import BrowserWindow = Electron.BrowserWindow;
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -89,9 +90,26 @@ function getMenu(i18n, windowMgr) {
         role: 'cut'
       },
       {
-        label: t(I18nTextKey.PASTE),
+        label: t(I18nTextKey.PASTE_AS_PLAIN_TEXT),
         // role: 'paste as plaintext',
         accelerator: 'CommandOrControl+V',
+        click(menuItem,browserWindow:BrowserWindow) {
+          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW,{
+            type: IpcType.MR_PASTE,
+            pasteType: PasteType.PASTE_PLAIN_TEXT
+          })
+        }
+      },
+      {
+        label: t(I18nTextKey.PASTE_WITH_STYLE),
+        // role: 'paste as plaintext',
+        accelerator: 'CommandOrControl+Shift+V',
+        click(menuItem,browserWindow:BrowserWindow) {
+          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW,{
+            type: IpcType.MR_PASTE,
+            pasteType: PasteType.PASTE_WITH_STYLE
+          })
+        }
       }
     ]
   };

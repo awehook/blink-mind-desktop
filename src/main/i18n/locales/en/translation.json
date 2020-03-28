@@ -18,6 +18,8 @@
   "CUT": "Cut",
   "COPY": "Copy",
   "PASTE": "Paste",
+  "PASTE_AS_PLAIN_TEXT": "Paste as plain text",
+  "PASTE_WITH_STYLE": "Paste with style",
   "DUPLICATE": "Duplicate",
 
   "PREFERENCES": "Preferences",

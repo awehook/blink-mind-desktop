@@ -19,6 +19,11 @@ export const IpcChannelName = {
   MR_GLOBAL: 'MR_GLOBAL',
 };
 
+export const PasteType = {
+  PASTE_PLAIN_TEXT: 'PASTE_PLAIN_TEXT',
+  PASTE_WITH_STYLE: 'PASTE_WITH_STYLE'
+};
+
 export const MrGlobalType = {
   SET_LANG: 'SET_LANG',
   SET_APPEARANCE: 'SET_APPEARANCE',
@@ -28,6 +33,6 @@ export const IpcType = {
   MR_SAVE: 'MR_SAVE',
   MR_UNDO: 'MR_UNDO',
   MR_REDO: 'MR_REDO',
+  MR_PASTE: 'MR_PASTE',
   MR_BEFORE_CLOSE_WINDOW: 'MR_BEFORE_CLOSE_WINDOW',
-
 };

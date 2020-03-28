@@ -18,6 +18,8 @@
   "CUT": "剪切",
   "COPY": "拷贝",
   "PASTE": "粘贴",
+  "PASTE_AS_PLAIN_TEXT": "粘贴为纯文本",
+  "PASTE_WITH_STYLE": "带格式粘贴",
   "DUPLICATE": "复制",
 
   "PREFERENCES": "首选项",
