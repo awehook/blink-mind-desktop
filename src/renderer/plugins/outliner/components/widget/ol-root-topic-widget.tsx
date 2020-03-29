@@ -47,9 +47,19 @@ export function OLRootTopicWidget(props: BaseProps) {
     controller.run('setZoomFactorOnWheel', { ...props, ev });
   };
 
+  const topicContentStyle = controller.run('getTopicContentStyle', props);
+  const { fontSize, fontFamily, lineHeight } = topicContentStyle;
+  const style: any = { fontSize, fontFamily, lineHeight };
+  if (topic.style) {
+    const topicStyle = JSON.parse(topic.style);
+    const { contentStyle = {} } = topicStyle;
+    const { color } = contentStyle;
+    style.color = color;
+  }
+
   return (
     <OLRootTopicWidgetRoot ref={divRef} onWheel={onWheel}>
-      <Title>{controller.run('renderTopicBlockContent', props)}</Title>
+      <Title style={style}>{controller.run('renderTopicBlockContent', props)}</Title>
 
       <SubTopics>
         {topic.subKeys.map(subKey => {

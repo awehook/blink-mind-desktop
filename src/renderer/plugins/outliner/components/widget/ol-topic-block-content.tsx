@@ -48,14 +48,18 @@ export function OLTopicBlockContent_(props: Props) {
     // console.log('onKeyDown');
     const innerEditorDiv = innerEditorDivRef.current;
     const sel = window.getSelection();
+    let hasText = false;
     const callback = () => () => {
-      document.execCommand('paste');
-      navigator.clipboard.writeText('');
+      if (hasText) {
+        document.execCommand('paste');
+        navigator.clipboard.writeText('');
+      }
     };
     switch (e.keyCode) {
       case Key.Enter:
         if (!e.shiftKey) {
           selectToEnd(innerEditorDiv, sel);
+          hasText = !!sel.toString();
           document.execCommand('cut');
           (topic.subKeys.size > 0 && !topic.collapse) ||
           topic.key === model.editorRootTopicKey

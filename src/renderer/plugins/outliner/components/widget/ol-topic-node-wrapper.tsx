@@ -5,12 +5,13 @@ import { OlOpType } from '../../op';
 import { OLTopicCollapseIcon } from './ol-topic-collapse-icon';
 import { OLTopicNodeWidget } from './ol-topic-node-widget';
 
-const OlTopicNodeWrapperRoot = styled.div`
+const OLTopicNodeWrapperRoot = styled.div`
   display: flex;
   align-content: flex-start;
+  //align-items: center;
   padding: 8px 0;
 `;
-export function OlTopicNodeWrapper(props: BaseProps) {
+export function OLTopicNodeWrapper(props: BaseProps) {
   const { controller } = props;
 
   const onMouseEnter = e => {
@@ -47,9 +48,9 @@ export function OlTopicNodeWrapper(props: BaseProps) {
     ref: iconRef,
   };
   return (
-    <OlTopicNodeWrapperRoot {...rootProps}>
+    <OLTopicNodeWrapperRoot {...rootProps}>
       <OLTopicCollapseIcon {...collpaseProps} />
       <OLTopicNodeWidget {...props} />
-    </OlTopicNodeWrapperRoot>
+    </OLTopicNodeWrapperRoot>
   );
 }

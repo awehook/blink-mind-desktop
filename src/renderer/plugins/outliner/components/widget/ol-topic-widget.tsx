@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { BaseProps } from '@blink-mind/renderer-react';
 import cx from 'classnames';
-import { OlTopicNodeWrapper } from './ol-topic-node-wrapper';
+import { OLTopicNodeWrapper } from './ol-topic-node-wrapper';
 import { olTopicWidgetRefKey } from '../../utils';
 
 const OLTopicWidgetRoot = styled.div``;
@@ -33,7 +33,7 @@ export function OLTopicWidget(props: BaseProps) {
     topic
   };
 
-  const topicNodeWrapper = <OlTopicNodeWrapper {...propsMore} />;
+  const topicNodeWrapper = <OLTopicNodeWrapper {...propsMore} />;
 
   const isSelected =
     model.selectedKeys && model.selectedKeys.includes(topicKey);

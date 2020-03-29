@@ -58,8 +58,14 @@ export function OLTopicCollapseIcon_(props: BaseProps, ref) {
     descCollapseIcon = <div {...descCollapseIconProps} />;
   }
 
+  const topicContentStyle = controller.run('getTopicContentStyle', props);
+  const fontSize = parseFloat(topicContentStyle.fontSize);
+  const lineHeight = parseFloat(topicContentStyle.lineHeight);
+  const h = lineHeight * fontSize;
+  const marginTop = Math.max((h - 16.0) / 2, 0);
+
   return (
-    <div className="bm-collapse-icons">
+    <div className="bm-collapse-icons" style={{ marginTop: `${marginTop}px` }}>
       {/*<Icon className={iconClassName(IconName.PLUS)} />*/}
       {descCollapseIcon}
       <div {...dotProps} />
