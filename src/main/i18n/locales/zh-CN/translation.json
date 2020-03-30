@@ -169,5 +169,9 @@
   "FILE_FORMAT_ERROR": "文件格式错误！",
 
   "NOT_IN_TEST_TIME_TITLE": "当前版本无法继续使用",
-  "NOT_IN_TEST_TIME": "已经超出软件测试截止时间，当前版本已经无法继续使用，请前往官网查看最新消息。"
+  "NOT_IN_TEST_TIME": "已经超出软件测试截止时间，当前版本已经无法继续使用，请前往官网下载最新版本。",
+
+  "SET_TO_ORIGINAL_SIZE": "设置为原始尺寸",
+  "MOVE_UP": "向上移动",
+  "MOVE_DOWN": "向下移动"
 }

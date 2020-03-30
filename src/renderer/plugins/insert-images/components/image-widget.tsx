@@ -1,9 +1,11 @@
 import {
   BaseProps,
   COLORS,
+  getI18nText,
+  I18nKey,
   iconClassName,
   IconName,
-  OutsideClickHandler,
+  OutsideClickHandler
 } from '@blink-mind/renderer-react';
 import { useState } from 'react';
 import * as React from 'react';
@@ -18,6 +20,7 @@ import {
 const Root = styled.div`
   position: relative;
   margin: 5px;
+  padding-right: 35px;
 `;
 
 const ImgContainer = styled(OutsideClickHandler)`
@@ -26,11 +29,11 @@ const ImgContainer = styled(OutsideClickHandler)`
 
 const ResizeIcon = styled.div`
   position: absolute;
-  right: -5px;
-  top: -5px;
+  right: 28px;
+  bottom: -7px;
   width: 10px;
   height: 10px;
-  cursor: nesw-resize;
+  cursor: nwse-resize;
   background: ${props => props.theme.highlightColor};
 `;
 
@@ -38,7 +41,7 @@ const ResizeImg = styled.img`
   display: block;
   position: absolute;
   left: 0;
-  bottom: 0;
+  top: 0;
   opacity: 0.6;
 `;
 
@@ -53,7 +56,7 @@ const Img = styled.img`
 const EditButtons = styled.div`
   position: absolute;
   right: 0;
-  bottom: 0;
+  bottom: 5px;
 `;
 
 const EditButton = styled.div`
@@ -84,11 +87,13 @@ interface Props extends BaseProps {
 }
 export function ImageWidget(props: Props) {
   const { image, index, totalCount, ...rest } = props;
-  const { controller } = rest;
-  const { key: imageKey, url, width, height } = image;
+  const { controller, model } = rest;
+  const { key: imageKey, imageRecord, width, height } = image;
+  const { url, width: originWidth, height: originHeight } = imageRecord;
   const [toolbarVisible, setToolbarVisible] = useState(false);
   const [tempSize, setTempSize] = useState({ width, height });
   const [status, setStatus] = useState('normal');
+  const isOriginSize = width === originWidth && height === originHeight;
   const canMoveUp = index > 0;
   const canMoveDown = index < totalCount - 1;
 
@@ -114,6 +119,15 @@ export function ImageWidget(props: Props) {
 
   const onClickMoveDown = () => {
     moveImage('down');
+  };
+
+  const onClickResetSize = () => {
+    controller.run('operation', {
+      ...props,
+      opType: OP_TYPE_SET_TOPIC_IMAGE,
+      imageKey,
+      imageData: { width: originWidth, height: originHeight }
+    });
   };
 
   let imageEle, rootEle;
@@ -152,12 +166,14 @@ export function ImageWidget(props: Props) {
       imageKey,
       imageData: { width: resizeSize.width, height: resizeSize.height }
     });
+    controller.run('setHandlingMouseMove', false);
   };
   let initMouseX;
   const prepareResize = e => {
     e.preventDefault();
     e.stopPropagation();
-    document.body.style.cursor = 'nesw-resize';
+    controller.run('setHandlingMouseMove', true);
+    document.body.style.cursor = 'nwse-resize';
     initMouseX = e.screenX;
     setStatus('resize');
     // console.log('prepareResize setTempSize', width, height);
@@ -203,18 +219,28 @@ export function ImageWidget(props: Props) {
         <EditButtons>
           {canMoveUp && (
             <EditButton
+              title={getI18nText(props, I18nKey.MOVE_UP)}
               className={iconClassName(IconName.MOVE_UP)}
               onClick={onClickMoveUp}
             />
           )}
           {canMoveDown && (
             <EditButton
+              title={getI18nText(props, I18nKey.MOVE_DOWN)}
               className={iconClassName(IconName.MOVE_DOWN)}
               onClick={onClickMoveDown}
             />
           )}
+          {!isOriginSize && (
+            <EditButton
+              title={getI18nText(props, I18nKey.SET_TO_ORIGINAL_SIZE)}
+              className={iconClassName('size-original')}
+              onClick={onClickResetSize}
+            />
+          )}
 
           <EditButton
+            title={getI18nText(props, I18nKey.DELETE)}
             className={iconClassName(IconName.TRASH)}
             onClick={onClickDelete}
           />

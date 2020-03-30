@@ -15,15 +15,18 @@ export function OLTopicNodeWrapper(props: BaseProps) {
   const { controller } = props;
 
   const onMouseEnter = e => {
+
     // log('onMouseEnter');
     // @ts-ignore
     iconRef.current.setHover(true);
 
-    e.nativeEvent.which === 1 &&
+    if (e.nativeEvent.which === 1 && !controller.run('isHandlingMouseMove')) {
+      console.log('SELECT_WITH_MOUSE_MOVE');
       controller.run('operation', {
         ...props,
         opType: OlOpType.SELECT_WITH_MOUSE_MOVE
       });
+    }
   };
 
   const onMouseLeave = () => {

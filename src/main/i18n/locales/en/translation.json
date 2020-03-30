@@ -169,5 +169,9 @@
   "FILE_FORMAT_ERROR": "File Format Error!",
 
   "NOT_IN_TEST_TIME_TITLE": "Current version is no longer available",
-  "NOT_IN_TEST_TIME": "The software test deadline has been exceeded and the current version is no longer available, please go to the official website for the latest news."
+  "NOT_IN_TEST_TIME": "The software test deadline has been exceeded and the current version is no longer available, please go to the official website to download the latest version.",
+
+  "SET_TO_ORIGINAL_SIZE": "Set to original size",
+  "MOVE_UP": "Move up",
+  "MOVE_DOWN": "Move down"
 }

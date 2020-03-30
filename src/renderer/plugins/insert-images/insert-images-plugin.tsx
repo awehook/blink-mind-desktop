@@ -93,7 +93,7 @@ export function InsertImagesPlugin() {
         .map(v => {
           return {
             key: v.key,
-            url: extData.images.get(v.key).url,
+            imageRecord: extData.images.get(v.key),
             width: v.width,
             height: v.height
           };
