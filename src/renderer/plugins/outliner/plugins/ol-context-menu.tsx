@@ -5,7 +5,7 @@ import { getI18nText, I18nKey, Icon } from '@blink-mind/renderer-react';
 import { OlOpType } from '../op';
 import {KeyboardHotKeyWidget} from "../../../../blink-mind/packages/renderer-react/src/components/widgets/keyborad-hotkey-widget";
 
-export function ContextMenuPlugin() {
+export function OlContextMenuPlugin() {
   return {
     customizeTopicContextMenu(props, next) {
       const { controller, model } = props;
