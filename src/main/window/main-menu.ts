@@ -1,9 +1,17 @@
 import { Menu, shell } from 'electron';
-import {I18nTextKey, IpcChannelName, IpcType, PasteType, ProductName} from '../../common';
+import {
+  I18nTextKey,
+  IpcChannelName,
+  IpcType,
+  PasteType,
+  ProductName
+} from '../../common';
 import { isMacOS, isWindows, IsDev } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
 import { subscribeMgr } from '../subscribe';
 import BrowserWindow = Electron.BrowserWindow;
+
+const log = require('debug')('bmd:menu');
 
 function getMenu(i18n, windowMgr) {
   const t = key => i18n.t(key);
@@ -43,7 +51,7 @@ function getMenu(i18n, windowMgr) {
       {
         id: I18nTextKey.SAVE,
         label: t(I18nTextKey.SAVE),
-        accelerator: 'CommandOrControl+S',
+        accelerator: 'CmdOrCtrl+S',
         click() {
           save(windowMgr);
         }
@@ -51,7 +59,7 @@ function getMenu(i18n, windowMgr) {
       {
         id: I18nTextKey.SAVE_AS,
         label: t(I18nTextKey.SAVE_AS),
-        accelerator: 'Shift+CommandOrControl+S',
+        accelerator: 'CmdOrCtrl+Shift+S',
         click() {
           saveAs(windowMgr);
         }
@@ -64,14 +72,14 @@ function getMenu(i18n, windowMgr) {
     submenu: [
       {
         label: t(I18nTextKey.UNDO),
-        accelerator: 'CommandOrControl+Z',
+        accelerator: 'CmdOrCtrl+Z',
         click() {
           undo();
         }
       },
       {
         label: t(I18nTextKey.REDO),
-        accelerator: 'Shift+CommandOrControl+Z',
+        accelerator: 'CmdOrCtrl+Shift+Z',
         click() {
           redo();
         }
@@ -92,23 +100,24 @@ function getMenu(i18n, windowMgr) {
       {
         label: t(I18nTextKey.PASTE_AS_PLAIN_TEXT),
         // role: 'paste as plaintext',
-        accelerator: 'CommandOrControl+V',
-        click(menuItem,browserWindow:BrowserWindow) {
-          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW,{
+        accelerator: 'CmdOrCtrl+V',
+        click(menuItem, browserWindow: BrowserWindow) {
+          log('PASTE_AS_PLAIN_TEXT');
+          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
             type: IpcType.MR_PASTE,
             pasteType: PasteType.PASTE_PLAIN_TEXT
-          })
+          });
         }
       },
       {
         label: t(I18nTextKey.PASTE_WITH_STYLE),
         // role: 'paste as plaintext',
-        accelerator: 'CommandOrControl+Shift+V',
-        click(menuItem,browserWindow:BrowserWindow) {
-          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW,{
+        accelerator: 'CmdOrCtrl+Shift+V',
+        click(menuItem, browserWindow: BrowserWindow) {
+          browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
             type: IpcType.MR_PASTE,
             pasteType: PasteType.PASTE_WITH_STYLE
-          })
+          });
         }
       }
     ]

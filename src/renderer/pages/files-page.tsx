@@ -105,6 +105,7 @@ export class FilesPageInternal extends Component<Props, State> {
     log('onIpcMRFileWindow', type);
     switch (type) {
       case IpcType.MR_PASTE:
+        console.log('Type.MR_PASTE');
         this.getActiveFileModel().controller.run('setPasteType', {
           pasteType: arg.pasteType
         });
