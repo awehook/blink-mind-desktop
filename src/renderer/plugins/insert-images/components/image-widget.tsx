@@ -60,6 +60,9 @@ const EditButtons = styled.div`
 `;
 
 const EditButton = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin: 5px;
   //border-radius: 50%;
   width: 24px;

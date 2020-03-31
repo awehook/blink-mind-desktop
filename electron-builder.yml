@@ -19,9 +19,9 @@ files:
 dmg:
   contents:
     - x: 130
-      'y': 220
+      'y': 100
     - x: 410
-      'y': 220
+      'y': 100
       type: link
       path: /Applications
 nsis:

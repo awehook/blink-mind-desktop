@@ -34,6 +34,7 @@
     "html-to-text": "^5.1.1",
     "immutable": "^4.0.0-rc.12",
     "is-plain-object": "^3.0.0",
+    "is-url": "^1.2.4",
     "lodash": "^4.17.15",
     "memoize-one": "^5.1.1",
     "mta-h5-analysis": "^2.0.15",
