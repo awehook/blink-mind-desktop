@@ -18,12 +18,13 @@ files:
       - icons/**/*
 dmg:
   contents:
-    - x: 130
-      'y': 100
     - x: 410
-      'y': 100
-      type: link
-      path: /Applications
+      y: 150
+      type: "link"
+      path: "/Applications"
+    - x: 130
+      y: 150
+      type: "file"
 nsis:
   artifactName: '${productName}-${version}.${ext}'
   oneClick: false
