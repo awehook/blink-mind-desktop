@@ -50,7 +50,9 @@ export function OLTopicBlockContent_(props: Props) {
     const sel = window.getSelection();
     let hasText = false;
     const callback = () => () => {
+      // console.log('callback', { hasText });
       if (hasText) {
+        console.log('hasText');
         document.execCommand('paste');
         navigator.clipboard.writeText('');
       }
@@ -98,6 +100,7 @@ export function OLTopicBlockContent_(props: Props) {
             range.setEndAfter(innerEditorDiv.lastChild);
             sel.removeAllRanges();
             sel.addRange(range);
+            hasText = !!sel.toString();
             console.log('cut');
             document.execCommand('cut');
             console.log('operation');
@@ -170,7 +173,7 @@ export function OLTopicBlockContent_(props: Props) {
         handleOnInput,
         innerEditorDivRef,
         className: 'bm-content-editable-ol',
-        readOnly: model.focusKey !== topicKey
+        // readOnly: model.focusKey !== topicKey
       })}
     </OLTopicBlockContentRoot>
   );

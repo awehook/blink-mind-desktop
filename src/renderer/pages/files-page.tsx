@@ -19,6 +19,8 @@ const handleElementClick = e => {
   }
 };
 
+
+
 export function FilesPage(props) {
   const t = useTranslation();
   //@ts-ignore
@@ -27,9 +29,9 @@ export function FilesPage(props) {
   const [windowData] = useState(initWindowData);
 
   useEffect(() => {
-    document.body.addEventListener('click', handleElementClick);
+    document.addEventListener('click', handleElementClick);
     return () => {
-      document.body.removeEventListener('click', handleElementClick);
+      document.removeEventListener('click', handleElementClick);
     };
   });
 

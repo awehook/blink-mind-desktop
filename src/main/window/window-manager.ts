@@ -23,6 +23,7 @@ import {
   getUntitledTile,
   isMacOS,
   regularBlinkPath,
+  FeatureSwitch,
   isWindows
 } from '../utils';
 import { buildMenu } from './main-menu';
@@ -273,8 +274,8 @@ export class WindowMgr {
         preload: join(__dirname, './file-window-preload'),
         scrollBounce: true
       },
-      frame: false,
-      titleBarStyle: 'hidden',
+      frame: !FeatureSwitch.isUseCustomTitleBar(),
+      titleBarStyle: FeatureSwitch.isUseCustomTitleBar() ? 'hidden' : 'default',
       //isMacOS ? 'hidden' : 'default',
       title: path == null ? getUntitledTile() : path
     });

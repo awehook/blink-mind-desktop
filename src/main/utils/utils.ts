@@ -1,6 +1,11 @@
 import { BrowserWindow } from 'electron';
 import { extname } from 'path';
-import { BlinkMindExtName, BlinkMindExtNames, I18nTextKey, IpcChannelName } from '../../common';
+import {
+  BlinkMindExtName,
+  BlinkMindExtNames,
+  I18nTextKey,
+  IpcChannelName
+} from '../../common';
 import { i18n } from '../i18n';
 
 export function regularBlinkPath(path) {
@@ -19,9 +24,8 @@ export function getFileTitle(path, edited) {
   return `${path}${edited ? ' -' + i18n.t(I18nTextKey.EDITED) : ''}`;
 }
 
-export function ipcMR(arg) {
-  const focusWindow = BrowserWindow.getFocusedWindow();
-  focusWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, arg);
+export function ipcMR(arg, win = BrowserWindow.getFocusedWindow()) {
+  win.webContents.send(IpcChannelName.MR_FILE_WINDOW, arg);
 }
 
 export function isDev() {

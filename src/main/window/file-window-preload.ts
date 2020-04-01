@@ -1,10 +1,10 @@
 import './preload';
-import { isMacOS, isWindows } from '../utils';
+import { isMacOS, isWindows, FeatureSwitch } from '../utils';
 
 window.addEventListener('DOMContentLoaded', event => {
-  if (isWindows) {
+  if (isWindows && FeatureSwitch.isUseCustomTitleBar()) {
     console.log('titlebar');
-    const customTitlebar = require('custom-electron-titlebar');
+    const customTitlebar = require('../custom-electron-titlebar');
     new customTitlebar.Titlebar({
       backgroundColor: customTitlebar.Color.fromHex('#fff'),
       menuPosition: 'right'
