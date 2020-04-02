@@ -163,6 +163,7 @@
 
   "INDENT": "缩进",
   "OUTDENT": "反向缩进",
+  "PASTE_AND_SPLIT_BY_LINE_BREAK": "粘贴且以换行符分割",
 
   "SELECT_REF_TOPICS_TIP": "请选择要引用的节点，选择完之后，请点击确认按钮。",
   "TAG_NAME_OVER_MAX_TIP": "标签名超出最大长度：50 ！",

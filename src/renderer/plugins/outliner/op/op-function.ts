@@ -72,6 +72,27 @@ export function outdent({
   return model;
 }
 
+export function pasteAndSplitByLineBreak({
+  model,
+  topicKey,
+  content,
+  replaceCurrentTopic
+}: BaseSheetModelModifierArg & {
+  content: string;
+  replaceCurrentTopic: boolean;
+}) {
+  const contentArray = content.split('\n');
+  if (contentArray.length > 0) {
+    if (replaceCurrentTopic) {
+      let firstLine = contentArray[0];
+      model = SheetModelModifier.setTopicBlockContentData({model,topicKey,data:firstLine});
+      contentArray.shift();
+    }
+    model = SheetModelModifier.addMultiSibling({model,topicKey,contentArray});
+  }
+  return model;
+}
+
 export function selectWithMouseMove({
   model,
   topicKey

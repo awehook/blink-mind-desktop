@@ -3,9 +3,10 @@ import {
   outdent,
   selectWithMouseMove,
   OlOpType,
-  olMoveFocus
+  olMoveFocus,
+  pasteAndSplitByLineBreak
 } from '../op';
-import { FocusMode, OpType, toDocModelModifierFunc } from '@blink-mind/core';
+import { toDocModelModifierFunc } from '@blink-mind/core';
 
 export function OlOpPlugin() {
   return {
@@ -13,6 +14,10 @@ export function OlOpPlugin() {
       const opMap = next();
       opMap.set(OlOpType.INDENT, toDocModelModifierFunc(indent));
       opMap.set(OlOpType.OUTDENT, toDocModelModifierFunc(outdent));
+      opMap.set(
+        OlOpType.PASTE_AND_SPLIT_BY_LINE_BREAK,
+        toDocModelModifierFunc(pasteAndSplitByLineBreak)
+      );
       opMap.set(
         OlOpType.SELECT_WITH_MOUSE_MOVE,
         toDocModelModifierFunc(selectWithMouseMove)

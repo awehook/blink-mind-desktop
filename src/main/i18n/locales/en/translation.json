@@ -163,6 +163,7 @@
 
   "INDENT": "Indent",
   "OUTDENT": "Outdent",
+  "PASTE_AND_SPLIT_BY_LINE_BREAK": "Paste and split by break",
 
   "SELECT_REF_TOPICS_TIP": "Please select the topics you want to reference. After selection, click the confirm button.",
   "TAG_NAME_OVER_MAX_TIP": "The length of tag name over the maximum length: 50!",

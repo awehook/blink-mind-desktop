@@ -12,6 +12,7 @@ import {
 } from '@blink-mind/renderer-react';
 import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
+import { pasteAndSplitByLineBreak } from '../../utils';
 
 const OLTopicBlockContentRoot = styled.div`
   //width: 100%;
@@ -117,6 +118,13 @@ export function OLTopicBlockContent_(props: Props) {
           }
         }
         break;
+      case Key.V:
+        if (
+          controller.run('isCommandOrControl', { ...props, ev: e }) &&
+          e.altKey
+        ) {
+          pasteAndSplitByLineBreak(props);
+        }
     }
     return false;
   };
@@ -172,7 +180,7 @@ export function OLTopicBlockContent_(props: Props) {
         handleKeyDown,
         handleOnInput,
         innerEditorDivRef,
-        className: 'bm-content-editable-ol',
+        className: 'bm-content-editable-ol'
         // readOnly: model.focusKey !== topicKey
       })}
     </OLTopicBlockContentRoot>
