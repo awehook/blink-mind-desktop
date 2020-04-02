@@ -1,3 +1,3 @@
-export function olTopicWidgetRefKey(key) {
-  return `ol-topic-widget-${key}`;
+export function olTopicWidgetRootRefKey(key) {
+  return `topic-widget-root-${key}`;
 }

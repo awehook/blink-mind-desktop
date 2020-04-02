@@ -12,6 +12,14 @@ const ErrorTip = styled.div`
   height: 24px;
 `;
 
+const Tips = styled.div`
+  margin-top: 20px;
+`;
+
+const Tip = styled.div`
+  padding: 5px 0;
+`;
+
 export function InsertImageDialog(props: BaseProps) {
   const { controller, setDiagramState } = props;
   const [inputText, setInputText] = useState(
@@ -20,7 +28,6 @@ export function InsertImageDialog(props: BaseProps) {
   const onInputChange = e => {
     if (e.target.files && e.target.files.length > 0) {
       const file: File = e.target.files[0];
-      console.log(file.type);
       if (
         !['image/png', 'image/jpg', 'image/jpeg', 'image/gif'].includes(
           file.type
@@ -36,13 +43,13 @@ export function InsertImageDialog(props: BaseProps) {
         fr.onload = () => {
           const url = fr.result;
           const img = new Image();
-          img.onload = () =>{
+          img.onload = () => {
             //@ts-ignore
             const image = new ImageRecord({
               key: md5(url),
               url,
               width: img.width,
-              height: img.height,
+              height: img.height
             });
             setDiagramState({ dialogType: null });
             controller.run('operation', {
@@ -53,13 +60,11 @@ export function InsertImageDialog(props: BaseProps) {
           };
           //@ts-ignore
           img.src = url;
-
         };
         fr.readAsDataURL(file);
         const src = URL.createObjectURL(file);
         serializeImage(src, file.type).then(res => {
           // TODO md5
-
         });
       }
     }
@@ -77,9 +82,10 @@ export function InsertImageDialog(props: BaseProps) {
       <div>
         <FileInput {...fileInputProps} />
       </div>
-
-      <div>{getI18nText(props, I18nKey.SELECT_IMAGE_TIP1)}</div>
-      <div>{getI18nText(props, I18nKey.SELECT_IMAGE_TIP2)}</div>
+      <Tips>
+        <Tip>{getI18nText(props, I18nKey.SELECT_IMAGE_TIP1)}</Tip>
+        <Tip>{getI18nText(props, I18nKey.SELECT_IMAGE_TIP2)}</Tip>
+      </Tips>
     </Root>
   );
 }

@@ -7,7 +7,6 @@ export function serializeImage(
   url,
   type = 'image/png'
 ): Promise<SerializeImageResult> {
-  console.log(url,type);
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = url;

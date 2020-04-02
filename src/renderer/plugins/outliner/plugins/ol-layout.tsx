@@ -1,5 +1,5 @@
 import { IControllerRunContext } from '@blink-mind/core';
-import { olTopicWidgetRefKey, ViewModeOutliner } from '../utils';
+import { olTopicWidgetRootRefKey, ViewModeOutliner } from '../utils';
 
 export function OlLayoutPlugin() {
   return {
@@ -8,7 +8,7 @@ export function OlLayoutPlugin() {
       const model = controller.model;
       if (model.config.viewMode === ViewModeOutliner) {
         const focusTopicDiv: HTMLElement = getRef(
-          olTopicWidgetRefKey(topicKey)
+          olTopicWidgetRootRefKey(topicKey)
         );
         focusTopicDiv && focusTopicDiv.scrollIntoView();
         return;

@@ -11,16 +11,23 @@ import { MenuItem } from '@blueprintjs/core';
 import { saveAs } from 'file-saver';
 import { toBlob, toSvgDataURL } from 'html-to-image';
 import * as React from 'react';
+import { ViewModeMindMap } from '@blink-mind/core';
+
 export function ContextMenuExportTopic(props: BaseProps) {
   const { controller, model, topicKey, getRef } = props;
-
+  const isMindMap = model.config.viewMode === ViewModeMindMap;
+  const outlinerEle = document.getElementById(`bm-outliner-${model.id}`);
   const exportTo = (type: 'png' | 'jpg' | 'svg') => () => {
-    const options = {
-      backgroundColor: model.config.theme.background
-    };
+    const options = isMindMap
+      ? {
+          backgroundColor: model.config.theme.background
+        }
+      : {
+          backgroundColor: window.getComputedStyle(outlinerEle).backgroundColor
+        };
     const title = controller.run('getTopicTitle', { ...props, maxLength: 40 });
     const topicWidgetEle =
-      topicKey === model.editorRootTopicKey
+      isMindMap && topicKey === model.editorRootTopicKey
         ? getRef(RefKey.NODE_LAYER + model.id)
         : getRef(topicWidgetRootRefKey(topicKey));
     switch (type) {

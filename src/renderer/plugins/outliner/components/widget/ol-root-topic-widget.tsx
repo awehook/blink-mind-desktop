@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { BaseProps } from '@blink-mind/renderer-react';
 import styled from 'styled-components';
+import { olTopicWidgetRootRefKey } from '../../utils';
 const OLRootTopicWidgetRoot = styled.div`
   width: 100%;
 `;
@@ -17,19 +18,21 @@ const EmptyDiv = styled.div`
 `;
 
 export function OLRootTopicWidget(props: BaseProps) {
-  const { controller, topic } = props;
-  const divRef = useRef<HTMLElement>();
+  const { controller, topic, topicKey, saveRef, getRef } = props;
   const setZoomFactor = z => {
-    if (divRef.current) {
-      divRef.current.style.transform = `scale(${z})`;
-      divRef.current.style.transformOrigin = '0 0';
+    const root = getRef(olTopicWidgetRootRefKey(topicKey));
+    if (root) {
+      root.style.transform = `scale(${z})`;
+      root.style.transformOrigin = '0 0';
     }
   };
 
   useEffect(() => {
-    if (divRef.current) {
-      divRef.current.style.transform = `scale(${controller.run('getZoomFactor',props) || 1})`;
-      divRef.current.style.transformOrigin = '0 0';
+    const root = getRef(olTopicWidgetRootRefKey(topicKey));
+    if (root) {
+      root.style.transform = `scale(${controller.run('getZoomFactor', props) ||
+        1})`;
+      root.style.transformOrigin = '0 0';
     }
     controller.run('addZoomFactorChangeEventListener', {
       ...props,
@@ -58,8 +61,13 @@ export function OLRootTopicWidget(props: BaseProps) {
   }
 
   return (
-    <OLRootTopicWidgetRoot ref={divRef} onWheel={onWheel}>
-      <Title style={style}>{controller.run('renderTopicBlockContent', props)}</Title>
+    <OLRootTopicWidgetRoot
+      ref={saveRef(olTopicWidgetRootRefKey(topicKey))}
+      onWheel={onWheel}
+    >
+      <Title style={style}>
+        {controller.run('renderTopicBlockContent', props)}
+      </Title>
 
       <SubTopics>
         {topic.subKeys.map(subKey => {

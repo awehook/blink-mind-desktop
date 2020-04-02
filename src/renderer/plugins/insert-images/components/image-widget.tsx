@@ -16,6 +16,7 @@ import {
   OP_TYPE_MOVE_TOPIC_IMAGE,
   OP_TYPE_SET_TOPIC_IMAGE
 } from '../utils';
+import { FocusMode, OpType } from '@blink-mind/core';
 
 const Root = styled.div`
   position: relative;
@@ -90,7 +91,7 @@ interface Props extends BaseProps {
 }
 export function ImageWidget(props: Props) {
   const { image, index, totalCount, ...rest } = props;
-  const { controller, model } = rest;
+  const { controller, model, topicKey } = rest;
   const { key: imageKey, imageRecord, width, height } = image;
   const { url, width: originWidth, height: originHeight } = imageRecord;
   const [toolbarVisible, setToolbarVisible] = useState(false);
@@ -143,6 +144,13 @@ export function ImageWidget(props: Props) {
   };
 
   const onImageClick = e => {
+    if (model.focusKey !== topicKey) {
+      controller.run('operation', {
+        ...props,
+        opType: OpType.FOCUS_TOPIC,
+        focusMode: FocusMode.EDITING_CONTENT
+      });
+    }
     setToolbarVisible(true);
   };
 
@@ -179,11 +187,6 @@ export function ImageWidget(props: Props) {
     document.body.style.cursor = 'nwse-resize';
     initMouseX = e.screenX;
     setStatus('resize');
-    // console.log('prepareResize setTempSize', width, height);
-    // setTempSize({
-    //   width,
-    //   height
-    // });
     document.addEventListener('mousemove', resizeMouseMove);
     document.addEventListener('mouseup', resizeMouseUp);
   };

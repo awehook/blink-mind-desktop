@@ -49,7 +49,7 @@ export function OutlinerSheet_(props) {
   }, []);
 
   return (
-    <div className="bm-outliner">
+    <div className="bm-outliner" id={`bm-outliner-${model.id}`}>
       {breadcrumbs}
       <OlNodeLayer {...nProps} />
       {controller.run('renderSheetCustomize', nProps)}
