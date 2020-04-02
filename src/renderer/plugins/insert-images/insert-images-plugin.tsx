@@ -1,8 +1,7 @@
-import { toDocModelModifierFunc } from '@blink-mind/core';
 import debug from 'debug';
 import { List } from 'immutable';
-import * as React from 'react';
-import { TopicImagesWidget } from './components';
+import React from 'react';
+import { InsertImageDialog, TopicImagesWidget } from './components';
 import {
   ExtDataImages,
   ImageRecord,
@@ -25,6 +24,8 @@ import {
   OP_TYPE_SET_TOPIC_IMAGE,
   serializeImage
 } from './utils';
+import { MenuItem } from '@blueprintjs/core';
+import { getI18nText, I18nKey, Icon, IconName } from "@blink-mind/renderer-react";
 
 const log = debug('plugin:insert-image');
 
@@ -62,6 +63,44 @@ export function InsertImagesPlugin() {
       }
     },
 
+    customizeDialog(ctx, next) {
+      const { diagramState, setDiagramState } = ctx;
+      const onClose = () => {
+        setDiagramState({ dialogType: null });
+      };
+      if (diagramState.dialogType === 'INSERT_IMAGE') {
+        return {
+          dialogProps: {
+            title: getI18nText(ctx, I18nKey.INSERT_IMAGE),
+            onClose
+          },
+          dialogContent: <InsertImageDialog {...ctx} />
+        };
+      }
+      return next();
+    },
+
+    customizeTopicContextMenu(ctx, next) {
+      const { controller, setDiagramState } = ctx;
+      const res = next();
+      const onClickInsertImage = () => {
+        setDiagramState({
+          dialogType: 'INSERT_IMAGE'
+        });
+      };
+
+      res.push(
+        <MenuItem
+          key="insert-image"
+          icon={Icon(IconName.IMAGE)}
+          text={getI18nText(ctx, I18nKey.INSERT_IMAGE)}
+          // labelElement={<KeyboardHotKeyWidget hotkeys={['Tab']} />}
+          onClick={onClickInsertImage}
+        />
+      );
+      return res;
+    },
+
     getOpMap(ctx, next) {
       const opMap = next();
       opMap.set(OP_TYPE_ADD_IMAGE, addImage);
@@ -85,7 +124,10 @@ export function InsertImagesPlugin() {
 
     getTopicImages(ctx): TopicImageData[] {
       const { docModel, topicKey } = ctx;
-      const extData = docModel.getExtDataItem(EXT_DATA_KEY_IMAGES, ExtDataImages);
+      const extData = docModel.getExtDataItem(
+        EXT_DATA_KEY_IMAGES,
+        ExtDataImages
+      );
       if (!extData.topics.has(topicKey)) return [];
       return extData.topics
         .get(topicKey)
@@ -98,6 +140,11 @@ export function InsertImagesPlugin() {
             height: v.height
           };
         });
+    },
+
+    topicExtDataToJson(ctx, next) {
+      const res = next();
+      return res;
     },
 
     customizeAllowUndo(ctx, next) {

@@ -12,9 +12,15 @@ const log = require('debug')('outliner:sheet');
 export function OutlinerSheet_(props) {
   log('render');
   const { controller, docModel, model } = props;
-  const [diagramState, setDiagramState] = useState(
+  const [diagramState, setDiagramState_] = useState(
     controller.run('getInitialSheetState', props)
   );
+  const setDiagramState = (arg) =>{
+    setDiagramState_({
+      ...diagramState,
+      ...arg
+    })
+  };
   const nProps = {
     ...props,
     diagramState,

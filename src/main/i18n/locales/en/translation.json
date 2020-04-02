@@ -55,6 +55,8 @@
   "DEFAULT": "Default",
   "REMOVE": "Remove",
   "SEARCH": "Search",
+  "BROWSE": "Browse",
+  "CHOOSE_FILE": "Choose file",
 
   "LAYOUT": "Layout",
   "LEFT_AND_RIGHT": "Left And Right",
@@ -76,6 +78,7 @@
   "SET_AS_EDITOR_ROOT": "Set As Editor Root",
   "EDIT_TOPOLOGY_DIAGRAM": "Edit Topology Diagram",
   "SET_TOPIC_REFERENCES": "Set Topic References",
+  "INSERT_IMAGE": "Insert Image",
 
   "TOPIC_STYLE": "Topic Style",
   "STYLE": "Style",
@@ -167,6 +170,9 @@
   "DELETE_TOPOLOGY_TIP": "Are you confirm to delete this topology diagram?",
   "DELETE_REFERENCE_TIP": "Are you confirm to remove this reference",
   "FILE_FORMAT_ERROR": "File Format Error!",
+  "SELECT_IMAGE_TIP1": "Please choose png/jpg/gif format image",
+  "SELECT_IMAGE_TIP2": "If you take a screenshot using some screenshot software (such as QQ, wechat, snipaste), you can paste the image directly in the editing state.",
+  "SELECT_IMAGE_ERR_TIP": "Only support png/jpg/gif format",
 
   "NOT_IN_TEST_TIME_TITLE": "Current version is no longer available",
   "NOT_IN_TEST_TIME": "The software test deadline has been exceeded and the current version is no longer available, please go to the official website to download the latest version.",

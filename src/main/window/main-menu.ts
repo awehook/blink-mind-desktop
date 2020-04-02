@@ -61,6 +61,7 @@ function getMenu(i18n, windowMgr) {
         label: t(I18nTextKey.SAVE_AS),
         accelerator: 'CmdOrCtrl+Shift+S',
         click() {
+          console.log('save as');
           saveAs(windowMgr);
         }
       }

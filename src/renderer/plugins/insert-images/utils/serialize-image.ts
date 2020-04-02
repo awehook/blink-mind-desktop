@@ -3,7 +3,11 @@ type SerializeImageResult = {
   width: number;
   height: number;
 };
-export function serializeImage(url): Promise<SerializeImageResult> {
+export function serializeImage(
+  url,
+  type = 'image/png'
+): Promise<SerializeImageResult> {
+  console.log(url,type);
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.src = url;
@@ -21,7 +25,7 @@ export function serializeImage(url): Promise<SerializeImageResult> {
         const context = canvas.getContext('2d');
         context.drawImage(image, 0, 0, canvas.width, canvas.height);
         resolve({
-          url: canvas.toDataURL('image/png', 1),
+          url: canvas.toDataURL(type, 1),
           width: canvas.width,
           height: canvas.height
         });

@@ -2,13 +2,15 @@ import debug from 'debug';
 import { ipcRenderer, remote, shell } from 'electron';
 import { List } from 'immutable';
 import * as React from 'react';
-import { Component, useEffect, useState } from 'react';
-import { IpcChannelName, IpcType, StoreItemKey } from '../../common';
+import { Component, useState } from 'react';
+import { IpcChannelName, IpcType } from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
 import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
+import { useEventListener } from "@blink-mind/renderer-react";
+import { Key } from "ts-keycode-enum";
 const log = debug('bmd:files-page');
 
 const handleElementClick = e => {
@@ -16,6 +18,13 @@ const handleElementClick = e => {
   if (hrefEle) {
     e.preventDefault();
     shell.openExternal(hrefEle.href);
+  }
+};
+
+const handleKeyDown = e => {
+  if(e.ctrlKey && e.keyCode === Key.Z) {
+    e.preventDefault();
+    console.log('ctrl + z');
   }
 };
 
@@ -28,12 +37,9 @@ export function FilesPage(props) {
 
   const [windowData] = useState(initWindowData);
 
-  useEffect(() => {
-    document.addEventListener('click', handleElementClick);
-    return () => {
-      document.removeEventListener('click', handleElementClick);
-    };
-  });
+  useEventListener('click',handleElementClick);
+  // useEventListener('keydown',handleKeyDown);
+
 
   const nProps = {
     windowData,

@@ -4,7 +4,7 @@ import { I18nTextKey } from '../../common';
 
 export function ExpirePlugin() {
   const now = new Date();
-  const expireDate = new Date(2020, 6, 30);
+  const expireDate = new Date(2020, 9, 30);
   const expire = now > expireDate;
   let totalNum = 0;
   return {

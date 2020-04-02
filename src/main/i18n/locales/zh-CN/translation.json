@@ -55,6 +55,8 @@
   "DEFAULT": "默认",
   "REMOVE": "移除",
   "SEARCH": "搜索",
+  "BROWSE": "浏览",
+  "CHOOSE_FILE": "选择文件",
 
   "LAYOUT": "布局",
   "LEFT_AND_RIGHT": "左右布局",
@@ -76,6 +78,7 @@
   "SET_AS_EDITOR_ROOT": "仅显示此节点及其子节点",
   "EDIT_TOPOLOGY_DIAGRAM": "编辑拓扑图",
   "SET_TOPIC_REFERENCES": "设置引用节点",
+  "INSERT_IMAGE": "插入图片",
 
   "TOPIC_STYLE": "节点样式",
   "STYLE": "样式",
@@ -167,6 +170,9 @@
   "DELETE_TOPOLOGY_TIP": "确认删除此拓扑图吗？",
   "DELETE_REFERENCE_TIP": "确认删除此引用吗？",
   "FILE_FORMAT_ERROR": "文件格式错误！",
+  "SELECT_IMAGE_TIP1": "请选择 png/jpg/gif 格式的图片",
+  "SELECT_IMAGE_TIP2": "如果你使用截图软件截图 (例如 QQ, 微信, snipaste), 可以在编辑模式下直接粘贴图片.",
+  "SELECT_IMAGE_ERR_TIP": "只支持 png/jpg/gif 格式的图片",
 
   "NOT_IN_TEST_TIME_TITLE": "当前版本无法继续使用",
   "NOT_IN_TEST_TIME": "已经超出软件测试截止时间，当前版本已经无法继续使用，请前往官网下载最新版本。",

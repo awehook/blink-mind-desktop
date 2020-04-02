@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/electron';
 import { Controller } from '@blink-mind/core';
 import { JsonSerializerPlugin } from '@blink-mind/plugin-json-serializer';
 // import TopologyDiagramPlugin from '@blink-mind/plugin-topology-diagram';
