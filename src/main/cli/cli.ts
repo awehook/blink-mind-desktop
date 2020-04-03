@@ -4,6 +4,7 @@ export class Cli {
   filesToOpen: string[];
   constructor() {
     elog.log('process.argv', process.argv);
+    elog.log('process.env', process.env);
     this.argv = process.argv.slice(1);
     const { filesToOpen } = this.parseArgs(this.argv);
     this.filesToOpen = filesToOpen;

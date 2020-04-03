@@ -82,13 +82,28 @@ export function pasteAndSplitByLineBreak({
   replaceCurrentTopic: boolean;
 }) {
   const contentArray = content.split('\n');
-  if (contentArray.length > 0) {
+  if (model.isEditorRootKey(topicKey)) {
+    model = SheetModelModifier.addMultiChild({
+      model,
+      topicKey,
+      contentArray,
+      addAtFront: true
+    });
+  } else if (contentArray.length > 0) {
     if (replaceCurrentTopic) {
       let firstLine = contentArray[0];
-      model = SheetModelModifier.setTopicBlockContentData({model,topicKey,data:firstLine});
+      model = SheetModelModifier.setTopicBlockContentData({
+        model,
+        topicKey,
+        data: firstLine
+      });
       contentArray.shift();
     }
-    model = SheetModelModifier.addMultiSibling({model,topicKey,contentArray});
+    model = SheetModelModifier.addMultiSibling({
+      model,
+      topicKey,
+      contentArray
+    });
   }
   return model;
 }

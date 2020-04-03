@@ -44,7 +44,7 @@ export function OlContextMenuPlugin() {
           key="pasteAndSplitByLineBreak"
           icon={Icon('list')}
           text={getI18nText(ctx, I18nKey.PASTE_AND_SPLIT_BY_LINE_BREAK)}
-          labelElement={<KeyboardHotKeyWidget hotkeys={['Meta', 'Alt', 'V']} />}
+          labelElement={<KeyboardHotKeyWidget hotkeys={['Mod', 'Alt', 'V']} />}
           onClick={() => pasteAndSplitByLineBreak(ctx)}
         />
       );
