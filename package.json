@@ -1,10 +1,18 @@
 {
   "name": "blink-mind-desktop",
   "productName": "BlinkMind",
+  "license": "MIT",
   "description": "Full featured mindmap and outliner app",
   "version": "0.1.6",
   "private": true,
-  "author": "awehook",
+  "author": {
+    "name": "awehook",
+    "email": "awehook@163.com | awehook@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:awehook/blink-mind-desktop.git"
+  },
   "dependencies": {
     "@blueprintjs/core": "^3.19.1",
     "@blueprintjs/icons": "^3.13.0",
@@ -231,7 +239,7 @@
   "main": "./build/main/main/index.js",
   "//build": {
     "productName": "BlinkMind",
-    "appId": "org.awehook.blinkminddesktop",
+    "appId": "com.github.awehook.blinkminddesktop",
     "fileAssociations": [
       {
         "ext": [

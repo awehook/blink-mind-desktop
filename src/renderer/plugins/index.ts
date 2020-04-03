@@ -4,10 +4,8 @@ export * from './font';
 export * from './outliner'
 export * from './export-topic';
 export * from './insert-images';
-export * from './auth';
 export * from './debug';
 export * from './rooster-desc-editor';
 export * from './ana';
-export * from './expire';
 export * from './bug-collect';
 export * from './validate-model';

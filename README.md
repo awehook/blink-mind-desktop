@@ -1,44 +1,71 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# BlinkMindDesktop
 
-## Available Scripts
+BlinkMindDesktop is a open source mind map and outliner app.
 
-In the project directory, you can run:
+BlinkMindDesktop is an MIT licensed open source project, and the latest version will always be downloadable for free from the GitHub release page. BlinkMindDesktop is still in development. 
 
-### `yarn start`
+BinkMindDesktop use the open source mind map libarary [BlinkMind](https://github.com/awehook/blink-mind) for mindmap rendering.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Insider Preview Version Download](https://github.com/awehook/blink-mind-package/releases/latest)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+![image](https://github.com/awehook/images/raw/master/blink-mind-desktop/blink-mind-mindmap-light.png)
 
-### `yarn test`
+![image](https://github.com/awehook/images/raw/master/blink-mind-desktop/blink-mind-mindmap.png)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+![image](https://github.com/awehook/images/raw/master/blink-mind-desktop/blink-mind-mindmap-pink.png)
 
-### `yarn build`
+![image](https://github.com/awehook/images/raw/master/blink-mind-desktop/blink-mind-outliner.png)
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## :rocket: Features
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+| Feature | Status | Description |
+|---------|:------:|-------------|
+| Multi sheet | :heavy_check_mark: | Document can insert multi sheets. |
+| Basic mind map features | :heavy_check_mark: | Add/remove topic, edit topic content. |
+| Undo redo | :heavy_check_mark: | History of map changes |
+| Set topic style | :heavy_check_mark: | Set topic style include border, text color, font, background and links. |
+| Customize theme | :heavy_check_mark: | Theme editor, import theme, export theme. |
+| Shortcuts | :heavy_check_mark: |  Shortcuts to make more efficient. |
+| Drag and drop | :heavy_check_mark: |  Support drag one topic and then drop to another topic to reorganize the mind map. |
+| Open and save file | :heavy_check_mark: | Save and open .bmind file, double click file to open. |
+| Export topic to image | :heavy_check_mark: | Export topic to png/jpg/svg. |
+| Insert image to topic | :heavy_check_mark: | Every topic can insert unlimited images. |
+| Paste rich text to topic | :heavy_check_mark: | You can paste rich text from browser/microsoft word/apple pages or anything else to BlinkMind without losing format. |
+| Rich text editor for topic notes | :heavy_check_mark: |  Rich text editor for topic notes. |
+| Focus mode | :heavy_check_mark: |  Select any topic node as the editor root and only show that branch. |
+| Outliner mode | :heavy_check_mark: |  Seamlessly switch between mind map and outliner, some outliner's shortcuts are different from mindmap mode. |
+| Search  | :heavy_check_mark: |  Search topic content and navigate to it. |
+| Tags  | :heavy_check_mark: |  Topics can add tags and you can navigate from tags. |
+| Copy topics and paste  | on the way |  Copy multi topics including all the infomation(content,notes,tags and all attachment) and paste to another location(same document or another document).  |
+| Topic reference  | on the way |  Topics can reference each other and navigate conveniently. |
+| Markdown editor  | on the way |  When editing topic notes, you can choose use rich html editor or markdown editor, for users  who familiar and like markdown grammar. Markdown editor will support latex and mermaid.  |
+| Link curve between any two topics  | planing |  Link curve between any two topics  |
+| Manual layout diagram  | planing |  Manual layout diagram  |
+| Cloud Storage  | planing |  Save and open file from clound storage(icloud/onedrive/google drive).  |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## For Dev
+### develop
+first run command
+```
+git clone git@github.com:awehook/blink-mind-desktop.git
+git submodule init
+git submodule update 
+```
+then run command
+```
+yarn install
+```
+then open three terminal and run 
+```
+yarn dev:r
+yarn dev:m
+yarn start:m
+```
+### build package
+```
+yarn dist
+```
+ 
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

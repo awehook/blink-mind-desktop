@@ -1,6 +1,6 @@
 import React from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import { FilesPage, PreferencesPage, WelcomePage, LoginPage } from '../pages';
+import { FilesPage, PreferencesPage, WelcomePage } from '../pages';
 import { RootRoute } from './root-route';
 
 export function PageRouter(props) {
@@ -21,12 +21,6 @@ export function PageRouter(props) {
     component: FilesPage
   };
 
-  const loginRouteProps = {
-    exact: true,
-    path: '/login',
-    component: LoginPage
-  };
-
   return (
     <HashRouter>
       <div className='full'>
@@ -35,7 +29,6 @@ export function PageRouter(props) {
           <Route {...preferencesRouteProps} />
           <Route {...welcomeRouteProps} />
           <Route {...fileRouteProps} />
-          <Route {...loginRouteProps} />
         </Switch>
       </div>
     </HashRouter>

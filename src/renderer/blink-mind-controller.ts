@@ -12,25 +12,22 @@ import { DefaultPlugin } from '@blink-mind/renderer-react';
 import {
   BugCollectPlugin,
   AnaPlugin,
-  ExpirePlugin,
   I18nPlugin,
   FontPlugin,
   OutlinerPlugin,
   ToolbarPlugin,
   ExportTopicPlugin,
   InsertImagesPlugin,
-  AuthPlugin,
   DebugPlugin,
-  RoosterDescEditorPlugin, ValidateModelPlugin
+  RoosterDescEditorPlugin,
+  ValidateModelPlugin
 } from './plugins';
 import { isDev } from './utils';
 
 const plugins = [
   BugCollectPlugin(),
   AnaPlugin(),
-  ExpirePlugin(),
   isDev && DebugPlugin(),
-  // AuthPlugin(),
   ValidateModelPlugin(),
   SearchPlugin(),
   OutlinerPlugin(),

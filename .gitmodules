@@ -1,9 +1,9 @@
 [submodule "BlinkMind"]
     path = src/blink-mind
-    url = git@e.coding.net:awehook/blink-mind.git
-    branch = dev
+    url = git@github.com:awehook/blink-mind.git
+    branch = master
 
 [submodule "src/roosterjs"]
 	path = src/roosterjs
-	url = git@e.coding.net:awehook/roosterjs.git
+	url = git@github.com:awehook/roosterjs.git
 	branch = my
