@@ -6,6 +6,9 @@ import {
   TagsPlugin,
   ThemeSelectorPlugin,
   TopicReferencePlugin,
+  ExportTopicPlugin,
+  InsertImagesPlugin,
+  DebugPlugin,
   UndoRedoPlugin
 } from '@blink-mind/plugins';
 import { DefaultPlugin } from '@blink-mind/renderer-react';
@@ -16,14 +19,11 @@ import {
   FontPlugin,
   OutlinerPlugin,
   ToolbarPlugin,
-  ExportTopicPlugin,
-  InsertImagesPlugin,
-  DebugPlugin,
+
   RoosterDescEditorPlugin,
   ValidateModelPlugin
 } from './plugins';
 import { isDev } from './utils';
-
 const plugins = [
   BugCollectPlugin(),
   AnaPlugin(),

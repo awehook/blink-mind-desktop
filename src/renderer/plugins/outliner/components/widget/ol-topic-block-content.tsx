@@ -13,6 +13,7 @@ import {
 import { ContextMenu } from '@blueprintjs/core';
 import { isDarkTheme } from '@blueprintjs/core/src/common/utils/isDarkTheme';
 import { pasteAndSplitByLineBreak } from '../../utils';
+import { OlOpType } from '../../op';
 
 const OLTopicBlockContentRoot = styled.div`
   //width: 100%;
@@ -58,7 +59,55 @@ export function OLTopicBlockContent_(props: Props) {
         navigator.clipboard.writeText('');
       }
     };
+
     switch (e.keyCode) {
+      case Key.UpArrow:
+      case Key.DownArrow:
+        if (!controller.run('isCommandOrControl', { ...props, ev: e })) {
+          const sel = window.getSelection();
+          if (sel.isCollapsed) {
+            const anchorNode = sel.anchorNode;
+            const anchorOffSet = sel.anchorOffset;
+            // const focusNode = sel.focusNode;
+            // const focusOffset = sel.focusOffset;
+            // log(anchorNode, sel.anchorOffset);
+            const innerEditorDiv = innerEditorDivRef.current;
+            if (e.keyCode === Key.UpArrow) {
+              let oldRange = sel.getRangeAt(0);
+              let range = new Range();
+              range.setStartBefore(innerEditorDiv.firstChild);
+              range.setEnd(anchorNode, anchorOffSet);
+              sel.removeAllRanges();
+              sel.addRange(range);
+              // log(sel,sel.toString());
+              if (sel.toString().length === 0) {
+                controller.run('operation', {
+                  ...props,
+                  opType: OlOpType.MOVE_FOCUS,
+                  dir: 'U'
+                });
+                return true;
+              }
+              sel.removeAllRanges();
+              sel.addRange(oldRange);
+            } else {
+              let range = new Range();
+              range.setStart(anchorNode, anchorOffSet);
+              range.setEndAfter(innerEditorDiv.lastChild);
+              sel.removeAllRanges();
+              sel.addRange(range);
+              if (sel.toString().length === 0) {
+                controller.run('operation', {
+                  ...props,
+                  opType: OlOpType.MOVE_FOCUS,
+                  dir: 'D'
+                });
+                return true;
+              }
+            }
+          }
+        }
+        break;
       case Key.Enter:
         if (!e.shiftKey) {
           selectToEnd(innerEditorDiv, sel);
