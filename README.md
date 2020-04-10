@@ -1,10 +1,10 @@
 # BlinkMindDesktop
 
-BlinkMindDesktop is a open source mind map and outliner app.
+BlinkMindDesktop is an open source mind-map and outliner app.
 
 BlinkMindDesktop is an MIT licensed open source project, and the latest version will always be downloadable for free from the GitHub release page. BlinkMindDesktop is still in development. 
 
-BlinkMindDesktop use the open source mind map library [BlinkMind](https://github.com/awehook/blink-mind) for mindmap rendering.
+BlinkMindDesktop uses the open source mind-map library [BlinkMind](https://github.com/awehook/blink-mind) for mind-map rendering.
 
 [Insider Preview Version Download](https://github.com/awehook/blink-mind-package/releases/latest)
 
@@ -51,7 +51,7 @@ BlinkMindDesktop use the open source mind map library [BlinkMind](https://github
 
 To develop locally, you need to have Chrome installed with the [Immutable.js Object Formatter extension](https://chrome.google.com/webstore/detail/immutablejs-object-format/hgldghadipiblonfkkicmgcbbijnpeog).
 
-First run download the code and the relevant submodules:
+First download the code and relevant submodules:
 ```bash
 git clone git@github.com:awehook/blink-mind-desktop.git
 git submodule init
