@@ -69,7 +69,6 @@ export class App {
     initStore();
     i18n.init();
     require('../sentry');
-    require('../subscribe');
     createWindowMgr(this.filesToOpen.slice());
     this.filesToOpen = [];
   };

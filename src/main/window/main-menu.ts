@@ -1,14 +1,10 @@
-import { Menu, shell, BrowserWindow } from 'electron';
+import { Menu, shell } from 'electron';
 import {
   I18nTextKey,
-  IpcChannelName,
-  IpcType,
-  PasteType,
   ProductName
 } from '../../common';
 import { isMacOS, isWindows, IsDev } from '../utils';
 import { openFile, redo, save, saveAs, undo } from './menu-event-handler';
-import { subscribeMgr } from '../subscribe';
 
 const log = require('debug')('bmd:menu');
 
@@ -103,26 +99,12 @@ function getMenu(i18n, windowMgr) {
         // role: 'paste as plaintext',
         accelerator: 'CmdOrCtrl+V',
         role: 'paste',
-        // click(menuItem, browserWindow: BrowserWindow) {
-        //   console.log('PASTE_AS_PLAIN_TEXT');
-        //   browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
-        //     type: IpcType.MR_PASTE,
-        //     pasteType: PasteType.PASTE_PLAIN_TEXT
-        //   });
-        // }
       },
       {
         label: t(I18nTextKey.PASTE_AS_PLAIN_TEXT),
         // role: 'paste as plaintext',
         accelerator: 'CmdOrCtrl+Shift+V',
         role: 'pasteAndMatchStyle',
-        // click(menuItem, browserWindow: BrowserWindow) {
-        //   console.log('PASTE_WITH_STYLE');
-        //   browserWindow.webContents.send(IpcChannelName.MR_FILE_WINDOW, {
-        //     type: IpcType.MR_PASTE,
-        //     pasteType: PasteType.PASTE_WITH_STYLE
-        //   });
-        // }
       }
     ]
   };
@@ -144,28 +126,7 @@ function getMenu(i18n, windowMgr) {
     view.submenu.push({ role: 'toggledevtools' });
   }
 
-  const account = {
-    label: 'account',
-    submenu: []
-  };
-  const { user } = subscribeMgr;
-  user
-    ? account.submenu.push(
-        {
-          labal: user.email,
-          click() {}
-        },
-        {
-          labal: 'Sign Out',
-          click() {}
-        }
-      )
-    : account.submenu.push({
-        label: 'Sign In',
-        click() {
-          windowMgr.showSignInWindow();
-        }
-      });
+
 
   const help = {
     label: 'Help',
@@ -198,17 +159,14 @@ function getMenu(i18n, windowMgr) {
         file,
         edit,
         view,
-        //account,
         help
       ]
     : [
         file,
         edit,
         view,
-        // account,
         help
       ];
-  // console.log(JSON.stringify(menu,null,2));
   return menu;
 }
 

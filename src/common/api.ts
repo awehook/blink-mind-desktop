@@ -1,3 +1,5 @@
+//Currently not used
+
 import axios from 'axios';
 import { ApiServerUrl } from './constants';
 

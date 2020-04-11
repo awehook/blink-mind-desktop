@@ -14,7 +14,7 @@ import {
 import { DefaultPlugin } from '@blink-mind/renderer-react';
 import {
   BugCollectPlugin,
-  AnaPlugin,
+  // AnaPlugin,
   I18nPlugin,
   FontPlugin,
   OutlinerPlugin,
@@ -26,7 +26,7 @@ import {
 import { isDev } from './utils';
 const plugins = [
   BugCollectPlugin(),
-  AnaPlugin(),
+  // AnaPlugin(),
   isDev && DebugPlugin(),
   ValidateModelPlugin(),
   SearchPlugin(),

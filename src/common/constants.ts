@@ -2,6 +2,7 @@ export const ProductName = "BlinkMind";
 
 export const Version = '0.1.7';
 
+//Currently not used
 export const ApiServerUrl = "http://localhost:8008/api/v1";
 
 export const ApiRoute = {
