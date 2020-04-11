@@ -5865,10 +5865,10 @@ follow-redirects@^1.0.0:
   dependencies:
     debug "^3.0.0"
 
-font-list@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/font-list/-/font-list-1.2.6.tgz#2b226cda4544f9f999af4c2e5b8cd68dd67b1d2e"
-  integrity sha512-Ej2xkVjyVLyQRs9Qz8gNTJkA8GP1jSz76s6Zu46OGh1x0WdISPsuTsbIfghEVy78adakpZage0Qva+fFeAfzVw==
+font-list@1.2.8:
+  version "1.2.8"
+  resolved "https://registry.npm.taobao.org/font-list/download/font-list-1.2.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Ffont-list%2Fdownload%2Ffont-list-1.2.8.tgz#a7c83bad5661f0a63d34ca8d9cf7a713ff6cfe24"
+  integrity sha1-p8g7rVZh8KY9NMqNnPenE/9s/iQ=
 
 for-in@^0.1.3:
   version "0.1.8"

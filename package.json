@@ -3,7 +3,7 @@
   "productName": "BlinkMind",
   "license": "MIT",
   "description": "Full featured mindmap and outliner app",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "private": true,
   "author": {
     "name": "awehook",
@@ -35,7 +35,7 @@
     "electron-log": "^4.1.0",
     "electron-store": "^5.1.0",
     "file-saver": "^2.0.2",
-    "font-list": "^1.2.6",
+    "font-list": "1.2.8",
     "fs-extra": "^8.1.0",
     "getmac": "^5.1.0",
     "html-to-image": "^0.1.1",
