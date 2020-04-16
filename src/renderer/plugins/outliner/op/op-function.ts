@@ -35,6 +35,8 @@ export function indent({
     );
     model = model.setIn(['topics', topic.key], topic);
   }
+  // 如果aboveTopic折叠，则需要设置为未折叠
+  aboveTopic = aboveTopic.set('collapse',false);
   model = model.update('topics', topics =>
     topics.set(pTopic.key, pTopic).set(aboveTopic.key, aboveTopic)
   );
