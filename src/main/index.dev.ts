@@ -41,7 +41,7 @@ app.on('ready', () => {
     });
 
   // immutable format
-  addLocalDevTools('hgldghadipiblonfkkicmgcbbijnpeog/1.9.2_0');
+  addLocalDevTools('hgldghadipiblonfkkicmgcbbijnpeog/1.9.3_0');
 });
 
 require('./index');
