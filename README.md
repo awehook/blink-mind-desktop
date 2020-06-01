@@ -1,3 +1,7 @@
+<div align="left">
+        <img src="https://www.electronjs.org/app-img/blink-mind-desktop/blink-mind-desktop-icon-128.png">
+</div>
+
 # BlinkMindDesktop
 
 BlinkMindDesktop is an open source mind-map and outliner app.
