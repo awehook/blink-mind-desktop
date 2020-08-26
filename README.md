@@ -75,6 +75,10 @@ yarn start:m
 ```bash
 yarn dist
 ```
+
+## Thanks
+![image](https://github.com/awehook/images/raw/master/others/jetbrains-variant-2.svg)
+Thanks for [JetBrains](https://www.jetbrains.com/?from=BLINK_MIND_DESKTOP) supporting us the free JetBrains Open Source license(s).
  
 
 
