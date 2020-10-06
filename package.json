@@ -95,7 +95,7 @@
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
     "drop-console-webpack-plugin": "^3.0.2",
-    "electron": "8.1.1",
+    "electron": "8.5.2",
     "electron-builder": "^22.3.2",
     "electron-debug": "^3.0.1",
     "electron-devtools-installer": "^2.2.4",
