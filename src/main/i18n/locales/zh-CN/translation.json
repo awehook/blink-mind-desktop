@@ -27,6 +27,8 @@
   "LIGHT": "浅色",
   "DARK": "深色",
   "DISPLAY_LANGUAGE": "显示语言",
+  "AUTO_SAVE": "自动保存",
+  "ENABLED": "开启",
 
   "MIND_MAP": "思维导图",
   "OUTLINER": "大纲",

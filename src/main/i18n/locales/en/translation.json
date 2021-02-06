@@ -27,6 +27,8 @@
   "LIGHT": "Light",
   "DARK": "Dark",
   "DISPLAY_LANGUAGE": "Display Language",
+  "AUTO_SAVE": "Auto Save",
+  "ENABLED": "Enabled",
 
   "MIND_MAP": "Mind Map",
   "OUTLINER": "Outliner",

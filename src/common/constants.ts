@@ -32,7 +32,8 @@ export const StoreItemKey = {
   preferences: {
     normal: {
       appearance: 'preferences.normal.appearance',
-      language: 'preferences.normal.language'
+      language: 'preferences.normal.language',
+      autoSave: 'preferences.normal.autoSave'
     }
   },
   recent: {

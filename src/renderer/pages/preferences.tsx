@@ -1,4 +1,4 @@
-import { Card, HTMLSelect } from '@blueprintjs/core';
+import { Card, HTMLSelect, Switch } from '@blueprintjs/core';
 import { ipcRenderer } from 'electron';
 import * as React from 'react';
 import { useState } from 'react';
@@ -28,8 +28,11 @@ export function PreferencesPage(props) {
   const t = useTranslation();
   const lng = getStoreItem(StoreItemKey.preferences.normal.language);
   const _appearance = getStoreItem(StoreItemKey.preferences.normal.appearance);
+  const _autoSave =
+    getStoreItem(StoreItemKey.preferences.normal.autoSave) || false;
 
   const [appearance, setAppearance] = useState(_appearance);
+  const [autoSave, setAutoSave] = useState(_autoSave);
 
   const onLngChange = e => {
     ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM, {
@@ -43,6 +46,15 @@ export function PreferencesPage(props) {
     ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM, {
       key: StoreItemKey.preferences.normal.appearance,
       value: e.target.value
+    });
+  };
+
+  const onAutoSaveChange = e => {
+    const v = !autoSave;
+    setAutoSave(v);
+    ipcRenderer.send(IpcChannelName.RM_SET_STORE_ITEM, {
+      key: StoreItemKey.preferences.normal.autoSave,
+      value: v
     });
   };
 
@@ -63,6 +75,17 @@ export function PreferencesPage(props) {
             <option value="en">{t(I18nTextKey.ENGLISH)}</option>
             <option value="zh-CN">{t(I18nTextKey.CHINESE_SIMPLIFIED)}</option>
           </Select>
+        </Item>
+
+        <Item>
+          <ItemText>{t(I18nTextKey.AUTO_SAVE) + ':'}</ItemText>
+          <Switch
+            checked={autoSave}
+            style={{
+              marginBottom: '0px'
+            }}
+            onChange={onAutoSaveChange}
+          />
         </Item>
       </Card>
     </Column>

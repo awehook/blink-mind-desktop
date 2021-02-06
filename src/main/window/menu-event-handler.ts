@@ -12,7 +12,7 @@ export function saveAs(windowMgr) {
 export function save(windowMgr) {
   const focusWindow = BrowserWindow.getFocusedWindow();
   //@ts-ignore
-  focusWindow.setTitleFlag({ edited: false });
+  // focusWindow.setTitleFlag({ edited: false });
   //@ts-ignore
   const windowData = focusWindow.windowData;
   if (windowData) {

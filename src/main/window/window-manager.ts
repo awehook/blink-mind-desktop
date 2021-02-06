@@ -193,7 +193,7 @@ export class WindowMgr {
     }
     const window = new BrowserWindow({
       width: 550,
-      height: 150,
+      height: 170,
       center: true,
       resizable: false,
       minimizable: false,

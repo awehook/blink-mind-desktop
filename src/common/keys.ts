@@ -30,6 +30,8 @@ export const I18nTextKey = {
   LIGHT: 'LIGHT',
   DARK: 'DARK',
   DISPLAY_LANGUAGE: 'DISPLAY_LANGUAGE',
+  AUTO_SAVE: 'AUTO_SAVE',
+  ENABLED: 'ENABLED',
 
   /*==============================================*/
   NEW_TAB: 'NEW_TAB',

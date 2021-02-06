@@ -3,14 +3,19 @@ import { ipcRenderer, remote, shell } from 'electron';
 import { List } from 'immutable';
 import * as React from 'react';
 import { Component, useState } from 'react';
-import { IpcChannelName, IpcType } from '../../common';
+import { IpcChannelName, IpcType, StoreItemKey } from '../../common';
 import { createBlinkMindController } from '../blink-mind-controller';
 import { MindMap } from '../components';
 import { TranslationFunction, useTranslation } from '../hooks';
 import { FileModel, FilesWindowModel, setFileModel } from '../models';
-import { getFileContent, saveFile, saveFileWithFileModel } from '../utils';
-import { useEventListener } from "@blink-mind/renderer-react";
-import { Key } from "ts-keycode-enum";
+import {
+  getFileContent,
+  getStoreItem,
+  saveFile,
+  saveFileWithFileModel
+} from '../utils';
+import { useEventListener } from '@blink-mind/renderer-react';
+import { Key } from 'ts-keycode-enum';
 const log = debug('bmd:files-page');
 
 const handleElementClick = e => {
@@ -22,13 +27,11 @@ const handleElementClick = e => {
 };
 
 const handleKeyDown = e => {
-  if(e.ctrlKey && e.keyCode === Key.Z) {
+  if (e.ctrlKey && e.keyCode === Key.Z) {
     e.preventDefault();
     console.log('ctrl + z');
   }
 };
-
-
 
 export function FilesPage(props) {
   const t = useTranslation();
@@ -37,9 +40,8 @@ export function FilesPage(props) {
 
   const [windowData] = useState(initWindowData);
 
-  useEventListener('click',handleElementClick);
+  useEventListener('click', handleElementClick);
   // useEventListener('keydown',handleKeyDown);
-
 
   const nProps = {
     windowData,
@@ -184,12 +186,26 @@ export class FilesPageInternal extends Component<Props, State> {
     }
   };
 
+  autoSaveInterval;
+
   componentDidMount() {
     ipcRenderer.on(IpcChannelName.MR_FILE_WINDOW, this.onIpcMRFileWindow);
+    const _autoSave =
+      getStoreItem(StoreItemKey.preferences.normal.autoSave) || false;
+    if (_autoSave) {
+      this.autoSaveInterval = setInterval(() => {
+        const unsavedFiles = this.state.filesWindowModel.getUnsavedFiles();
+        console.log(unsavedFiles);
+        unsavedFiles.forEach(f => {
+          this.onSave(null, f);
+        });
+      }, 3000);
+    }
   }
 
   componentWillUnmount() {
     ipcRenderer.off(IpcChannelName.MR_FILE_WINDOW, this.onIpcMRFileWindow);
+    clearInterval(this.autoSaveInterval);
   }
 
   onChange = fileModelId => (docModel, callback) => {

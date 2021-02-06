@@ -51,6 +51,9 @@ ipcMain.on(IpcChannelName.RM_SAVE, (event, arg) => {
   log('RM_SAVE');
   const { content } = arg;
   let { path } = arg;
+  const focusWindow = BrowserWindow.getFocusedWindow();
+  //@ts-ignore
+  focusWindow.setTitleFlag({ edited: false });
   if (path == null) {
     const defaultName = i18n.t(I18nTextKey.UNTITLED) + BlinkMindExtName;
     console.log(defaultName);
