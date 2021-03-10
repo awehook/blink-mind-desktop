@@ -15,7 +15,7 @@
     "baseUrl": ".",
     "lib": ["dom", "es2015"],
     "paths": {
-      //      "@/*": ["src/*"],
+      "@a-util/util": ["node_modules/a-util/packages/core/src"],
       "@blink-mind/core": ["src/blink-mind/packages/core/src"],
       "@blink-mind/icons": ["src/blink-mind/packages/icons"],
       "@blink-mind/renderer-react": [
@@ -64,7 +64,7 @@
       ]
     }
   },
-  "include": ["src"],
+  "include": ["src", "node_modules/a-util"],
   "exclude": [
     "src/blink-mind/stories",
     "src/main",

@@ -45,5 +45,11 @@ export function MindMap(props: Props) {
     return <Diagram {...diagramProps} />;
   };
 
-  return <div className="mindmap">{renderDiagram()}</div>;
+  return (
+    <div
+      className="mindmap"
+    >
+      {renderDiagram()}
+    </div>
+  );
 }

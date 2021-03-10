@@ -334,7 +334,9 @@ module.exports = function(webpackEnv) {
         immutable: path.resolve('node_modules/immutable'),
         'react-dom': path.resolve('node_modules/react-dom'),
         'styled-components': path.resolve('node_modules/styled-components'),
-
+        '@a-util/util': path.resolve(
+          'node_modules/a-util/packages/util/src/index'
+        ),
         '@blink-mind/core': path.resolve(
           'src/blink-mind/packages/core/src/index'
         ),
